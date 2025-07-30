@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}Promoção Bombril{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilo_participantes.css' %}">
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+
+    <script src="{% static 'participantes.js' %}"></script>
+
+    {% endblock %}
+</head>
+
+<body class="d-flex flex-column min-vh-100";>
+    
+
+    <main class="container-fluid p-0 flex-fill">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/participantes.js' %}"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script src="{% static 'js/forms.js' %}"></script>
+</body>
+</html>

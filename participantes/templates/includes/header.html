@@ -1,0 +1,22 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light" style=" background-image: linear-gradient(to right, #FEEA3B , #fde615ff);">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-danger" href="#">
+      <img src="{% static 'imgs_sistema/logo_bombril.png' %}" alt="Bombril" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarMenu" >
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{% url 'home_participantes' %}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{% url 'como_participar' %}">Como Participar</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="#regulamento">Regulamento</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="#sorteios">Sorteios</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{% url 'cadastrar_participante' %}">Cadastro</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{% url 'login_participante' %}">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

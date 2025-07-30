@@ -1,0 +1,81 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - Lista de Usuários
+{% endblock %}
+
+{% block cabecalho %}
+    <h2>Usuários</h2>
+{% endblock %}
+{% block content %}
+    <div class="container mt-2">
+        <div class="container mt-2">
+        <a href="{% url 'cadastro' %}" class="btn btn-primary">
+            Cadastrar um novo Usuário
+        </a>
+        <hr>
+        <div>
+        <div class="row">
+            <div class="centralizada">
+                <table class="table table-hover">
+                    <tr>
+                        <th> Usuário </th>
+                        <th> Nível </th>
+                        <th> Status </th>
+                        <th> E-mail </th>
+                        <th> Editar </th>
+                        <th> Deletar </th>
+                    </tr>
+                    {% for x in usuarios %}
+                    <form action="{% url 'editar' x.id %}" method="POST"> {% csrf_token %}
+                        <tr>
+                             <td>
+                              <input type="text" value="{{ x.username }}" name="usuario"  class="form-control" >
+                            </td>
+
+                             <td>
+                                <select name="nivel" class="form-select">
+                                    <option value="1" {% if x.nivel == '1' %}selected{% endif %}>Administrador</option>
+                                    <option value="2" {% if x.nivel == '2' %}selected{% endif %}>Comum</option>
+                                    <option value="3" {% if x.nivel == '3' %}selected{% endif %}>Visitante</option>
+                                </select>
+                            </td>
+
+                           
+
+                            <td>
+                                <select name="status" class="form-select">
+                                    <option value="1" {% if x.is_active %}selected{% endif %}>Ativo</option>
+                                    <option value="0" {% if not x.is_active %}selected{% endif %}>Inativo</option>
+                                </select>
+                            </td>
+
+
+                            <td>
+                                <input type="text" value="{{ x.email }}" name="email"  class="form-control" >
+                            </td>
+
+                            <td>
+                              <button type="submit"  class="btn btn-light">
+                                 <img src="{% static 'imgs_sistema/file-edit.ico'  %}" alt="" style="width:20px;height:20px;"></imag>  
+                            </td>
+
+                             <td>
+                                <a href="{% url 'deletar' x.id %}" class="btn btn-light">
+                                    <img src="{% static 'imgs_sistema/file-delete.ico'  %}" alt="" style="width:20px;height:20px;"></imag>
+                                </a>
+                            </td>  
+                        </tr>
+                    </form>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'js/script.js' %}"></script>
+ 
+{% endblock %}
+

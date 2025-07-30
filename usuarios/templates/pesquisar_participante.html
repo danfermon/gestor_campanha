@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - Lista de Participantes
+{% endblock %}
+
+{% block cabecalho %}
+  
+{% endblock %}
+
+{% block content %}
+  Pesquisar Participante por CPF:
+  <div class="centralizada">
+        <div class="row">
+        <form action="{% url 'pesquisar_participante' %}" method="POST"> {% csrf_token %}
+            <div class="row">
+                <input type="text" value="" name="texto"  class="form-control" style="width:60%;height:30px;margin:1%">
+                <button class="btn btn-light" style="width:10%;height:40px;margin:1%">Pesquisar</button>
+            </div>
+        </form>
+        <p>Resultado: 
+          {% if participante.nome != enpet %}
+            <a href="{% url 'participante_detalhado' participante.id %}">{{ participante.nome }} </a> 
+          {% else %}
+            <p style="margin:2px; background:lightred;"> {{ mensagem }} </p>
+          {% endif %}
+    </div>
+
+    <hr>
+
+{% endblock %}

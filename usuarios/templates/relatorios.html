@@ -1,0 +1,66 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - Lista de Usuários
+{% endblock %}
+
+{% block cabecalho %}
+    <h2>Relatórios</h2>
+{% endblock %}
+{% block content %}
+    
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Participantes</h4>
+            <p>Listar</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Estatísticas</h4>
+            <p>Gerar</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Campanha</h4>
+            <p> Dados</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4> Sorteios</h4>
+            <p>Metas</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Perfil</p> 
+            <p>Região</p> 
+            <p>Ordenar por produtos</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Média</p> 
+            <p>Mediana</p> 
+            <p>Imprimir dados</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Numeros Gerados</p> 
+            <p>Cupons Cadastrados</p> 
+            <p>Valores de produtos Cadastrados</p> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

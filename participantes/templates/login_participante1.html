@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Login Participante{% endblock %}
+
+{% block cabecalho %}
+  <h3>Login do Participante</h3>
+  <p>Informe seus dados para acessar o sistema</p>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  {% if erro %}
+    <div class="alert alert-danger">{{ erro }}</div>
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    
+    <label for="email">E-mail:</label>
+    <input type="email" name="email" class="form-control" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" name="senha" class="form-control" required>
+
+    <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+  </form>
+</div>
+{% endblock %}

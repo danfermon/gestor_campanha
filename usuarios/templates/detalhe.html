@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Usuário detalhado {{ usuarios.nome }} 
+{% endblock %}
+
+ {% block cabecalho %}
+    <h2> Usuário </h2>
+    {{ usuarios.nome }}
+ {% endblock %}
+
+{% block content %}   
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-4">
+      
+        <table class="table table-hover">
+          <tr>
+            <th> ID </th>
+            <th> Usuário </th>
+            <th> Nome </th>
+            <th> Status </th>
+            <th> E-mail </th>
+            <th> Senha </th>
+          </tr>
+          
+          <tr>
+            <td> {{ usuarios.id }}     </td>
+            <td> {{ usuarios.usuario }}</td>
+            <td> {{ usuarios.nome }}   </td>
+            <td> {{ usuarios.status }} </td>
+            <td> {{ usuarios.email }} </td>
+            <td> {{ usuarios.senha }} </td>
+          </tr>
+        </table>
+
+        <div>
+          <button type="button" class="btn btn-primary">Editar</button>
+          <button type="button" class="btn btn-danger">Ecluir</button>
+        </div>
+        
+       
+      </div>
+    </div>
+  </div>
+
+
+    
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalhes do Cupom{% endblock %}
+
+{% block content %}
+{% include 'includes/header_3.html' %}
+<div class="container mt-4">
+  <h2 class="mb-4">Visualização do Cupom</h2>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h5>Imagem do cupom enviado:</h5>
+      {% if cupom.imagem %}
+        <img src="{{ cupom.imagem.url }}" alt="Imagem do Cupom" class="img-fluid border rounded shadow">
+      {% else %}
+        <p class="text-muted">Nenhuma imagem enviada.</p>
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <h5>Dados extraídos do QR Code:</h5>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_ocr.cnpj|default:"-" }}</li>
+        <li class="list-group-item"><strong>Data:</strong> {{ dados_ocr.data|default:"-" }}</li>
+        <li class="list-group-item"><strong>Hora:</strong> {{ dados_ocr.hora|default:"-" }}</li>
+        <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_ocr.total|default:"-" }}</li>
+        <li class="list-group-item"><strong>SAT:</strong> {{ dados_ocr.sat|default:"-" }}</li>
+        <li class="list-group-item"><strong>Chave QR:</strong> {{ dados_ocr.chave_qr|default:"-" }}</li>
+      </ul>
+    </div>
+  </div>
+
+  {% if cupom.dados_cupom != '' %}
+    <div class="mb-4">
+        <h5>Texto completo extraído do cupom (OCR):</h5>
+        <pre class="bg-light p-3 border rounded" style="white-space: pre-wrap;">{{ cupom.dados_cupom }}</pre>
+    </div>
+    {% endif %}
+
+    <a href="{% url 'painel_participante' %}" class="btn btn-secondary">Voltar à lista</a>
+</div>
+{% endblock %}

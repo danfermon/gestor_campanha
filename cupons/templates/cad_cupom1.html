@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load form_filters_cupons %}  {# Carrega o filtro add_class #}
+
+{% block title %}
+Cadastro de Cupom
+{% endblock %}
+
+{% block cabecalho %}
+  <h3>Cadastro</h3>
+  <p>Preencha os campos abaixo com os dados do seu Cupom</p>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-1 sm-5">
+
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <div style="visibility: hidden; display:inline;">
+      <label for="Participante">Participante:</label>
+      {{ form.participante |add_class:"form-control" }}
+    </div>
+    <label for="imagem_cupom">Foto do Cupom:</label>
+    {{ form.imagem_cupom|add_class:"form-control" }}
+
+       <div class="mt-4 mb-4">
+      <button type="submit" class="btn btn-primary" style="width:30%">
+        Cadastrar
+      </button>
+      <a href="{% url 'painel_participante' %}" class="btn btn-light" style="width:30%">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
+
+<script src="{% static 'js/cep.js' %}"></script>
+{% endblock %}

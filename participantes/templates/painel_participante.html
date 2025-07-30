@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Painel do Participante{% endblock %}
+
+{% block content %}
+  {% include 'includes/header_2.html' %}
+  
+  <div style="font-family: Segoe UI; color: #263A7C; text-align:center;font-weight:bold;font-size:40px">
+    <h1>Painel do participante</h1>
+  </div>
+  <div style="font-family: Segoe UI; color: #263A7C; text-align:center;font-weight:bold;font-size:20px">
+    <p> Bem vindo de volta! {{ participante.nome }} </p>
+  </div>
+  <!--container-->
+   <div class="container-fluid py-8" style="width: 100%;">
+    <div class="justify-content-center align-items-center gx-4">
+    <!--<div class="col-6 col-md-4 col-lg-4 mb-3 text-left">
+        <img src="{% static 'imgs_sistema/hero_4.png' %}" alt="Personagem" class="img-fluid" style="max-height: 350px; margin-left:2%;">
+    </div> fecha primeira coluna cluna-->
+
+    <!--segunda coluna-->
+    <div class="row justify-content-center">
+  <div class="card" style="width:70%;margin:1%;">
+    <div class="card-header bg-primary text-white">
+      Seus dados
+    </div>
+    <div class="card-body">
+      <form action="{% url 'editar_particip' participante.id %}" method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          <label>Nome:</label>
+          <input type="text" name="nome" value="{{ participante.nome }}" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>CPF:</label>
+          <input type="text" name="cpf" value="{{ participante.cpf }}" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>E-mail:</label>
+          <input type="email" name="email" value="{{ participante.email }}" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Celular:</label>
+          <input type="text" name="celular" value="{{ participante.celular }}" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-warning mt-3" style="width: 100%;">Salvar alterações</button>
+      </form>   
+    </div>
+  </div>
+</div>
+
+        
+        
+<!--/////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <div class="row justify-content-center">
+      <div class="card" style="width: 70%;margin:2%;">
+        <div class="card-header bg-primary text-white">
+           Ações
+         </div>
+        <divclass="card-body">
+          <p style="margin:4px">
+              <a href="#" class="btn btn-info" style="width:100%">
+                informações sobre os sorteios
+              </a>
+            </p>
+
+          <p style="margin:4px">
+            <a href="{% url 'cad_cupom' participante.id %}" class="btn btn-danger" style="width:100%">
+              Cadastrar Cupom
+            </a>
+          </p>
+
+          <p style="margin:4px">
+            <a href="" class="btn btn-warning" style="width:100%">
+              Mudar Senha
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Card Cupons Cadastrados -->
+    <div class="row justify-content-center">
+      <div class="card" style="width: 70%;margin:2%;">
+        <div class="card-header bg-primary text-white">
+           Cupons Cadastrados
+         </div>
+      <div style="height: 200px; overflow: auto;">
+        <divclass="card-body">
+          <table class="table table-striped">
+            <tr>
+              <th> Status  </th>
+              <th> Data  </th>
+              <th> Hora  </th>
+              <th> Detalhar  </th>
+            <tr>
+            {% for x in cupons %}
+               <tr>
+                  <td>  {{ x.status }} </td>
+                  <td>  {{ x.data_cadastro }}</td>
+                  <td>  {{ x.hora_cadastro }}</td>
+                  <td>  
+                     <a href="{% url 'area_cupom' x.id %}" class="btn btn-light">
+                          <img src="{% static 'imgs_sistema/detalhe2.ico'  %}" alt="" style="width:30px;height:30px;"></imag>  
+                      </a>
+                    
+                  </td>
+               </tr>
+               {% endfor %}
+          </table>
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+      
+
+  </div> <!-- container-->
+  
+ 
+
+{% endblock %}

@@ -1,0 +1,26 @@
+# Django e essenciais
+Django==5.2.3
+gunicorn
+whitenoise
+dj-database-url
+python-dotenv
+psycopg2-binary
+
+# Celery + Redis
+celery==5.5.3
+redis==6.2.0
+
+# OCR
+pytesseract==0.3.13
+opencv-python==4.12.0.88
+
+# Data e imagem
+pandas==2.3.0
+pillow==11.2.1
+requests==2.32.4
+python-dateutil==2.9.0.post0
+
+# Suporte extra (timezone, parsing, utilitários)
+tzdata==2025.2
+typing_extensions==4.14.1
+PyYAML==6.0.2

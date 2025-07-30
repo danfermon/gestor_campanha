@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+   Sistema Gestor de Campanha
+{% endblock %}
+
+{% block cabecalho %}
+    <h3>Campaing Manager</h3>
+    <p> Sistema Gestor de campanha </p>
+{% endblock %}
+
+{% block TextoBtn%} 
+    {% url 'login'  %}
+{% endblock %}
+
+{% block content %} 
+    <h3> Atenção area restrita! <h3>
+        <p> Apenas para o usuo da gestão.</p> 
+        <p>Alterações no cadastro de SKUs podem afetar o desempenho da campanha</p>
+{% endblock %}

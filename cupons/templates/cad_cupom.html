@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cadastrar Cupom{% endblock %}
+
+{% block content %}
+  {% include 'includes/header_3.html' %}
+<div class="container mt-4">
+  <h2 class="mb-3">Cadastro de Cupom</h2>
+
+  <!-- FORMULÁRIO DE ENVIO DE IMAGEM -->
+  <form action="{% url 'cad_cupom' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="img_cupom" class="form-label">Envie a imagem do seu cupom</label>
+      <input type="file" class="form-control" name="img_cupom" id="img_cupom" accept="image/*" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar imagem</button>
+  </form>
+
+  <hr class="my-4">
+
+  <!-- LEITURA COM A CÂMERA -->
+  <h4>Ou escaneie o QR Code com a câmera</h4>
+  
+  <!-- BOTÃO DE TOGGLE -->
+  <button id="btn-toggle-camera" class="btn btn-success mb-3" onclick="toggleCamera()">Ativar câmera</button>
+  <div id="reader" style="width: 300px; display: none;"></div>
+  <p id="qr-result" class="mt-2 text-success fw-bold"></p>
+
+  {% if msg %}
+    <div class="alert alert-success mt-3">{{ msg }}</div>
+  {% endif %}
+
+  {% if qr_msg %}
+    <div class="alert alert-info mt-2">{{ qr_msg }}</div>
+  {% endif %}
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+  const resultText = document.getElementById('qr-result');
+  const readerDiv = document.getElementById('reader');
+  const btnToggle = document.getElementById('btn-toggle-camera');
+  let html5QrCode;
+  let cameraAtiva = false;
+
+  function onScanSuccess(decodedText, decodedResult) {
+    resultText.textContent = "QR Code detectado: " + decodedText;
+
+    // Envia dados via AJAX
+    fetch("{% url 'salvar_qrcode_ajax' id_participante %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({ dados_qr: decodedText })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'ok') {
+        resultText.textContent += " ✅ (salvo com sucesso)";
+      } else {
+        resultText.textContent += " ❌ Erro: " + data.mensagem;
+      }
+    });
+
+    // Para a câmera automaticamente após a leitura
+    pararCamera();
+  }
+
+  function toggleCamera() {
+    if (!cameraAtiva) {
+      iniciarCamera();
+    } else {
+      pararCamera();
+    }
+  }
+
+  function iniciarCamera() {
+    readerDiv.style.display = "block";
+    html5QrCode = new Html5Qrcode("reader");
+
+    Html5Qrcode.getCameras().then(devices => {
+      if (devices && devices.length) {
+        const cameraId = devices[0].id;
+        html5QrCode.start(
+          cameraId,
+          { fps: 10, qrbox: 250 },
+          onScanSuccess
+        ).then(() => {
+          cameraAtiva = true;
+          btnToggle.textContent = "Parar câmera";
+          btnToggle.classList.remove("btn-success");
+          btnToggle.classList.add("btn-danger");
+        });
+      }
+    }).catch(err => {
+      resultText.textContent = "Erro ao acessar câmera: " + err;
+    });
+  }
+
+  function pararCamera() {
+    if (html5QrCode) {
+      html5QrCode.stop().then(() => {
+        html5QrCode.clear();
+        readerDiv.style.display = "none";
+        cameraAtiva = false;
+        btnToggle.textContent = "Ativar câmera";
+        btnToggle.classList.remove("btn-danger");
+        btnToggle.classList.add("btn-success");
+      }).catch(err => {
+        resultText.textContent = "Erro ao parar câmera: " + err;
+      });
+    }
+  }
+</script>
+
+
+
+{% endblock %}

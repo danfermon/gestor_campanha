@@ -1,0 +1,41 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - SKUs Válidos
+{% endblock %}
+
+{% block cabecalho %}
+    <h2> SKUs Válidos</h2>
+{% endblock %}
+
+{% block content %} 
+
+    <div class="container mt-1">
+        <div class="row">
+            <div>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th>Codigo</th>
+                        <th>Nome</th>
+                        <th>EAN</th>
+                        <th>DUN</th>
+                        <th>Categoria</th>
+                    </thead>
+                    {% for x in skus %}
+                         <tr>
+                            <td> {{ x.id }} </td>
+                            <td> {{ x.nome }} </td>
+                            <td> {{ x.ean }} </td>
+                            <td> {{ x.dun }} </td>
+                            <td> {{ x.categoria }} </td>
+                         </tr>
+                    {% endfor %}
+                </table>
+                   
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

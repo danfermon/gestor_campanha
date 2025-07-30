@@ -1,0 +1,78 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - Lista de Participantes
+{% endblock %}
+
+{% block cabecalho %}
+{% endblock %}
+
+{% block content %} 
+
+    <div class="container mt-2">
+        <div class="row">
+            <div class="centralizada">
+                <a href="{% url 'pesquisar_participante' %}"  class="btn btn-primary" style="position-align:center;">Pesquisar Participante</a>    
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mt-2">
+        <div class="row">
+            <div class="centralizada">
+                <table class="table table-hover">
+                    <tr>
+                        <th> Nome </th>
+                        <th> Celular </th>
+                        <th> E-mail </th>
+                        <th> Status </th>
+                        <th> Editar </th>
+                        <th>Detalhar</th>
+                    </tr>
+                    {% for x in lista_participantes %}
+                    <form action="{% url 'editar_participante' x.id %}" method="POST"> {% csrf_token %}
+                        <tr>
+                             <td>
+                              <input type="text" value="{{ x.nome }}" name="nome"  class="form-control" >
+                            </td>
+
+                             <td>
+                                <input type="text" value="{{ x.celular }}" name="celular"  class="form-control" >
+                            </td>
+                           
+                            <td>
+                                <input type="text" value="{{ x.email }}" name="email"  class="form-control" >
+                            </td>
+
+                             <td>
+                                <select name="status" class="form-select">
+                                    <option value="1" {% if x.status == '1' %} selected {% endif %}>Ativo</option>
+                                    <option value="2" {% if x.status == '2' %}  selected {% endif %}>Inativo</option>
+                                </select>
+                             </td>
+
+                            
+                            <td>
+                              <button type="submit"  class="btn btn-light">
+                                 <img src="{% static 'imgs_sistema/file-edit.ico'  %}" alt="" style="width:20px;height:20px;"></imag>  
+                            </td>
+
+                             <td>
+                              <a href="{% url 'participante_detalhado' x.id %}"  class="btn btn-light">
+                                 <img src="{% static 'imgs_sistema/detalhe.ico'  %}" alt="" style="width:20px;height:20px;"></a>  
+                            </td>
+
+                        </tr>
+                    </form>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'js/script.js' %}"></script>
+ 
+{% endblock %}
+

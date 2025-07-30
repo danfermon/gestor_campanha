@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login Participante{% endblock %}
+
+{% block content %}
+
+{% include 'includes/header_2.html' %}
+
+<div class="col-md-4 mb-2" style="margin:auto;width: 50%;padding:10px;">
+      <div class="card">
+          <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;font-weight:bold;"> Login:</h3>
+    
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="email" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">E-mail:</label>
+      <input type="email" name="email" class="form-control" required>
+
+      <label for="senha" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">Senha:</label>
+      <input type="password" name="senha" class="form-control" required>
+
+      <div style="margin:2%;width: 50%;padding:10px;">
+        <button type="submit" class="btn btn-primary mt-3" style="width: 140px;">Entrar</button>
+        <a href="{% url 'home_participantes' %}" class="btn btn-warning mt-3" style="width: 140px;"> Voltar </a>
+      </div>
+      
+    </form>
+  </div>
+
+    {% if erro %}
+      <div class="alert alert-danger">{{ erro }}</div>
+    {% endif %}
+
+</div>
+{% endblock %}

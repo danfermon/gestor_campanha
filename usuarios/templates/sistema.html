@@ -1,0 +1,109 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+   Sistema Gestor de Campanha
+{% endblock %}
+
+{% block cabecalho %}
+    <h3>Gestor de campanha</h3>
+    <p> Acompanhe sua campanha </p>
+{% endblock %}
+
+{% block TextoBtn%} 
+    {% url 'login'  %}
+{% endblock %}
+
+{% block content %} 
+
+  <div class="row">
+  <div class="col-md-3 mb-2">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          
+         <!--img src="{{ usuario.foto }}" alt="" style="width:80px;height:80px;"-->
+         <img src="{% static 'avatar/user.ico'  %}" alt="" style="width:80px;height:80px;"></imag>
+         <p> Bem Vindo de volta ! {{ usuario.username }} </p> 
+         
+         {% if usuario.nivel == '1' %}
+          <p>Nível: Admin </p>
+        {% elif usuario.nivel == '2' %}
+          <p>Nível: Comum</p>
+        {% else %}
+          <p>Nível: Visitante</p>
+        {% endif %} 
+         
+        
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 mb-3">
+    <div class="card">
+      <div class="card-body">
+
+        <form action="{% url 'perfil' usuario.id %}" method="POST" > {% csrf_token %}
+          <table class="table table-hover">
+           <tr>
+              <th> Nome </th>
+              <th> Usuário </th>
+              <th> Senha </th>
+              <th> E-mail </th>
+              <th> Editar </th>
+           </tr>
+          <tr>
+             <td><input type="text" value="{{ usuario.first_name }}"  name="nome"  class="form-control"></td>
+             <td><input type="text" value="{{ usuario.username }}"   name="usuario"  class="form-control"></td>  
+             <td><input type="text" value="*******"                  name="senha" class="form-control"> </td>           
+             <td><input type="text" value="{{ usuario.email }}"      name="email"  class="form-control"></td>
+             <td>
+              <button type="submit"  class="btn btn-light">
+                <img src="{% static 'imgs_sistema/file-edit.ico'  %}" alt="" style="width:20px;height:20px;"></imag>  
+              </td>
+          </tr>
+          <tr>
+            
+          </tr>
+        </table>
+      </form> 
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 mb-2">
+    <div class="card">
+      <div class="card-body">
+        <p><b>Atividades:</b></p>
+        {% for atividade in atividades_usuario %}
+          <p>{{ atividade }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <p> <b>Produtos: SKU Ativos</b></p>
+        <p>
+          <a href="{% url 'skus' %}">
+              Listar SKUs
+          </a>
+        </p>
+        <p>
+          <!--a href="{% url 'importar_skus' %}">
+              Importar SKUs
+          </a-->
+        </p> <!--  Deixei fixo no banco- danny 19-07 -2025   -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 
+  
+{% endblock %}

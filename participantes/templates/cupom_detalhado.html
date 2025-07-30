@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Cupom{% endblock %}
+
+
+{% block content %}
+
+  {% include 'includes/header_3.html' %}
+
+  <div class="container mt-1 sm-5">
+    <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;"> Status do Cupom: </h3>
+    <div class="container-fluid text-center mt-4">
+      <table class="table table-striped">
+        <tr>
+          <th>Status</th>
+          <th>Imagem Enviada</th>
+          <th>Loja</th>
+          <th>CNPJ</th>
+          <th>Documento</th>
+          <th>Número Documento</th>
+          <th>Valor Total</th>
+          <th>Data de Cadastro</th>
+          <th>Hora de Cadastro</th>
+        </tr> 
+        <tr>
+          <td>
+            {% if cupom.status == 'Pendente' %}
+              Aguardando Validação
+            {% else %}
+              {{ cupom.status }}
+            {% endif %}
+          </td>
+          <td>
+            <input type="button" class="btn btn-light" onclick="exibir()" value="Visualizar">
+          </td>  
+          <td>{{ cupom.nome_loja }}</td> 
+          <td>{{ cupom.cnpj_loja }}</td>
+          <td>{{ cupom.tipo_documento }}</td>
+          <td>{{ cupom.numero_documento }}</td>
+          <td>{{ cupom.valor_total }}</td>
+          <td>{{ cupom.data_cadastro }}</td>
+          <td>{{ cupom.hora_cadastro }}</td>
+        </tr>
+      </table>
+    </div> <!-- fecha container -->
+
+  <!--div class="container-fluid text-center mt-4">  
+    <div id="img_cupom" style="display: none;">
+      <img src="{{ cupom.imagem_cupom.url }}" alt="Imagem do cupom" style="width:100px;height:200px;">
+    </div>
+  </div-->
+
+
+  <div id="img_cupom" style="display: none;">
+    <text>
+      {{ cupom.id }}
+    </text>
+    <a href="{% url 'dados_cupom' cupom.id %}" class="btn btn-info"> Ler Cupom </a>  <br>
+    <h2>Texto do cupom lido:</h2>
+    <textarea rows="23" style="width: 600px;" readonly>{{ cupom.dados_cupom }}</textarea>
+  
+    <br>
+    <textarea rows="23" style="width: 600px;" readonly>
+      {{ cupom.dados_cupom }}
+    </textarea>
+  </div>
+
+
+  <script>
+    function exibir() {
+      const div = document.getElementById('img_cupom');
+      if (div.style.display === 'none' || div.style.display === '') {
+        div.style.display = 'block';
+      } else {
+        div.style.display = 'none';
+      }
+    }
+  </script>
+
+</div>
+
+{% endblock %}

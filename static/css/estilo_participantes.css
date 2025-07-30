@@ -1,0 +1,287 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  margin: auto;
+}
+
+body {
+  font-family: Arial;
+  padding: 0px;
+  /*background-image: linear-gradient(to right, #FEEA3B , #fde615ff);*/
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background-color: #ddd;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #263A7C;
+  font-size: 12px;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+.li:hover  {
+  background-color: #f0f0f0;
+  color: #000;
+  transform: scale(1.1); /* Aumenta o tamanho do botão */
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-image: linear-gradient(to right, #FEEA3B, #E3A42E);
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: center;
+  width: 10%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  background-color: #ddd;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #ddd;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: #ddd;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 10px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/*side bar*****************************/
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #d1df0f;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: bisque;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+/***************************************/
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+  
+}
+
+#navbarMenu{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-emphasis: right;
+  
+
+}
+
+#inicio{
+  height: min-content;
+}
+
+.accordion .item {
+  margin-bottom: 5px;
+  border: none;
+}
+
+.accordion-header {
+  background-color: #b4001e;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.accordion-header:hover {
+  background-color: #8d0017;
+}
+
+.accordion-content {
+  background-color: #f32d3c;
+  color: white;
+  padding: 15px;
+  display: none;
+  font-size: 14px;
+}
+
+.accordion-content.active {
+  display: block;
+}
+
+.arrow {
+  font-size: 14px;
+}
+
+
+/*feito de botão*/
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+
+
+.grid-container {
+  /*grid-template-columns: repeat(5, 1fr);*/
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px; /* Adiciona espaçamento entre as células */
+  display: grid;
+  position: relative;
+  top: -60px; /* Sobe 20 pixels */
+  
+}
+
+.borda {
+  border-style:solid;
+  border-color: #C20D19;
+  background-color: #C20D19;
+  height:70px;
+  width:100%;
+  position: relative;
+  top:-10px;
+}

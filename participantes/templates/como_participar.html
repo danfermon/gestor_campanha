@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+{% include 'includes/header_2.html' %}
+
+<!-- SEÇÃO INICIAL -->
+<section id="inicio" class="pt-1">
+  <div class="container-fluid py-8">
+
+    <div class="row align-items-center" style=" background-image: linear-gradient(to right, #FEEA3B, #f0d7a9ff);">
+
+        <div class="col-md-6 col-lg-4 mb-6 text-center">
+          <img src="{% static 'imgs_sistema/premios_0.png' %}" alt="Prêmios" class="img-fluid" style="max-height: 300px;">
+        </div>
+
+         <div class="col-md-6 col-lg-4 mb-6 text-center">
+          <img src="{% static 'imgs_sistema/hero_7.png' %}" alt="Herói" class="img-fluid" style="max-height: 350px;margin-top:3%;">
+         </div>
+
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+          <img src="{% static 'imgs_sistema/texto_btn_cadastrar.png' %}" alt="Texto Cadastro" class="img-fluid" style="max-height:80px;margin: 1%;">
+          <a href="{% url 'cadastrar_participante' %}"  type="btn btn-light" class="glow-on-hover">
+            <img src="{% static 'imgs_sistema/btn_cadastrar.png' %}" alt="Botão Cadastrar" class="img-fluid" style="max-height: 70px;margin: 1%;">
+          </a>
+          <img src="{% static 'imgs_sistema/pack.png' %}" alt="Pack" class="img-fluid" style="max-height: 400px;margin: 1%;">
+        </div>
+    </div> 
+  </div>
+  
+</section>
+
+<section>     
+        <div class="container-fluid py-8" style="background-color: #fffdf5;">
+            <div class="row justify-content-center">
+            <div class="col-6 col-md-4 col-lg-4 mb-3 text-center">
+
+                <div style="font-family: Segoe UI; color: #263A7C; text-align:center;font-weight:bold;font-size:40px">
+                    COMO PARTICIPAR
+                </div>
+                <div style="font-family: Segoe UI; color: #E11F1D; text-align:center;font-weight:bold;font-size:30px">
+                    <p>
+                        COMPRE E CADASTRE
+                    </p>
+                </div>
+                
+            </div>
+        
+
+            <div class="row justify-content-center">
+                    <div class="col-6 col-md-6 col-lg-8 mb-4 text-center">
+                        <div style="font-family: Arial, Helvetica, sans-serif;text-align: left;">
+                           <p>
+                                <b> 1- Adquira 3 produtos Bombril diferentes </b> (veja a relação dos produtos participantes na aba regulamento aqui no site). 
+                           </p>
+                           <p>
+                            <b> 2- Após a compra, converse com o Robom-Bril</b> via WhatsApp 00 0000 0000 e envie seu CUPOM FISCAL para receber seu número da sorte e participar dos sorteios semanais e do grande prêmio final. 
+                           </p>
+                            <p>
+                                <b> 3 - Bônus nas Redes Sociais: </b> poste, marque e dobre seus cupons! Poste suas compras o Cupom Fiscal no Facebook, Instagram ou Tiktok, marque #ROBOM-BRIL = 1 NÚMERO DA SORTE EXTRA
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!---->
+            <div class="row justify-content-center">
+                    <div class="col-3 col-md-6 col-lg-8 mb-4">
+                        <div style="font-family: Arial, Helvetica, sans-serif;text-align: left;">
+                            <p style="font-family: Segoe UI; color: #E11F1D; text-align:left;font-weight:bold;font-size:30px">
+                                CONCORRA!
+                            </p>
+                            <p>
+                                <b>08 prêmios semanais:</b><br> 
+                            </p>
+                            <p>
+                                • 1 ANO DE SUPERMERCADO GRÁTIS 
+                            </p>
+                            <p>
+                                • Prêmio final do Robom-Bril: 
+                            </p>
+                            <p>
+                                • Carro elétrico Renault Kwid e E-Tech 100% Elétrico
+                            </p>
+
+                            <p>
+                                • iPhone 16 128GB 
+                            </p>
+                            <p>
+                                • Central Alexa 
+                            </p>
+                            <p>
+                                • Eletrodomésticos e eletrônicos Ultra-Tecnológicos
+                            </p>
+                            
+                             <p>
+                                • Geladeira Brastemp BRE80AB 
+                             </p>
+                             <p>
+                                • Aspirador Robô Eletrolux ERB30
+                             </p>
+
+                             <p>
+                                • Fogão Brastemp BFE5N 
+                             </p>
+
+                             <p>
+                                • Máquina de lavar LG AI DD 
+                             </p>
+
+                             <p>
+                                • TV 55' Philips 4k OLED 
+                             </p>
+
+                             <p>
+                                • PlayStation 5 digital Edition
+                             </p>                            
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-6 col-lg-8 mb-4 text-center">
+                        <img src="{% static 'imgs_sistema/hero_3.png' %}" alt="Pack" class="img-fluid" style="max-height: 400px;margin: 1%;">
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+
+
+
+</section>
+
+
+
+<script src="{% static 'participantes.js' %}"></script>
+
+{% endblock %}

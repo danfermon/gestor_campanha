@@ -1,0 +1,39 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Sistema Gestor de Campanha - Importar SKUs 
+{% endblock %}
+
+{% block cabecalho %}
+    <h2> Importar SKU </h2>
+{% endblock %}
+
+{% block content %} 
+
+    <div class="container mt-1">
+        <div class="row">
+            <div class="col-sm-5">
+                <form action="{% url 'importar_skus' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}  
+                    <p>Selecione a Planilha com os SKUs Válidos: </p>
+                    <b>Formato: (Nome | Ean | Dun | Categoria)</b>
+                    <input type="file" class="form-control" name="planilha" id="planilha">
+
+                    <div style="margin:4px">
+                        <button class="btn btn-primary" type="submit">
+                            Importar
+                        </button>
+
+                        <a href="{% url 'importar_skus' %}" class="btn btn-warning">
+                            Cancelar
+                        </a>
+                    </div>   
+                </form>  
+                <p>{{ texto }}</p>   
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+
+{% block title %}
+   Sistema Gestor de Campanha
+{% endblock %}
+
+{% block cabecalho %}
+    <h1> Campaign Manager </h1>
+    <p>Sistema Gestor de Campanha</p>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Login</h3>
+                <form action="{% url "login" %}" method="POST"> {% csrf_token %}
+                    <label for="username">Usuário:</label>
+                    <input type="text" class="form-control" id="username" placeholder="Entre com seu Usuário" name="username">
+                    
+                    <label for="password">Senha:</label>
+                    <input type="password" class="form-control" id="password" placeholder="Entre com a Senha" name="password">
+
+                <div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Logar</button>
+                </div>
+            </form> 
+
+            {% for k, v in form.errors.items %}
+                {{ v }}
+            {% endfor %}
+
+            </div>  
+        </div>
+    </div>
+
+    
+
+  
+  
+{% endblock %}

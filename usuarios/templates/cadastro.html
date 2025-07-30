@@ -1,0 +1,67 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block title %}
+   Sistema Gestor de Campanha
+{% endblock %}
+
+{% block cabecalho %}
+    <h3>Cadastro de Usuários</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-1">
+        <div class="row">
+            <div class="col-sm-5">
+                <form  action="{% url "cadastro" %}" method="POST"> {% csrf_token %}                    
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Entre com seu Nome" name="nome">
+
+                    <label for="usuario">Usuário:</label>
+                    <input type="text" class="form-control" id="usuario" placeholder="Entre com seu Usuário" name="usuario">
+
+                    <label for="email">E-mail:</label>
+                    <input type="text" class="form-control" id="email" placeholder="Entre com seu E-mail" name="email">
+
+                    <label for="status">Status:</label>
+                     <select class="form-select" aria-label="Status" id="status" name="status">
+                        <option value="1">Ativo</option>
+                        <option value="2">Inativo</option>
+                     </select>
+
+                     <label for="nivel">Nível:</label>
+                     <select class="form-select" aria-label="nivel" id="nivel" name="nivel">
+                        <option value="1">Administrador</option>
+                        <option value="2">Comum</option>
+                        <option value="3">Visitante</option>
+                     </select>
+
+                    <label for="pwd">Senha:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Entre com a Senha" name="senha">
+
+                <div>
+                    <br>
+                    <button type="submit" class="btn btn-light">
+                        <img src="{% static 'imgs_sistema/Save.ico'  %}" alt="" style="width:30px;height:30px;"></imag>
+                    </button>
+
+                    <a href="{% url 'usuarios' %}" class="btn btn-light">
+                        <img src="{% static 'imgs_sistema/cancel.ico'  %}" alt="" style="width:30px;height:30px;"></imag>  
+                    </a>
+
+                </div>
+            </div> 
+
+                </form> 
+
+                <br>
+            
+
+         
+             </div> 
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}
