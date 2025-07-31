@@ -18,11 +18,17 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 
 ## Técnologias utilizadas no desenvolvimento:
 - Linux Ubuntu - https://ubuntu.com/
+- Versão : Distributor ID: Ubuntu - Description: Ubuntu 24.04.2 LTS Release: 24.04 - Codename:noble
+
 - Python - (V.: Python 3.12.3) - https://www.python.org/
 - Django - (V.: 5.2.3) - https://www.djangoproject.com/
-- Django Rest Framework - https://www.django-rest-framework.org/
+- Django Rest Framework - https://www.django-rest-framework.org/ 
+
 - PostgresSql - https://www.postgresql.org/
-- Redis - https://app.redislabs.com/#/
+- Versão : psql (PostgreSQL) 16.9 (Ubuntu 16.9-0ubuntu0.24.04.1)
+
+- Redis - https://app.redislabs.com/#/ V. 2.18.1
+- Observação - Estou trabalhando com o (django_celery_beat), para criar rotinas.
 
 ## Dependências:
 
