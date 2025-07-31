@@ -66,32 +66,5 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 ## Arquitetura do projeto:
 
 '''
-.
-├── gestor_campanha
-│ ├── README.md
-│ ├── cupons
-│ ├── db.sqlite3
-│ ├── gestor_campanha
-│ ├── lib64 -> lib
-│ ├── manage.py
-│ ├── media
-│ ├── participantes
-│ ├── procfile
-│ ├── pyvenv.cfg
-│ ├── requirements-prod.txt
-│ ├── requirements.txt
-│ ├── share
-│ ├── skus_validos
-│ ├── static
-│ ├── staticfiles
-│ ├── usuarios
-│ └── utils
-└── venv
-    ├── bin
-    ├── include
-    ├── lib
-    ├── lib64 -> lib
-    └── pyvenv.cfg
-'''
 ## Documentação:
 - ... em andamento 🚀🛠️

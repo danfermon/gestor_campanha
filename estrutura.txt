@@ -1,0 +1,957 @@
+.
+├── .env
+├── .git
+│   ├── COMMIT_EDITMSG
+│   ├── HEAD
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── main
+│   ├── objects
+│   │   ├── 00
+│   │   │   └── 6f04cfdcae1c504a82b20217f3b6d157cdadfe
+│   │   ├── 01
+│   │   │   └── 21630ca62fa1166dabff2f1fe171458a90f29b
+│   │   ├── 03
+│   │   │   └── cb8f9df45689b3b9a4009e44f8482fb8894081
+│   │   ├── 04
+│   │   │   └── c1fab0b4e3f002080fe302f2f9e245606c4b47
+│   │   ├── 06
+│   │   │   ├── df8e9e48e3ce9239410d857a1acd8a47b3f6f2
+│   │   │   └── e9e68282db8ccf06795b8f88f171b81b9ec01c
+│   │   ├── 08
+│   │   │   ├── bb1eca18cd5fa6b973c54c1f8de592d637c834
+│   │   │   └── f42351329acdabe857b213c6a3205a83f46464
+│   │   ├── 0a
+│   │   │   └── 371056b837ecbbd1c88068d04b2d28940177fa
+│   │   ├── 0b
+│   │   │   ├── 2c135fbbb191e90d1d16979e4a5a97f884b20e
+│   │   │   └── b5fb2c2d3687418c3463abf28aca4a3f23da68
+│   │   ├── 0c
+│   │   │   ├── 54cb16a6d320df7f335fee4c6f4c9028186a99
+│   │   │   └── dc54d25ff131a1d992459d9a73c11037ba606e
+│   │   ├── 0e
+│   │   │   ├── 2df016021d0005697d6b8acc0bdc0f7e1a7b61
+│   │   │   └── 5cd49ff94111282aca1209a8a17164a0abcb45
+│   │   ├── 0f
+│   │   │   └── 18f30eb14b6df30155a1158e6028a7571b8c39
+│   │   ├── 10
+│   │   │   └── bb9bcd8a015b65920b34772e3c0f488110b0ca
+│   │   ├── 11
+│   │   │   ├── 22f71b9bda733905d913e8c531c724a132d11d
+│   │   │   └── e7767ea7e49517c941614ea0c3f528994a88db
+│   │   ├── 12
+│   │   │   └── 8cf678d63481fc31b249ba85072db38c7112b7
+│   │   ├── 14
+│   │   │   ├── 38708a405d78ca66337acfe7509873b38a5ef8
+│   │   │   ├── 53fdc3ecb9128db5b863407ae4887882f0d060
+│   │   │   └── c51b6abb35766e2e959f9211e1b9006c960761
+│   │   ├── 16
+│   │   │   └── bfaa410fcff5d010f8f036bbdb43b6f37860ef
+│   │   ├── 17
+│   │   │   ├── e81b1271420207023b4913157084770ba0f65d
+│   │   │   └── f000de3974ac8a008f4dd4e597f925099330c5
+│   │   ├── 18
+│   │   │   ├── 03eeec7457e556c7e292f152a84489d846ef4c
+│   │   │   └── ee2780ac16413ddb677ddb0ca61738680b55c4
+│   │   ├── 1b
+│   │   │   └── 4ccfccc523560c64cf7451e16fe969b28cac3b
+│   │   ├── 1f
+│   │   │   └── 5898bf672d6d00d53120d0c674f84e3f300f8b
+│   │   ├── 21
+│   │   │   ├── 745675f46ca74231b74a63a1caf7d1f5524c14
+│   │   │   └── fc11619fa287e44460c6e75b8c0773ca4dc6e6
+│   │   ├── 24
+│   │   │   └── 09853f757040cbbf39f14260c31565ef449b19
+│   │   ├── 25
+│   │   │   ├── 348c39be949578e7166c574f65e03d5f408e3c
+│   │   │   ├── 64db67ead882e6ba8cdc17623b1871990c869b
+│   │   │   ├── ae492ad5f3a2af9e85c99cfc03eb4080b6e9a6
+│   │   │   └── ecb076905f27edd7b8c358e0c60548a2a66895
+│   │   ├── 2a
+│   │   │   ├── 6fa6b2cf0a9add054a16747fd75146aa3cd295
+│   │   │   └── 99c9a00536989561773ac6684b6261ed03f071
+│   │   ├── 2b
+│   │   │   ├── 67c75aa31b6415320e9a096ba7a7605f22a012
+│   │   │   └── 780b9e8b7553d4ddcda0d395f144fcdacb8a2b
+│   │   ├── 2c
+│   │   │   └── 00b2e5b421b6abd062e532671b163ed8bb4e0d
+│   │   ├── 2d
+│   │   │   └── 587599a21cf4c83cc0b8735b52fd2b7bb53d1e
+│   │   ├── 2f
+│   │   │   └── ad9b94b798f0ade48fe8518dc7b4605c598ff5
+│   │   ├── 33
+│   │   │   ├── 235fbd6aeb39c46fa7fc091c71294aefda6adb
+│   │   │   └── e8d4117fce4afbad4bbfb8566b3335b24f6fb1
+│   │   ├── 36
+│   │   │   └── e07d0f24c9a87c4d9b02bc92a47438ef578f0b
+│   │   ├── 3a
+│   │   │   └── 1fdecaf4643aae5f0e21e783c6c830690671e5
+│   │   ├── 3b
+│   │   │   └── 3d5c84d7b0e27154f169ad686383f7495e7dd6
+│   │   ├── 3d
+│   │   │   └── 8dbbdad2bf7d11b59d191a1bb906b38d8a11b6
+│   │   ├── 3e
+│   │   │   ├── caa798499fc95708021b7cce68857618edb1c5
+│   │   │   └── ec41ac7d4bdbc8cfdd183239262144ebe2b7e3
+│   │   ├── 41
+│   │   │   ├── d2d18f201c75a29bad09cfaf7f3fe1b0fa7849
+│   │   │   └── e36072f189c9e9232144a69d038c797c3f524d
+│   │   ├── 44
+│   │   │   └── ac585fcb3a0f461a0b4b62b8b3644bc05075ad
+│   │   ├── 45
+│   │   │   └── bf1e54efebcaed8f01ed8af6f383185bc10c13
+│   │   ├── 46
+│   │   │   └── 514ecd7e4e18dd54d6a016951c27455b108330
+│   │   ├── 47
+│   │   │   └── 8e7759ef77453b07ae1b12303aa3180b7397b7
+│   │   ├── 49
+│   │   │   └── e71f00df25a308c39ab092d872b6d8a6fa77b5
+│   │   ├── 4b
+│   │   │   ├── 15983d1647c8753dadbedfbc11f59613f6da75
+│   │   │   └── 4bd48164882b16c7513f15f6d0fa9ace08d923
+│   │   ├── 52
+│   │   │   ├── 74cff77580c271fa955bb528ae46735271d1d1
+│   │   │   ├── b4179cd4dbd5ecbe24a9a34585d804775e2df0
+│   │   │   └── b76f41ca75b8233531f4e01e3bba650a5beb0b
+│   │   ├── 54
+│   │   │   └── ced560256c14299414f67d814445a37effe3c2
+│   │   ├── 55
+│   │   │   ├── ca50947b15d24226c335c4b2bc49f5c65c2ff6
+│   │   │   └── ee165286079ef5d90542ed42bd16856f48ab0b
+│   │   ├── 56
+│   │   │   └── 6290d6287ad4252f3968af1ef30f09a307627e
+│   │   ├── 57
+│   │   │   ├── 3be30cf00437354d2f145dcb783f338eeee59e
+│   │   │   └── a8424a4ac8c7f3f5828320f119395afd7baf99
+│   │   ├── 59
+│   │   │   ├── 845b4cdc6d7ce6082179f02556e7de855ac2cb
+│   │   │   └── f00154d8bf2fe8ec82d8c7f83c2100b4a37414
+│   │   ├── 5a
+│   │   │   └── e546067e2e8170c4b6a233df832029e7a06a2e
+│   │   ├── 5b
+│   │   │   ├── 032be737fd631909f0b2ef6664a84977221173
+│   │   │   └── e0475a90a2662ebcd5992e758b7c8195529f06
+│   │   ├── 5c
+│   │   │   ├── 1eda8f5332da59161aaa09ebbf9c22b52db268
+│   │   │   └── f72ece561a32d0678e333923597ab737473753
+│   │   ├── 5d
+│   │   │   ├── 78562ef11295b7ddf5b7361df53dcdf106a969
+│   │   │   └── fed000cf396a3a97d615e0a9fe9dc888ce7d5d
+│   │   ├── 5e
+│   │   │   └── a540623f990bd5d8a2e3b085dee3f1933fe1a3
+│   │   ├── 5f
+│   │   │   └── 5a9979188a8d81a4ce3bd775b3eb3a6c01e646
+│   │   ├── 62
+│   │   │   └── 14cb4be73324eb2f13cccf1f32690b6ca3f598
+│   │   ├── 63
+│   │   │   ├── 4787f3aa8afb8cb0d9cdbdffe6a118671625a7
+│   │   │   └── f22ead34993634c61ac82630f279b3600fa0af
+│   │   ├── 69
+│   │   │   ├── 94437c52c79ccf4642d1ba5c5dc885358b962f
+│   │   │   └── ddc2ee00cb8e65360bd79eaabd0e89c400ce78
+│   │   ├── 6a
+│   │   │   └── d1e2ce55816f669820b29e2a758c83cc920952
+│   │   ├── 6b
+│   │   │   ├── 59dde8d056ba48babdd393df27ebd48fc47e3d
+│   │   │   ├── 6d9a453f4ce5087dd9de9671ed18e178199750
+│   │   │   └── b603efb97d91d082a73c166df1c6a7fb4b094e
+│   │   ├── 6c
+│   │   │   └── 424d64080b21f449b893eb478d559f581664c1
+│   │   ├── 6d
+│   │   │   └── d3bde79b170c363855ca90e3f6e08fcc1449b2
+│   │   ├── 6e
+│   │   │   ├── 3119087041e19cf58b35a702c1834056f4701f
+│   │   │   └── 76bcfeb1ac6db21c4db7d9292e1d30a8107f6e
+│   │   ├── 6f
+│   │   │   └── 6e8b1b8b41c6599989bb189a7ee0088422744b
+│   │   ├── 78
+│   │   │   └── 9ede973204f4e5503d06e662725f1ac6f1f7a9
+│   │   ├── 79
+│   │   │   └── 51405f85a569efbacc12fccfee529ef1866602
+│   │   ├── 7a
+│   │   │   ├── 78bb06ed00b92e1a76fd912fc9f7048d69d488
+│   │   │   └── 9ca04f3ea6ee36ef2ae8381c3206ec180a7119
+│   │   ├── 7c
+│   │   │   ├── 05bfa639b57062d254c23984b5ead2321a6030
+│   │   │   └── e503c2dd97ba78597f6ff6e4393132753573f6
+│   │   ├── 7d
+│   │   │   └── 9f2423f153d8c79aa858fd1650c0c51152f2fa
+│   │   ├── 7f
+│   │   │   └── 72e57bc6ee793b7e0943428352230e8d6d3a9e
+│   │   ├── 80
+│   │   │   └── 47391cc9d51f18ffde98735357803b1679aa06
+│   │   ├── 81
+│   │   │   └── b56a787d8012a945e98eb26c9e0b46472c27bd
+│   │   ├── 82
+│   │   │   ├── 02cd67466856e6a9bdf1302c6b3c34ba1f1b28
+│   │   │   └── f0dd0c15d1b3752f337c11a1083182cd528cdb
+│   │   ├── 83
+│   │   │   ├── a2f51cf10f2b37304f7bec72aacef6c61cfa61
+│   │   │   └── cdf4153e27c7c4aaf5bf620f9158fdbe510d61
+│   │   ├── 84
+│   │   │   └── c156d155bc754b8449003734830a3664483c39
+│   │   ├── 85
+│   │   │   └── fd5ea599de3e59da9f6c329233daab774e7052
+│   │   ├── 88
+│   │   │   └── 5223cbfca76808f7243fb59cc99c764caae9ee
+│   │   ├── 8a
+│   │   │   └── caf19b7c50e4bf051c74c6a6acbd73965fcc84
+│   │   ├── 8c
+│   │   │   └── 38f3f3dad51e4585f3984282c2a4bec5349c1e
+│   │   ├── 8d
+│   │   │   └── 458d9c486ebadd0b2f86ceae276faad9535847
+│   │   ├── 8e
+│   │   │   └── d7634070cdd1975d8272840570ddf31a4134bd
+│   │   ├── 8f
+│   │   │   ├── 8c62f592b93fd12d4d069743e22c26cdbb45d7
+│   │   │   └── b26c16607734ffd76a331f1c7ea682c47997fd
+│   │   ├── 90
+│   │   │   └── a6eed37c1e2c89877dcb4d8adff92fce19e04c
+│   │   ├── 97
+│   │   │   └── 381b439a728b5a84aa65f33da2bfd923775b66
+│   │   ├── 98
+│   │   │   └── 8bbda0ded1f3db4bac75a53ae714252cc02c48
+│   │   ├── 99
+│   │   │   └── 446bd46bba04574f78439e9233135b15effcd5
+│   │   ├── 9c
+│   │   │   └── c1a8177e8e51395879a06730e9ac41289b2871
+│   │   ├── 9f
+│   │   │   └── b2ae3b7cd041b9721e8590cb8669d0dfcbb9df
+│   │   ├── a0
+│   │   │   └── 9fda231dbd9aa640f9b9014a24b0f4e73e56ac
+│   │   ├── a2
+│   │   │   └── 5645ca870a130311bda1cf9de6ef73e2f73eac
+│   │   ├── a3
+│   │   │   ├── 4de60bc3cc36c3187933cb2cffeeb5c347fc89
+│   │   │   └── adbe229c425eba3a6ce4680adead0f2c330994
+│   │   ├── a4
+│   │   │   └── 5e1ac4c0c673681b8767bd60e9ab3cdb7dd8d7
+│   │   ├── a5
+│   │   │   └── 90c8c7449b0a9682cb9abdb9aa2c25c9992eec
+│   │   ├── a6
+│   │   │   └── 1713a6c00bcf05e1b9b994c0d36b806c915c16
+│   │   ├── a7
+│   │   │   └── 9b4e4aeba8055caae2cb4308331b5cc4487ae2
+│   │   ├── a8
+│   │   │   ├── 9733160db6cdab65e89e52c0b9f660e27bf67e
+│   │   │   └── d6d50406921ec0c94d01f8d16a21005b3e4323
+│   │   ├── a9
+│   │   │   └── 0a46698e12a2799ff086ef4d74130399a53272
+│   │   ├── aa
+│   │   │   └── 4e8c0b5f54571e19b787d61da08ede5ce2005c
+│   │   ├── ab
+│   │   │   └── 6401fd59b11ec9d8e79c4962be937e68757abe
+│   │   ├── ad
+│   │   │   └── 745b23d30be0ab62d26a29783d4d7966edb93c
+│   │   ├── b0
+│   │   │   └── 58d0177c2bf3ebbd0df2f47a31dfcd92af9f7d
+│   │   ├── b4
+│   │   │   └── 449bbce5076e08472973658b0702f55fa3a078
+│   │   ├── b6
+│   │   │   └── 2a5eead62510c764a76de756bc6ada9037991a
+│   │   ├── b7
+│   │   │   ├── 4fd4eb561d765462976d777d2c49cabaebcbb4
+│   │   │   ├── 67a8c3d59fd6b88209b57b4bb057ad868b4560
+│   │   │   ├── b5dfeb023ccd7b1de91dd2c0087350c08fd487
+│   │   │   └── bd4dc323ec48026df284742ace0fb8eb9e3efb
+│   │   ├── b8
+│   │   │   └── 6373eb69464c767a94392a40f9e2a9ce4301c7
+│   │   ├── ba
+│   │   │   └── 79a5f10191c775cdc6e351f5701063b0717e08
+│   │   ├── bb
+│   │   │   ├── 8bdd8dd58f9c17e059aa4cf0ca90aa08427ccc
+│   │   │   ├── 93dd37a4d5b60b387dfcd006e43c7f410f8d2f
+│   │   │   └── a23b5e51629509a499f4471fc8196e9863d211
+│   │   ├── bc
+│   │   │   └── c9fc80db841e50ba7a7e211aacaf946950ea3b
+│   │   ├── bf
+│   │   │   ├── a8849a7967a1eab060c98732501f988c249c3a
+│   │   │   └── e2fc1b0720e1a466f2ce1a8ee27769429cd8ab
+│   │   ├── c0
+│   │   │   └── 12010318fb533415bec593b058dc87b9a33a2d
+│   │   ├── c1
+│   │   │   ├── 4559d132b0cc7ede59bd3aa2214fec797abfc1
+│   │   │   ├── 66197f2d84ff2a30beff3aaa8c2e651e22a3ce
+│   │   │   └── b21189ad3ef0daa4c0c575ebe13536fb15c616
+│   │   ├── c2
+│   │   │   └── c218b9676dd2b6c4f5903cb052ced31990915f
+│   │   ├── c3
+│   │   │   ├── 6d22b913c987028b60c1953afa0ea1665722bd
+│   │   │   └── e9888da14ab85614b662beb2347cee209cb6cb
+│   │   ├── c4
+│   │   │   └── fbc6775de3617f974e8a90109e13800585fc2b
+│   │   ├── c5
+│   │   │   └── 24037681a9f3c5b1266ff3f186a11f7a7cbd7d
+│   │   ├── c7
+│   │   │   ├── 189431742cbee79cfac01f8f95dcc714dd9224
+│   │   │   └── 32f5a712d34d84a87b1fdd894f02d765b9c97c
+│   │   ├── c8
+│   │   │   ├── 0650a769581701c9ea87888ebf29e84cde2a4f
+│   │   │   └── 60ce4f4232d619c257bcf6115720c76c4278fe
+│   │   ├── ca
+│   │   │   └── 52ba93d73c51380bc6064ca66c768c2afb9639
+│   │   ├── cd
+│   │   │   └── 0e6e222c511a045b172488694fcff7d9c175a0
+│   │   ├── ce
+│   │   │   └── c9a8264d1671ea74457d9f09dee0ba66a4ab7d
+│   │   ├── cf
+│   │   │   └── 04bf64b700b202677457cd37e733f2f21b6096
+│   │   ├── d0
+│   │   │   ├── 64b1990f317e8b513fa9cffd2a5940fc0736fb
+│   │   │   ├── 99b65d1a2332146c2bbb6fcbe3717ec73ab846
+│   │   │   └── f28803ce6a33572f62082125507fac5c1c667a
+│   │   ├── d2
+│   │   │   └── 4535a14cdc2ffb298bad2ebe1eac3ea422e548
+│   │   ├── d5
+│   │   │   ├── 41b2490ac4d9c550ca48d2639fa91408d287be
+│   │   │   └── 908b32c315863aa9e7cd7904d31f5433dd3041
+│   │   ├── d6
+│   │   │   └── 3db471b8e058deb83bad1b9a288985eb561533
+│   │   ├── d7
+│   │   │   └── 17a52532f94817de97681d3aec6a2eebbfb0f0
+│   │   ├── d9
+│   │   │   └── 0ab8c0c2e024f66fcd7f313cd6a42797e79dc3
+│   │   ├── db
+│   │   │   └── 4c5c4707ae0bcb984e81997c1bb781d6d33fda
+│   │   ├── dc
+│   │   │   └── e9e8255eb8e7fed239cd6803d322492f0c2307
+│   │   ├── de
+│   │   │   └── 9b24763b603c580e518d6e71132ba6e4a220c9
+│   │   ├── df
+│   │   │   ├── 143d568628c9a2b0680756b875080c6e82f8cf
+│   │   │   └── 626b92d1f890bef186cc5061c33f83c6bd9831
+│   │   ├── e0
+│   │   │   └── 1d1b94310f99aeda1b39c1f25036a379d31bb9
+│   │   ├── e1
+│   │   │   └── 02a8e9a49840b2d4a28ddb52f0f3c7a4616ca4
+│   │   ├── e4
+│   │   │   └── 233f26b62bb359a7119413d271b5e517b1cb8e
+│   │   ├── e6
+│   │   │   ├── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   │   └── b0659874b5f2f9636a462c6499e4e4444139b2
+│   │   ├── e7
+│   │   │   ├── 67379513fd6c84862e15bf3f8c7e89686ef96e
+│   │   │   ├── 6daa03f10ed0de18fa422a6ddd191ed8c3a92b
+│   │   │   ├── a15b76eb2d684e89bb96b39558ff42226d2ab4
+│   │   │   ├── c9a2c37068815d99adcfb01790982234fca8d8
+│   │   │   └── f80a809057caf2076b0195f641134aa5bed2b5
+│   │   ├── eb
+│   │   │   └── 1899c2bf7ad849fb21ed157658d4cba72af3c1
+│   │   ├── ed
+│   │   │   ├── 1b1c67d605e438a333b08693c84a8e5c0dc23d
+│   │   │   └── 5dc9515b701ee8d4e1ba94522c5f0aa3cb563c
+│   │   ├── ee
+│   │   │   ├── 92678ab59b99b01a7a7edf8b2bb63ba546e0d5
+│   │   │   └── a3e2f139574191acd0be1b4797099dbea2de66
+│   │   ├── ef
+│   │   │   ├── 0426046c00080ab53a3f584a94f13cbc99a154
+│   │   │   └── 41a9baf8b22f3772599d07e2c37dcd1abe6223
+│   │   ├── f1
+│   │   │   └── 35511a2bfa4ee022345e310cb83c6bfddefb9d
+│   │   ├── f2
+│   │   │   └── 4b594edd8e6ea47c97dea35305c8db8778ca06
+│   │   ├── f5
+│   │   │   └── f304087d31005826f290d1dfb193305730e55c
+│   │   ├── f7
+│   │   │   └── b7db3c9cfa5f102cec68d893eaeb8b9fc15cd6
+│   │   ├── fa
+│   │   │   ├── 3a994e7557935f7fa644900d2b8f4733fd2090
+│   │   │   └── 8952c4eea4d2c73bff167f02d6f176c836e45c
+│   │   ├── fb
+│   │   │   └── 5e2b725f8246d4dbbd4db3b3b1e4ff28a85419
+│   │   ├── fe
+│   │   │   └── 564aa10dc99cf135119ff3e711655916b2a69b
+│   │   ├── ff
+│   │   │   └── bea71f1c62b69c8e46d29f368fcc41dd48a84a
+│   │   ├── info
+│   │   └── pack
+│   └── refs
+│       ├── heads
+│       │   └── main
+│       ├── remotes
+│       │   └── origin
+│       │       └── main
+│       └── tags
+├── .gitignore
+├── README.md
+├── cupons
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms
+│   │   ├── __init__.py
+│   │   ├── cupom.py
+│   │   ├── numero_sorte.py
+│   │   └── produto.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── cupom.py
+│   │   ├── numero_sorte.py
+│   │   └── produto.py
+│   ├── tasks.py
+│   ├── templates
+│   │   ├── cad_cupom.html
+│   │   ├── cad_cupom1.html
+│   │   ├── cad_produto.html
+│   │   ├── master.html
+│   │   └── valida_cupom.html
+│   ├── templatetags
+│   │   ├── __init__.py
+│   │   └── form_filters_cupons.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── db.sqlite3
+├── estrutura.txt
+├── gestor_campanha
+│   ├── .ebextensions
+│   │   └── django.config
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── celery.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── lib64 -> lib
+├── manage.py
+├── media
+│   ├── cupons
+│   │   ├── 013c8c6e-6083-43e6-8436-39281d98bd7f.jpg
+│   │   ├── 04046ce3-f345-4ddb-80bb-c8af647dc835.jpg
+│   │   └── 865b6bfb-ffcf-42f7-95dc-953f1d8e4d2d.jpg
+│   └── planilhas
+│       ├── lista SKU.csv
+│       ├── lista SKU_34hhXe0.csv
+│       ├── lista SKU_651E6OF.csv
+│       ├── lista SKU_Adff7uS.csv
+│       ├── lista SKU_ImQ2Roe.csv
+│       ├── lista SKU_P1VpdWO.csv
+│       ├── lista SKU_UHL3ifF.csv
+│       ├── lista SKU_cIgdPrs.csv
+│       └── lista SKU_lO6KpQn.csv
+├── participantes
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── static
+│   │   ├── css
+│   │   └── js
+│   │       └── main.js
+│   ├── templates
+│   │   ├── area_cupom.html
+│   │   ├── base.html
+│   │   ├── cadastrar_participante.html
+│   │   ├── como_participar.html
+│   │   ├── cupom_detalhado.html
+│   │   ├── home_participantes.html
+│   │   ├── includes
+│   │   │   ├── footer.html
+│   │   │   ├── header.html
+│   │   │   ├── header_2.html
+│   │   │   ├── header_3.html
+│   │   │   └── sidebar.html
+│   │   ├── layout.html
+│   │   ├── login_participante.html
+│   │   ├── login_participante1.html
+│   │   └── painel_participante.html
+│   ├── templatetags
+│   │   ├── __init__.py
+│   │   ├── __init__.py:Zone.Identifier
+│   │   ├── form_filters.py
+│   │   └── form_filters.py:Zone.Identifier
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── procfile
+├── pyvenv.cfg
+├── requirements-prod.txt
+├── requirements.txt
+├── share
+│   └── man
+│       └── man1
+│           └── ttx.1
+├── skus_validos
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── management
+│   │   ├── __init__.py
+│   │   ├── commands
+│   │   │   ├── __init__.py
+│   │   │   ├── reset_skus.py
+│   │   │   └── resetdb.py
+│   │   ├── dados.json
+│   │   └── importar_skus.py
+│   ├── models.py
+│   ├── templates
+│   │   ├── importar_skus.html
+│   │   ├── master.html
+│   │   └── skus.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── static
+│   ├── css
+│   │   └── estilo_participantes.css
+│   ├── imgs_sistema
+│   │   ├── Grupo 45.png
+│   │   ├── Save.ico
+│   │   ├── bonus.png
+│   │   ├── btn_cadastrar.png
+│   │   ├── btn_faleconosco.png
+│   │   ├── btn_regulamento.png
+│   │   ├── cancel.ico
+│   │   ├── detalhe.ico
+│   │   ├── detalhe2.ico
+│   │   ├── diskette.ico
+│   │   ├── file-add.ico
+│   │   ├── file-delete.ico
+│   │   ├── file-edit.ico
+│   │   ├── grande_premio.png
+│   │   ├── grupo2.png
+│   │   ├── grupo_42.png
+│   │   ├── grupo_48.png
+│   │   ├── grupo_67.png
+│   │   ├── grupo_7.png
+│   │   ├── grupo_hero7_carro.png
+│   │   ├── grupo_mascara_1.png
+│   │   ├── hero_3.png
+│   │   ├── hero_4.png
+│   │   ├── hero_5.png
+│   │   ├── hero_6.png
+│   │   ├── hero_7.png
+│   │   ├── logo_bombril.png
+│   │   ├── pack.png
+│   │   ├── pesquisar.ico
+│   │   ├── premios_0.png
+│   │   ├── premios_semanais.png
+│   │   ├── sairr.ico
+│   │   ├── soma.png
+│   │   └── texto_btn_cadastrar.png
+│   └── js
+│       ├── cep-autofill.js
+│       ├── cep.js
+│       ├── forms.js
+│       ├── participantes.js
+│       ├── uf-select.js
+│       └── validar_cpf.js
+├── staticfiles
+│   ├── admin
+│   │   ├── css
+│   │   │   ├── autocomplete.css
+│   │   │   ├── autocomplete.css:Zone.Identifier
+│   │   │   ├── base.css
+│   │   │   ├── base.css:Zone.Identifier
+│   │   │   ├── changelists.css
+│   │   │   ├── changelists.css:Zone.Identifier
+│   │   │   ├── dark_mode.css
+│   │   │   ├── dark_mode.css:Zone.Identifier
+│   │   │   ├── dashboard.css
+│   │   │   ├── dashboard.css:Zone.Identifier
+│   │   │   ├── forms.css
+│   │   │   ├── forms.css:Zone.Identifier
+│   │   │   ├── login.css
+│   │   │   ├── login.css:Zone.Identifier
+│   │   │   ├── nav_sidebar.css
+│   │   │   ├── nav_sidebar.css:Zone.Identifier
+│   │   │   ├── responsive.css
+│   │   │   ├── responsive.css:Zone.Identifier
+│   │   │   ├── responsive_rtl.css
+│   │   │   ├── responsive_rtl.css:Zone.Identifier
+│   │   │   ├── rtl.css
+│   │   │   ├── rtl.css:Zone.Identifier
+│   │   │   ├── unusable_password_field.css
+│   │   │   ├── unusable_password_field.css:Zone.Identifier
+│   │   │   ├── vendor
+│   │   │   │   └── select2
+│   │   │   │       ├── LICENSE-SELECT2.md
+│   │   │   │       ├── LICENSE-SELECT2.md:Zone.Identifier
+│   │   │   │       ├── select2.css
+│   │   │   │       ├── select2.css:Zone.Identifier
+│   │   │   │       ├── select2.min.css
+│   │   │   │       └── select2.min.css:Zone.Identifier
+│   │   │   ├── widgets.css
+│   │   │   └── widgets.css:Zone.Identifier
+│   │   ├── img
+│   │   │   ├── LICENSE
+│   │   │   ├── LICENSE:Zone.Identifier
+│   │   │   ├── README.txt
+│   │   │   ├── README.txt:Zone.Identifier
+│   │   │   ├── calendar-icons.svg
+│   │   │   ├── calendar-icons.svg:Zone.Identifier
+│   │   │   ├── gis
+│   │   │   │   ├── move_vertex_off.svg
+│   │   │   │   ├── move_vertex_off.svg:Zone.Identifier
+│   │   │   │   ├── move_vertex_on.svg
+│   │   │   │   └── move_vertex_on.svg:Zone.Identifier
+│   │   │   ├── icon-addlink.svg
+│   │   │   ├── icon-addlink.svg:Zone.Identifier
+│   │   │   ├── icon-alert.svg
+│   │   │   ├── icon-alert.svg:Zone.Identifier
+│   │   │   ├── icon-calendar.svg
+│   │   │   ├── icon-calendar.svg:Zone.Identifier
+│   │   │   ├── icon-changelink.svg
+│   │   │   ├── icon-changelink.svg:Zone.Identifier
+│   │   │   ├── icon-clock.svg
+│   │   │   ├── icon-clock.svg:Zone.Identifier
+│   │   │   ├── icon-deletelink.svg
+│   │   │   ├── icon-deletelink.svg:Zone.Identifier
+│   │   │   ├── icon-hidelink.svg
+│   │   │   ├── icon-hidelink.svg:Zone.Identifier
+│   │   │   ├── icon-no.svg
+│   │   │   ├── icon-no.svg:Zone.Identifier
+│   │   │   ├── icon-unknown-alt.svg
+│   │   │   ├── icon-unknown-alt.svg:Zone.Identifier
+│   │   │   ├── icon-unknown.svg
+│   │   │   ├── icon-unknown.svg:Zone.Identifier
+│   │   │   ├── icon-viewlink.svg
+│   │   │   ├── icon-viewlink.svg:Zone.Identifier
+│   │   │   ├── icon-yes.svg
+│   │   │   ├── icon-yes.svg:Zone.Identifier
+│   │   │   ├── inline-delete.svg
+│   │   │   ├── inline-delete.svg:Zone.Identifier
+│   │   │   ├── search.svg
+│   │   │   ├── search.svg:Zone.Identifier
+│   │   │   ├── selector-icons.svg
+│   │   │   ├── selector-icons.svg:Zone.Identifier
+│   │   │   ├── sorting-icons.svg
+│   │   │   ├── sorting-icons.svg:Zone.Identifier
+│   │   │   ├── tooltag-add.svg
+│   │   │   ├── tooltag-add.svg:Zone.Identifier
+│   │   │   ├── tooltag-arrowright.svg
+│   │   │   └── tooltag-arrowright.svg:Zone.Identifier
+│   │   └── js
+│   │       ├── SelectBox.js
+│   │       ├── SelectBox.js:Zone.Identifier
+│   │       ├── SelectFilter2.js
+│   │       ├── SelectFilter2.js:Zone.Identifier
+│   │       ├── actions.js
+│   │       ├── actions.js:Zone.Identifier
+│   │       ├── admin
+│   │       │   ├── DateTimeShortcuts.js
+│   │       │   ├── DateTimeShortcuts.js:Zone.Identifier
+│   │       │   ├── RelatedObjectLookups.js
+│   │       │   └── RelatedObjectLookups.js:Zone.Identifier
+│   │       ├── autocomplete.js
+│   │       ├── autocomplete.js:Zone.Identifier
+│   │       ├── calendar.js
+│   │       ├── calendar.js:Zone.Identifier
+│   │       ├── cancel.js
+│   │       ├── cancel.js:Zone.Identifier
+│   │       ├── change_form.js
+│   │       ├── change_form.js:Zone.Identifier
+│   │       ├── core.js
+│   │       ├── core.js:Zone.Identifier
+│   │       ├── filters.js
+│   │       ├── filters.js:Zone.Identifier
+│   │       ├── inlines.js
+│   │       ├── inlines.js:Zone.Identifier
+│   │       ├── jquery.init.js
+│   │       ├── jquery.init.js:Zone.Identifier
+│   │       ├── nav_sidebar.js
+│   │       ├── nav_sidebar.js:Zone.Identifier
+│   │       ├── popup_response.js
+│   │       ├── popup_response.js:Zone.Identifier
+│   │       ├── prepopulate.js
+│   │       ├── prepopulate.js:Zone.Identifier
+│   │       ├── prepopulate_init.js
+│   │       ├── prepopulate_init.js:Zone.Identifier
+│   │       ├── theme.js
+│   │       ├── theme.js:Zone.Identifier
+│   │       ├── unusable_password_field.js
+│   │       ├── unusable_password_field.js:Zone.Identifier
+│   │       ├── urlify.js
+│   │       ├── urlify.js:Zone.Identifier
+│   │       └── vendor
+│   │           ├── jquery
+│   │           │   ├── LICENSE.txt
+│   │           │   ├── LICENSE.txt:Zone.Identifier
+│   │           │   ├── jquery.js
+│   │           │   ├── jquery.js:Zone.Identifier
+│   │           │   ├── jquery.min.js
+│   │           │   └── jquery.min.js:Zone.Identifier
+│   │           ├── select2
+│   │           │   ├── LICENSE.md
+│   │           │   ├── LICENSE.md:Zone.Identifier
+│   │           │   ├── i18n
+│   │           │   │   ├── af.js
+│   │           │   │   ├── af.js:Zone.Identifier
+│   │           │   │   ├── ar.js
+│   │           │   │   ├── ar.js:Zone.Identifier
+│   │           │   │   ├── az.js
+│   │           │   │   ├── az.js:Zone.Identifier
+│   │           │   │   ├── bg.js
+│   │           │   │   ├── bg.js:Zone.Identifier
+│   │           │   │   ├── bn.js
+│   │           │   │   ├── bn.js:Zone.Identifier
+│   │           │   │   ├── bs.js
+│   │           │   │   ├── bs.js:Zone.Identifier
+│   │           │   │   ├── ca.js
+│   │           │   │   ├── ca.js:Zone.Identifier
+│   │           │   │   ├── cs.js
+│   │           │   │   ├── cs.js:Zone.Identifier
+│   │           │   │   ├── da.js
+│   │           │   │   ├── da.js:Zone.Identifier
+│   │           │   │   ├── de.js
+│   │           │   │   ├── de.js:Zone.Identifier
+│   │           │   │   ├── dsb.js
+│   │           │   │   ├── dsb.js:Zone.Identifier
+│   │           │   │   ├── el.js
+│   │           │   │   ├── el.js:Zone.Identifier
+│   │           │   │   ├── en.js
+│   │           │   │   ├── en.js:Zone.Identifier
+│   │           │   │   ├── es.js
+│   │           │   │   ├── es.js:Zone.Identifier
+│   │           │   │   ├── et.js
+│   │           │   │   ├── et.js:Zone.Identifier
+│   │           │   │   ├── eu.js
+│   │           │   │   ├── eu.js:Zone.Identifier
+│   │           │   │   ├── fa.js
+│   │           │   │   ├── fa.js:Zone.Identifier
+│   │           │   │   ├── fi.js
+│   │           │   │   ├── fi.js:Zone.Identifier
+│   │           │   │   ├── fr.js
+│   │           │   │   ├── fr.js:Zone.Identifier
+│   │           │   │   ├── gl.js
+│   │           │   │   ├── gl.js:Zone.Identifier
+│   │           │   │   ├── he.js
+│   │           │   │   ├── he.js:Zone.Identifier
+│   │           │   │   ├── hi.js
+│   │           │   │   ├── hi.js:Zone.Identifier
+│   │           │   │   ├── hr.js
+│   │           │   │   ├── hr.js:Zone.Identifier
+│   │           │   │   ├── hsb.js
+│   │           │   │   ├── hsb.js:Zone.Identifier
+│   │           │   │   ├── hu.js
+│   │           │   │   ├── hu.js:Zone.Identifier
+│   │           │   │   ├── hy.js
+│   │           │   │   ├── hy.js:Zone.Identifier
+│   │           │   │   ├── id.js
+│   │           │   │   ├── id.js:Zone.Identifier
+│   │           │   │   ├── is.js
+│   │           │   │   ├── is.js:Zone.Identifier
+│   │           │   │   ├── it.js
+│   │           │   │   ├── it.js:Zone.Identifier
+│   │           │   │   ├── ja.js
+│   │           │   │   ├── ja.js:Zone.Identifier
+│   │           │   │   ├── ka.js
+│   │           │   │   ├── ka.js:Zone.Identifier
+│   │           │   │   ├── km.js
+│   │           │   │   ├── km.js:Zone.Identifier
+│   │           │   │   ├── ko.js
+│   │           │   │   ├── ko.js:Zone.Identifier
+│   │           │   │   ├── lt.js
+│   │           │   │   ├── lt.js:Zone.Identifier
+│   │           │   │   ├── lv.js
+│   │           │   │   ├── lv.js:Zone.Identifier
+│   │           │   │   ├── mk.js
+│   │           │   │   ├── mk.js:Zone.Identifier
+│   │           │   │   ├── ms.js
+│   │           │   │   ├── ms.js:Zone.Identifier
+│   │           │   │   ├── nb.js
+│   │           │   │   ├── nb.js:Zone.Identifier
+│   │           │   │   ├── ne.js
+│   │           │   │   ├── ne.js:Zone.Identifier
+│   │           │   │   ├── nl.js
+│   │           │   │   ├── nl.js:Zone.Identifier
+│   │           │   │   ├── pl.js
+│   │           │   │   ├── pl.js:Zone.Identifier
+│   │           │   │   ├── ps.js
+│   │           │   │   ├── ps.js:Zone.Identifier
+│   │           │   │   ├── pt-BR.js
+│   │           │   │   ├── pt-BR.js:Zone.Identifier
+│   │           │   │   ├── pt.js
+│   │           │   │   ├── pt.js:Zone.Identifier
+│   │           │   │   ├── ro.js
+│   │           │   │   ├── ro.js:Zone.Identifier
+│   │           │   │   ├── ru.js
+│   │           │   │   ├── ru.js:Zone.Identifier
+│   │           │   │   ├── sk.js
+│   │           │   │   ├── sk.js:Zone.Identifier
+│   │           │   │   ├── sl.js
+│   │           │   │   ├── sl.js:Zone.Identifier
+│   │           │   │   ├── sq.js
+│   │           │   │   ├── sq.js:Zone.Identifier
+│   │           │   │   ├── sr-Cyrl.js
+│   │           │   │   ├── sr-Cyrl.js:Zone.Identifier
+│   │           │   │   ├── sr.js
+│   │           │   │   ├── sr.js:Zone.Identifier
+│   │           │   │   ├── sv.js
+│   │           │   │   ├── sv.js:Zone.Identifier
+│   │           │   │   ├── th.js
+│   │           │   │   ├── th.js:Zone.Identifier
+│   │           │   │   ├── tk.js
+│   │           │   │   ├── tk.js:Zone.Identifier
+│   │           │   │   ├── tr.js
+│   │           │   │   ├── tr.js:Zone.Identifier
+│   │           │   │   ├── uk.js
+│   │           │   │   ├── uk.js:Zone.Identifier
+│   │           │   │   ├── vi.js
+│   │           │   │   ├── vi.js:Zone.Identifier
+│   │           │   │   ├── zh-CN.js
+│   │           │   │   ├── zh-CN.js:Zone.Identifier
+│   │           │   │   ├── zh-TW.js
+│   │           │   │   └── zh-TW.js:Zone.Identifier
+│   │           │   ├── select2.full.js
+│   │           │   ├── select2.full.js:Zone.Identifier
+│   │           │   ├── select2.full.min.js
+│   │           │   └── select2.full.min.js:Zone.Identifier
+│   │           └── xregexp
+│   │               ├── LICENSE.txt
+│   │               ├── LICENSE.txt:Zone.Identifier
+│   │               ├── xregexp.js
+│   │               ├── xregexp.js:Zone.Identifier
+│   │               ├── xregexp.min.js
+│   │               └── xregexp.min.js:Zone.Identifier
+│   ├── avatar
+│   │   ├── user.Identifier
+│   │   ├── user.Identifier:Zone.Identifier
+│   │   ├── user.ico
+│   │   └── user.ico:Zone.Identifier
+│   ├── css
+│   │   ├── estilo.css
+│   │   ├── estilo_dash.css
+│   │   ├── estilo_participantes.css
+│   │   └── style.css
+│   ├── imgs_sistema
+│   │   ├── Grupo 45.png
+│   │   ├── Grupo 67.png
+│   │   ├── Save.ico
+│   │   ├── Save.ico:Zone.Identifier
+│   │   ├── bonus.png
+│   │   ├── btn_cadastrar.png
+│   │   ├── btn_fale_conosco.png:Zone.Identifier
+│   │   ├── btn_faleconosco.png
+│   │   ├── btn_regulamento.png
+│   │   ├── cancel.ico
+│   │   ├── detalhe.ico
+│   │   ├── detalhe2.ico
+│   │   ├── diskette.ico
+│   │   ├── file-add.ico
+│   │   ├── file-delete.ico
+│   │   ├── file-edit.ico
+│   │   ├── grande_premio.png
+│   │   ├── grupo2.png
+│   │   ├── grupo_42.png
+│   │   ├── grupo_48.png
+│   │   ├── grupo_67.png
+│   │   ├── grupo_7.png
+│   │   ├── grupo_hero7_carro.png
+│   │   ├── grupo_mascara_1.png
+│   │   ├── grupo_mascara_1.png:Zone.Identifier
+│   │   ├── hero_3.png
+│   │   ├── hero_4.png
+│   │   ├── hero_4.png:Zone.Identifier
+│   │   ├── hero_5.png
+│   │   ├── hero_6.png
+│   │   ├── hero_7.png
+│   │   ├── logo_bombril.png
+│   │   ├── pack.png
+│   │   ├── pesquisar.ico
+│   │   ├── pesquisar.ico:Zone.Identifier
+│   │   ├── premios_0.png
+│   │   ├── premios_semanais.png
+│   │   ├── sairr.ico
+│   │   ├── sairr.ico:Zone.Identifier
+│   │   ├── soma.png
+│   │   └── texto_btn_cadastrar.png
+│   ├── js
+│   │   ├── cep-autofill.js
+│   │   ├── cep.js
+│   │   ├── cep.js:Zone.Identifier
+│   │   ├── forms.js
+│   │   ├── forms.js:Zone.Identifier
+│   │   ├── main.js
+│   │   ├── participantes.js
+│   │   ├── script.js
+│   │   ├── script.js:Zone.Identifier
+│   │   ├── uf-select.js
+│   │   └── validar_cpf.js
+│   └── participantes
+│       ├── Grupo 7.png
+│       ├── HERO_7.png
+│       └── PREMIOS_1.png
+├── usuarios
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── static
+│   │   ├── avatar
+│   │   │   └── user.ico
+│   │   ├── css
+│   │   │   ├── estilo.css
+│   │   │   └── estilo_dash.css
+│   │   ├── imgs_sistema
+│   │   │   ├── Save.ico
+│   │   │   ├── cancel.ico
+│   │   │   ├── detalhe.ico
+│   │   │   ├── detalhe2.ico
+│   │   │   ├── diskette.ico
+│   │   │   ├── file-add.ico
+│   │   │   ├── file-delete.ico
+│   │   │   ├── file-edit.ico
+│   │   │   ├── pesquisar.ico
+│   │   │   └── sairr.ico
+│   │   └── js
+│   │       └── script.js
+│   ├── templates
+│   │   ├── cadastro.html
+│   │   ├── dados_participantes.html
+│   │   ├── dash.html
+│   │   ├── deletar_skus.html
+│   │   ├── detalhe.html
+│   │   ├── home.html
+│   │   ├── master.html
+│   │   ├── participante_detalhado.html
+│   │   ├── participantes.html
+│   │   ├── pesquisar_participante.html
+│   │   ├── registration
+│   │   │   └── login.html
+│   │   ├── relatorios.html
+│   │   ├── sistema.html
+│   │   ├── sorteios.html
+│   │   └── todos_usuarios.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+└── utils
+    ├── __init__.py
+    ├── cupo qrCode.jpg
+    ├── funcoes.py
+    ├── ler_qr_code.py
+    ├── ocr.py
+    ├── reset_database.py
+    ├── skus.py
+    ├── skus2.py
+    └── teste.py
+
+220 directories, 735 files
