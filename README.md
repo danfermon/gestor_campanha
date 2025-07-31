@@ -64,6 +64,8 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 
 
 ## Arquitetura do projeto:
+
+'''
 .
 ├── gestor_campanha
 │ ├── README.md
@@ -90,6 +92,6 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
     ├── lib
     ├── lib64 -> lib
     └── pyvenv.cfg
-
+'''
 ## Documentação:
 - ... em andamento 🚀🛠️
