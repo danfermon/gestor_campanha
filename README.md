@@ -49,7 +49,7 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 ## como rodar o projeto:
 - 1 > Criar uma pasta para o projeto;
 - 2 > Criar um ambiente virtual para colocar a o Django e as demais dependências - No meu pc chamei o ambiente de Dev;
-- 3 > Clonar esse repositório : '''git clone https://github.com/DanatiellyCP/campaign-manager.git''';
+- 3 > Clonar esse repositório : '''git clone https://github.com/DanatiellyCP/gestor_campanhax.git''';
 - 4 > Instale todas as dependências mencionadas acima.
 - 5 > No terminal abra a pasta do progeto
     - '''cd Pasta_Do_Projeto/campaign-manager''';
@@ -66,24 +66,24 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 ## Arquitetura do projeto:
 .
 ├── gestor_campanha
-│   ├── README.md
-│   ├── cupons
-│   ├── db.sqlite3
-│   ├── gestor_campanha
-│   ├── lib64 -> lib
-│   ├── manage.py
-│   ├── media
-│   ├── participantes
-│   ├── procfile
-│   ├── pyvenv.cfg
-│   ├── requirements-prod.txt
-│   ├── requirements.txt
-│   ├── share
-│   ├── skus_validos
-│   ├── static
-│   ├── staticfiles
-│   ├── usuarios
-│   └── utils
+│ ├── README.md
+│ ├── cupons
+│ ├── db.sqlite3
+│ ├── gestor_campanha
+│ ├── lib64 -> lib
+│ ├── manage.py
+│ ├── media
+│ ├── participantes
+│ ├── procfile
+│ ├── pyvenv.cfg
+│ ├── requirements-prod.txt
+│ ├── requirements.txt
+│ ├── share
+│ ├── skus_validos
+│ ├── static
+│ ├── staticfiles
+│ ├── usuarios
+│ └── utils
 └── venv
     ├── bin
     ├── include
