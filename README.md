@@ -38,6 +38,7 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 - Para manipulação de imagens:
     - Pillow : python3 -m pip install Pillow
     - opencv : pip install opencv-python
+    - pytesseract : v. 0.3.13
 
 - Para reqisições web:
     - Requests : pip install requests 
@@ -54,11 +55,11 @@ para o público em geral, sobre a promoção bem como a participação dos sorte
 
 ## como rodar o projeto:
 - 1 > Criar uma pasta para o projeto;
-- 2 > Criar um ambiente virtual para colocar a o Django e as demais dependências - No meu pc chamei o ambiente de Dev;
+- 2 > Criar um ambiente virtual para colocar a o Django e as demais dependências - No meu pc chamei o ambiente de *venv*;
 - 3 > Clonar esse repositório : '''git clone https://github.com/DanatiellyCP/gestor_campanhax.git''';
 - 4 > Instale todas as dependências mencionadas acima.
 - 5 > No terminal abra a pasta do progeto
-    - '''cd Pasta_Do_Projeto/campaign-manager''';
+    - '''cd Pasta_Do_Projeto/gestor_campanha''';
     - ative o ambiente virtual que foi criado : '''source dev/bin/activate'''
 - 6 > Por fim suba o servidor local do django: '''python3 manage.py runserver'''
 
