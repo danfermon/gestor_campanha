@@ -3,6 +3,7 @@
 import requests
 import json
 import os
+import re
 
 from django.core.management.base import BaseCommand
 from skus_validos.models import Skus_validos
@@ -103,52 +104,6 @@ def limpar_lista_sku(table_name):
 
 
 
-def extrair_texto_ocr(imagem_path):
-    """
-    Recebe o caminho da imagem e retorna o texto extraído via OCR.
-    """
-    try:
-        imagem = Image.open(imagem_path)
-        texto = pytesseract.image_to_string(imagem, lang="por")
-        return texto
-    except Exception as e:
-        print(f"Erro ao processar OCR: {e}")
-        return ""
 
-
-
-def parse_dados_cupom(texto):
-    """Extrai dados estruturados do conteúdo OCR do QR Code (modelo SAT SP)."""
-    dados = {}
-
-    # CNPJ
-    cnpj_match = re.search(r'CNPJ\s*[:\-]?\s*(\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})', texto)
-    if cnpj_match:
-        dados['cnpj'] = cnpj_match.group(1)
-
-    # Data e hora
-    data_match = re.search(r'Data[:\-]?\s*(\d{2}/\d{2}/\d{4})', texto)
-    hora_match = re.search(r'(\d{2}:\d{2}:\d{2})', texto)
-    if data_match:
-        dados['data'] = data_match.group(1)
-    if hora_match:
-        dados['hora'] = hora_match.group(1)
-
-    # Valor total
-    total_match = re.search(r'Total[:\-]?\s*R?\$?\s*([0-9,.]+)', texto, re.IGNORECASE)
-    if total_match:
-        dados['total'] = total_match.group(1)
-
-    # Número SAT
-    sat_match = re.search(r'SAT[:\-]?\s*(\d+)', texto)
-    if sat_match:
-        dados['sat'] = sat_match.group(1)
-
-    # Chave QR (44 dígitos)
-    chave_match = re.search(r'\b(\d{44})\b', texto)
-    if chave_match:
-        dados['chave_qr'] = chave_match.group(1)
-
-    return dados
 
         

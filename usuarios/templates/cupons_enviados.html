@@ -1,0 +1,56 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+   Cupons Enviados
+{% endblock %}
+
+{% block cabecalho %}
+    <h3>Cupons Enviados</h3>
+    
+{% endblock %}
+
+{% block TextoBtn%} 
+    {% url 'login'  %}
+{% endblock %}
+
+
+{% block content %} 
+    <div class="container">
+        <p>
+            Lista de cupons enviados - (Total: {{ Total }} )
+        </p>
+
+        <div>
+            <table class="table table-hover">
+            <tr>
+                <th> Documento          </th>
+                <th> Número             </th>
+                <th> Data Cadastro      </th>
+                <th> Hora Cadastro      </th>
+                <th> Status             </th>
+                <th> Participante       </th>
+            </tr>
+
+            {% for x in lista_cupons %}
+               <tr>
+                    <td>    {{ x.tipo_documento }}     </td>
+                    <td>    {{ x.numero_documento}}    </td>
+                    <td>    {{ x.data_cadastro}}       </td>
+                    <td>    {{ x.hora_cadastro}}       </td>
+                    <td>    {{ x.status }}             </td>
+                    <td>    {{ x.participante}}        </td>
+                </tr> 
+
+
+            {% endfor %}
+            </table>
+        </div>
+
+    </div>
+
+
+
+ 
+  
+{% endblock %}

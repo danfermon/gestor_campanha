@@ -6,10 +6,10 @@ from . import views
 
 urlpatterns = [
     #path('ler-qrcode/', views.ler_qrcode_view, name='ler_qrcode_view'),
-    path('cupom/<int:id_participante>/', views.cad_cupom, name='cad_cupom'),
     
     path('cupom/<int:id_participante>/', views.cad_cupom, name='cad_cupom'),
-    path('cupom/salvar_qrcode/<int:id_participante>/', views.salvar_qrcode_ajax, name='salvar_qrcode_ajax'),
+    path('salvar_qrcode/<int:id_participante>/', views.salvar_qrcode_ajax, name='salvar_qrcode_ajax'),
+    path('cad_cupom_codigo/<int:id_participante>/', views.cad_cupom_codigo, name='cad_cupom_codigo'),
     
     
 ]

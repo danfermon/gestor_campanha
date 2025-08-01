@@ -28,8 +28,13 @@ urlpatterns = [
     # parte de gestão de SKUs
     path('deletar_skus/', views.deletar_skus, name='deletar_skus'),
    
+
+    #Parte dos Cupons
+    path('cupons_enviados/', views.cupons_enviados, name='cupons_enviados'),
     
     # Login e Logout (seguros e corretos)
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/',auth_views.LogoutView.as_view(), name='logout'),
+
+    
 ]

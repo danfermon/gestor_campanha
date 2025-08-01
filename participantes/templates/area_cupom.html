@@ -18,22 +18,41 @@
       {% endif %}
     </div>
     <div class="col-md-6">
-      <h5>Dados extraídos do QR Code:</h5>
+      <h5>Dados Do cupom:</h5>
       <ul class="list-group">
-        <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_ocr.cnpj|default:"-" }}</li>
-        <li class="list-group-item"><strong>Data:</strong> {{ dados_ocr.data|default:"-" }}</li>
-        <li class="list-group-item"><strong>Hora:</strong> {{ dados_ocr.hora|default:"-" }}</li>
-        <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_ocr.total|default:"-" }}</li>
-        <li class="list-group-item"><strong>SAT:</strong> {{ dados_ocr.sat|default:"-" }}</li>
-        <li class="list-group-item"><strong>Chave QR:</strong> {{ dados_ocr.chave_qr|default:"-" }}</li>
+        <li class="list-group-item"><strong>Loja:</strong> {{ dados_cupom.emitente.nome_razao_social }}</li>
+        <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_cupom.emitente.cnpj }}</li>
+        <li class="list-group-item"><strong>Endereço:</strong> {{ dados_cupom.emitente.endereco }}</li>
+        <li class="list-group-item"><strong>bairro:</strong> {{ dados_cupom.emitente.bairro }}</li>
+        <li class="list-group-item"><strong>municipio:</strong> {{ dados_cupom.emitente.municipio }}</li>
+        <li class="list-group-item"><strong>Data:</strong> {{ dados_cupom.data_hora_emissao }}</li>
+        <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_cupom.valor_total }}</li>
+        <li class="list-group-item"><strong>Forma Pagamento:</strong> {{ dados_cupom.forma_pagamento }}</li>
+        <li class="list-group-item"><strong>SAT:</strong> {{ dados_cupom.sat_numero_serie }}</li>
+        <li class="list-group-item"><strong>Chave QR:</strong> {{ dados_cupom.chave_acesso|default:"-" }}</li>
+
       </ul>
+      <h5 class="mt-4">Produtos</h5>
+      <ul class="list-group">
+        {% for produto in dados_cupom.produtos %}
+          <li class="list-group-item">
+            <strong>{{ produto.item }}. {{ produto.descricao }}</strong><br>
+            {{ produto.quantidade }} × R$ {{ produto.valor_unitario }} = R$ {{ produto.valor_total_item }}
+          </li>
+        {% empty %}
+          <li class="list-group-item">Nenhum produto encontrado.</li>
+        {% endfor %}
+      </ul>
+
+
+
     </div>
   </div>
 
   {% if cupom.dados_cupom != '' %}
     <div class="mb-4">
         <h5>Texto completo extraído do cupom (OCR):</h5>
-        <pre class="bg-light p-3 border rounded" style="white-space: pre-wrap;">{{ cupom.dados_cupom }}</pre>
+        <pre class="bg-light p-3 border rounded" style="white-space: pre-wrap;">{{ cupom.ocr_text }}</pre>
     </div>
     {% endif %}
 

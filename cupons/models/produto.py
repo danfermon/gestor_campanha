@@ -6,6 +6,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length=255)
     quantidade = models.PositiveIntegerField()
     valor_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    num_sorte = models.CharField(max_length=60)  
 
     def valor_total(self):
         return self.quantidade * self.valor_unitario

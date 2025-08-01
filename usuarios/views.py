@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseForbidden
 from functools import wraps
 from utils.funcoes import limpar_lista_sku, retorna_atividades
-
+from cupons.models import Cupom
+from utils.link_sefaz import gerar_link_sefaz
 ## Função para restringir acessos por niveis - Danny - 27-06-2025
 def nivel_required(nivel_permitido):
     def decorator(view_func):
@@ -282,6 +283,21 @@ def deletar_skus(request):
     }
     template = loader.get_template('sistema.html')
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def cupons_enviados(request):
+  # filtrar cupons cadastrados
+  lista_cupons = Cupom.objects.all().values()
+  total_cup = Cupom.objects.count()
+  template = loader.get_template('cupons_enviados.html')
+  context = {
+    'lista_cupons': lista_cupons,
+    'Total' : total_cup
+  }
+  return HttpResponse(template.render(context, request))
+  
+
 
    
 

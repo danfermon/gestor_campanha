@@ -5,6 +5,7 @@
 
 {% block content %}
   {% include 'includes/header_3.html' %}
+
 <div class="container mt-4">
   <h2 class="mb-3">Cadastro de Cupom</h2>
 
@@ -23,8 +24,9 @@
   <!-- LEITURA COM A CÂMERA -->
   <h4>Ou escaneie o QR Code com a câmera</h4>
   
-  <!-- BOTÃO DE TOGGLE -->
   <button id="btn-toggle-camera" class="btn btn-success mb-3" onclick="toggleCamera()">Ativar câmera</button>
+  <button id="switch-camera" class="btn btn-secondary mb-3 ms-2" onclick="trocarCamera()" style="display:none;">Trocar câmera</button>
+
   <div id="reader" style="width: 300px; display: none;"></div>
   <p id="qr-result" class="mt-2 text-success fw-bold"></p>
 
@@ -35,20 +37,49 @@
   {% if qr_msg %}
     <div class="alert alert-info mt-2">{{ qr_msg }}</div>
   {% endif %}
+
+
 </div>
 
+<!-- ENVIAR CUPOM VIA FORMULÁRIO  -->
+   <div style="margin-top: 2%; margin-bottom: 2%;">
+    <hr>
+      <h4>Ou envie o código do seu cupom</h4>
+
+      <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control" id="cod_cupom" placeholder="Informe o código do seu cupom" name="cod_cupom">
+          </imput>
+        </div>
+
+         <button type="submit" class="btn btn-dark">Enviar Cupom</button>
+
+      </form>
+
+   </div>
+
+
+
+
+
+
+<!-- SCRIPTS -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
   const resultText = document.getElementById('qr-result');
   const readerDiv = document.getElementById('reader');
   const btnToggle = document.getElementById('btn-toggle-camera');
+  const switchCameraBtn = document.getElementById('switch-camera');
+  
   let html5QrCode;
   let cameraAtiva = false;
+  let cameras = [];
+  let currentCameraIndex = 0;
 
   function onScanSuccess(decodedText, decodedResult) {
     resultText.textContent = "QR Code detectado: " + decodedText;
 
-    // Envia dados via AJAX
     fetch("{% url 'salvar_qrcode_ajax' id_participante %}", {
       method: "POST",
       headers: {
@@ -66,7 +97,6 @@
       }
     });
 
-    // Para a câmera automaticamente após a leitura
     pararCamera();
   }
 
@@ -84,7 +114,9 @@
 
     Html5Qrcode.getCameras().then(devices => {
       if (devices && devices.length) {
-        const cameraId = devices[0].id;
+        cameras = devices;
+        const cameraId = cameras[currentCameraIndex].id;
+
         html5QrCode.start(
           cameraId,
           { fps: 10, qrbox: 250 },
@@ -94,6 +126,7 @@
           btnToggle.textContent = "Parar câmera";
           btnToggle.classList.remove("btn-success");
           btnToggle.classList.add("btn-danger");
+          switchCameraBtn.style.display = "inline-block";
         });
       }
     }).catch(err => {
@@ -104,19 +137,32 @@
   function pararCamera() {
     if (html5QrCode) {
       html5QrCode.stop().then(() => {
-        html5QrCode.clear();
+        try {
+          // Verifica se o scanner ainda tem o elemento interno
+          if (html5QrCode._element) {
+            html5QrCode.clear();
+          }
+        } catch (e) {
+          console.warn("Erro ao limpar QRCode scanner:", e);
+        }
         readerDiv.style.display = "none";
         cameraAtiva = false;
         btnToggle.textContent = "Ativar câmera";
         btnToggle.classList.remove("btn-danger");
         btnToggle.classList.add("btn-success");
+        switchCameraBtn.style.display = "none";
       }).catch(err => {
         resultText.textContent = "Erro ao parar câmera: " + err;
       });
     }
   }
+
+  function trocarCamera() {
+    if (!cameras.length) return;
+    pararCamera();
+    currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+    setTimeout(() => iniciarCamera(), 500);
+  }
 </script>
-
-
 
 {% endblock %}

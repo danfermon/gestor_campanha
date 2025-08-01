@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from django.template import loader
 from .models import Participantes
@@ -7,7 +8,8 @@ from django.core import serializers
 from .forms import ParticipanteForm
 from cupons.models import Cupom
 from django.shortcuts import render, get_object_or_404, redirect
-from utils.funcoes import parse_dados_cupom
+
+from utils.funcoes_cupom import parse_dados_cupom
 
 
 def login_participante(request):
@@ -131,15 +133,22 @@ def editar_particip(request, id):
 
 #--------- PARTE DE EXTRAÇÃO DE VALIDAÇÃO DOS DADOS DO CUPOM --------------------------------
 
-
 def area_cupom(request, id):
     cupom = get_object_or_404(Cupom, id=id)
     dados_ocr = parse_dados_cupom(cupom.dados_cupom or "")
-    
+
+    dados_json = json.loads(cupom.dados_json or '{}')
+
+    # Acessa os dados do cupom que estão dentro da chave "data"
+    dados = dados_json.get("data", [{}])[0]  # se "data" não existir, evita erro
+
     context = {
         'cupom': cupom,
-        'dados_ocr': dados_ocr
+        'dados_ocr': dados_ocr,
+        'dados_cupom': dados
     }
     return render(request, 'area_cupom.html', context)
+
+
 
 

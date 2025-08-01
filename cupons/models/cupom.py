@@ -13,7 +13,9 @@ class Cupom(models.Model):
     data_cadastro = models.DateField(auto_now_add=True)
     hora_cadastro = models.TimeField(auto_now_add=True)
     dados_cupom = models.TextField(blank=True, null=True)
-    #ocr_text = models.TextField(blank=True, null=True, verbose_name="Texto OCR bruto")
+    ocr_text = models.TextField(blank=True, null=True, verbose_name="Texto OCR bruto")
+    link_consulta = models.URLField(blank=True, null=True)
+    dados_json = models.JSONField(default=dict)
 
     
     TIPO_ENVIO = [
