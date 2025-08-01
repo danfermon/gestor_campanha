@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "skus_validos",
     "django_celery_beat",
     "widget_tweaks",
+    "rest_framework",
 ]
 
 # Middlewares
