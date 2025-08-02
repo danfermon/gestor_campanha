@@ -22,10 +22,11 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "6288686b9d4b.ngrok-free.app",
+    "http://34.95.220.242",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://6288686b9d4b.ngrok-free.app" 
+    "http://34.95.220.242" 
 ]
 
 # Aplicativos instalados
@@ -79,7 +80,7 @@ WSGI_APPLICATION = "gestor_campanha.wsgi.application"
 
 # Banco de dados
 # DATABASE
-'''if os.getenv('DATABASE_URL'):
+if os.getenv('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
@@ -90,15 +91,15 @@ else:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }'''
+    }
 
 #teste local de banco
-DATABASES = {
+'''DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }  
-}
+}'''
         
 
 # Celery com Redis
