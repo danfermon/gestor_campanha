@@ -3,8 +3,13 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+
 # Carrega variáveis do .env
 load_dotenv()
+
+
+# parte das apis
+API_KEY_SEFAZ = os.getenv('API_KEY_SEFAZ')
 
 # Diretório base
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,3 +148,5 @@ DATE_INPUT_FORMATS = ["%d/%m/%Y"]
 
 # AutoField padrão
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+

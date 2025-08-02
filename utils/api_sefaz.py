@@ -1,12 +1,15 @@
 # Testado com Python 3.13.5
 import requests
+from django.conf import settings
 
 def consulta_api_sefaz(chave):
 
+  api_key = settings.API_KEY_SEFAZ
+
   url = 'https://api.infosimples.com/api/v2/consultas/sefaz/sp/cfe'
   args = {
-    "chave":  chave, #"35250501157555004100590004797948322835671276",
-    "token":   "VhGk5q69irbXv6baG7HVKy__qlh_AhFBzvVSRweX",
+    "chave":  chave, 
+    "token":  api_key,
     "timeout": 300
   }
 
