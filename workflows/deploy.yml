@@ -3,7 +3,7 @@ name: Deploy Django to GCP VM
 on:
   push:
     branches:
-      - main  # ou 'master', dependendo do seu branch principal
+      - main
 
 jobs:
   deploy:
@@ -31,5 +31,5 @@ jobs:
           python manage.py migrate
           python manage.py collectstatic --noinput
 
-          sudo supervisorctl restart gestor  # Altere se o nome for outro
+          sudo supervisorctl restart gestor
         EOF
