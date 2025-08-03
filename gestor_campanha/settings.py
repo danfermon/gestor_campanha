@@ -18,15 +18,20 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "34.95.220.242",  # IP da sua VM
-    os.getenv("DOMAIN_NAME", ""),  # opcional se usar domínio
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    f"http://{os.getenv('DOMAIN_NAME')}",
-    f"https://{os.getenv('DOMAIN_NAME')}",
     "http://34.95.220.242",
     "https://34.95.220.242",
 ]
+
+# teste 
+DOMAIN_NAME = os.getenv('DOMAIN_NAME')
+if DOMAIN_NAME:
+    ALLOWED_HOSTS.append(DOMAIN_NAME)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{DOMAIN_NAME}")
+
+
 
 # Variável para APIs
 API_KEY_SEFAZ = os.getenv("API_KEY_SEFAZ")
