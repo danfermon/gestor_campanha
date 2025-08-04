@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base_2.html' %}
 {% load static %}
 {% load form_filters %}  {# Carrega o filtro add_class #}
 {% load widget_tweaks %}
@@ -7,79 +7,94 @@
 Cadastro de Participante
 {% endblock %}
 
+<div id="header-placeholder"></div> 
+
 {% block content %}
 {% include 'includes/header_2.html' %}
 
+<!-- segunda seção como participar  -->
+<section id="cadastrar" class="page-content embed-section section-up-interna">
+    <div class="container">
+      <h1 class="custom-title text-bombril-red text-center">CADASTRE SEU CUPOM</h1>
+        <div id="external-form-container">
+          
+          <div class="container mt-1 sm-5">
 
-<div class="container mt-1 sm-5">
-  <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;"> Crie o seu cadastro</h3>
-
-  {% if form.errors %}
-    <div class="alert alert-danger">
-      <ul>
-        {% for field in form %}
-          {% for error in field.errors %}
-            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
-          {% endfor %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
-  <form method="POST" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">
-    {% csrf_token %}
-
-    <label for="nome">Nome:</label>
-    {{ form.nome|add_class:"form-control"|attr:"id:nome" }}
-
-    <label for="dt_nasc">Data de Nascimento:</label>
-    {{ form.dt_nasc|add_class:"form-control"|attr:"id:dt_nasc" }}
-
-    <label for="CPF">CPF:</label>
-    {{ form.cpf|add_class:"form-control"|attr:"id:cpf" }}
-
-    <label for="celular">Celular:</label>
-    {{ form.celular|add_class:"form-control"|attr:"id:celular" }}
-
-    <label for="email">Email:</label>
-    {{ form.email|add_class:"form-control"|attr:"id:email" }}
-
-    <label for="CEP">CEP:</label>
-    {{ form.cep|add_class:"form-control"|attr:"id:cep"|attr:"onblur:pesquisacep(this.value);" }}
-
-    <label for="uf">Estado:</label>
-    <select name="uf" id="uf" class="form-control">
-      <option value="">Selecione um estado</option>
-    </select>
-
-    <label for="cidade">Cidade:</label>
-    {{ form.cidade|add_class:"form-control"|attr:"id:cidade" }}
-
-    <label for="bairro">Bairro:</label>
-    {{ form.bairro|add_class:"form-control"|attr:"id:bairro" }}
-
-    <label for="logradouro">Rua:</label>
-    {{ form.rua|add_class:"form-control"|attr:"id:rua" }}
-
-    <label for="numero">Número:</label>
-    {{ form.num|add_class:"form-control"|attr:"id:num" }}
-
-    <label for="senha">Senha:</label>
-    {{ form.senha|add_class:"form-control"|attr:"id:senha" }}
-
-    <label for="senhaconf">Confirme a Senha:</label>
-    {{ form.senhaconf|add_class:"form-control"|attr:"id:senhaconf" }}
-
-    <div class="mt-4 mb-4">
-      <button type="submit" class="btn btn-success" style="width:30%">
-        Cadastrar
-      </button>
-      <a href="{% url 'home_participantes' %}" class="btn btn-warning" style="width:30%">
-        Cancelar
-      </a>
-    </div>
-  </form>
+      {% if form.errors %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      
+      <form method="POST" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">
+        {% csrf_token %}
+      
+        <label for="nome">Nome:</label>
+        {{ form.nome|add_class:"form-control"|attr:"id:nome" }}
+      
+        <label for="dt_nasc">Data de Nascimento:</label>
+        {{ form.dt_nasc|add_class:"form-control"|attr:"id:dt_nasc" }}
+      
+        <label for="CPF">CPF:</label>
+        {{ form.cpf|add_class:"form-control"|attr:"id:cpf" }}
+      
+        <label for="celular">Celular:</label>
+        {{ form.celular|add_class:"form-control"|attr:"id:celular" }}
+      
+        <label for="email">Email:</label>
+        {{ form.email|add_class:"form-control"|attr:"id:email" }}
+      
+        <label for="CEP">CEP:</label>
+        {{ form.cep|add_class:"form-control"|attr:"id:cep"|attr:"onblur:pesquisacep(this.value);" }}
+      
+        <label for="uf">Estado:</label>
+        <select name="uf" id="uf" class="form-control">
+          <option value="">Selecione um estado</option>
+        </select>
+      
+        <label for="cidade">Cidade:</label>
+        {{ form.cidade|add_class:"form-control"|attr:"id:cidade" }}
+      
+        <label for="bairro">Bairro:</label>
+        {{ form.bairro|add_class:"form-control"|attr:"id:bairro" }}
+      
+        <label for="logradouro">Rua:</label>
+        {{ form.rua|add_class:"form-control"|attr:"id:rua" }}
+      
+        <label for="numero">Número:</label>
+        {{ form.num|add_class:"form-control"|attr:"id:num" }}
+      
+        <label for="senha">Senha:</label>
+        {{ form.senha|add_class:"form-control"|attr:"id:senha" }}
+      
+        <label for="senhaconf">Confirme a Senha:</label>
+        {{ form.senhaconf|add_class:"form-control"|attr:"id:senhaconf" }}
+      
+        <div class="mt-4 mb-4" style="width:60%; margin:5px;">
+          <button type="submit" class="btn btn-primary" style="width:40%; margin:5px;">
+            Cadastrar
+          </button>
+          <a href="{% url 'home_participantes' %}" class="btn btn-danger" style="width:40%; margin:5px;">
+            Cancelar
+          </a>
+        </div>
+      </form>
 </div>
+
+            </div>
+        </div>
+</section>
+
+
+
+
+
 
 <script src="{% static 'js/cep-autofill.js' %}"></script>
 <script src="https://unpkg.com/imask"></script>

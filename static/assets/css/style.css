@@ -1,0 +1,1175 @@
+/*--------------------------------------------------
+  CONFIGURAÇÕES GERAIS E VARIÁVEIS
+--------------------------------------------------*/
+:root {
+    --primary-color: #F61A07;
+    --secondary-color: #E3A42E;
+    --light-bg-color: #FFFFFF;
+    --dark-text-color: #1f1e1e;
+    --light-text-color: #FFFFFF;
+    --accordion-content-bg: #f53928;
+    --font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--dark-text-color);
+    background-color: var(--light-bg-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+section {
+    padding: 60px 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilo para o título "Compre 3 produtos..." */
+.custom-title {
+    /* Cor azul retirada da imagem de referência */
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    /* Super negrito para se aproximar da referência */
+    font-size: 48px;
+    /* Tamanho grande para destaque */
+    text-transform: uppercase;
+    line-height: 1.1;
+    /* Deixa as linhas mais próximas */
+}
+
+/* Aplica a cor vermelha principal da campanha na palavra "Bombril" */
+.text-bombril-red {
+    color: var(--primary-color);
+}
+
+
+
+
+.text-bombril-white {
+    color: #ffffff;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+/* Ajuste para telas menores (celulares) */
+@media (max-width: 768px) {
+    .custom-title {
+        font-size: 32px;
+        /* Diminui a fonte em telas menores */
+    }
+}
+
+
+
+/*--------------------------------------------------
+  BOTÕES
+--------------------------------------------------*/
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/*--------------------------------------------------
+  CABEÇALHO 
+--------------------------------------------------*/
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s, border-bottom 0.3s, box-shadow 0.3s;
+}
+
+.main-header.scrolled {
+    background-color: var(--light-bg-color);
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo img {
+    height: 50px;
+    /* Ajuste conforme necessário */
+    width: auto;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    margin-right: 30px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: color 0.2s;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/*--------------------------------------------------
+  SEÇÃO 1: HERO BANNER 
+--------------------------------------------------*/
+.hero-banner {
+    background-size: cover;
+    background-position: center;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.hero-image-front {
+    flex-basis: 100%;
+}
+
+
+
+hero-image-premios {
+    flex-basis: 30%;
+    /* margin-bottom: -100px; Para invadir a próxima seção  */
+}
+
+/*--------------------------------------------------
+  SEÇÃO 2: PRÊMIOS 
+--------------------------------------------------*/
+.prizes-section {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+.prizes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.prize-item {
+    width: 45%;
+}
+
+
+
+.plus-icon {
+    width: 5%;
+}
+
+/*--------------------------------------------------
+  NOVA ESTRUTURA PARA SEÇÃO 3
+--------------------------------------------------*/
+.image-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem para a próxima linha */
+    gap: 20px;
+    /* Espaço entre todas as imagens */
+    margin-top: 40px;
+    /* Espaço abaixo do título */
+}
+
+.grid-item {
+    /* Estilo base para todos os itens da grade */
+    width: 100%;
+}
+
+/* Define que os itens 1 e 2 ocuparão 50% cada, menos o espaço do gap */
+.grid-item.item-1,
+.grid-item.item-2 {
+    flex: 1 1 calc(50% - 10px);
+    align-self: center;
+}
+
+/* Opcional: Garante que o item 3 ocupe 100% da largura */
+.grid-item.item-3 {
+    flex-basis: 100%;
+}
+
+/*--------------------------------------------------
+  LAYOUT FINAL PARA SEÇÃO 4: WHATSAPP (VERSÃO 2.0)
+--------------------------------------------------*/
+
+/* Remove o padding padrão da seção para o mascote encostar na borda */
+.whatsapp-section {
+    padding-bottom: 0;
+}
+
+.whatsapp-container-new {
+    display: flex;
+    align-items: center;
+    /* Mantém o alinhamento vertical geral */
+    gap: 30px;
+}
+
+.whatsapp-col-mascot {
+    flex: 0 0 40%;
+    align-self: flex-end;
+    /* <<< CHAVE 1: Alinha esta coluna na parte de baixo */
+    margin-bottom: -4px;
+    /* <<< CHAVE 2: Faz o mascote 'vazar' um pouco (ajuste fino) */
+}
+
+.whatsapp-col-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 60px;
+    /* Adiciona um padding para compensar a remoção do padding da seção */
+}
+
+/* Estilo para o TÍTULO PRINCIPAL (CADASTRE PELO WHATSAPP) */
+.whatsapp-col-content h3 {
+    font-size: 2.8rem;
+    /* Tamanho maior */
+    font-weight: 900;
+    /* Super negrito */
+    text-transform: uppercase;
+    color: var(--primary-color);
+    line-height: 1.1;
+}
+
+/* Estilo para o parágrafo de descrição */
+.whatsapp-col-content p {
+    font-size: 1.1rem;
+    max-width: 450px;
+    /* Limita a largura do texto para melhor leitura */
+}
+
+/* Ajuste no tamanho da imagem do botão */
+.content-buttons img {
+    max-width: 300px;
+    /* Tamanho ajustado para o botão */
+}
+
+
+/* Bloco de texto p whatsapp*/
+.whatsapp-col-content p {
+    font-size: 30px;
+    margin-top: 5px;
+    line-height: 40px;
+}
+
+/*--------------------------------------------------
+  SEÇÃO 5: REGULAMENTO HOME 
+--------------------------------------------------*/
+.regulation-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.regulation-col-image {
+    flex: 1;
+}
+
+.regulation-col-text {
+    flex: 2;
+}
+
+/* DIV do regulamento na página interna */
+.regulamento-text {
+    font-size: 1.1rem;
+    line-height: 3;
+    color: var(--dark-text-color);
+    margin: 20px 0;
+}
+
+.regulation-col-text p {
+    font-size: 25px;
+    color: var(--dark-text-color);
+    margin-top: 20px;
+}
+
+
+/*--------------------------------------------------
+  SEÇÃO 6: SORTEIOS 
+--------------------------------------------------*/
+.draws-header-new {
+    position: relative;
+    /* Cria um contexto para o posicionamento do mascote */
+    text-align: center;
+    /* Centraliza o bloco de título */
+    margin-bottom: 120px;
+    padding: 0 180px;
+    /* Adiciona espaço nas laterais para o mascote não sobrepor o texto */
+}
+
+.draws-title-new h2 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.draws-title-new p {
+    font-size: 30px;
+    color: var(--dark-text-color);
+    margin-top: -25px;
+}
+
+.draws-mascot-new {
+    position: absolute;
+    right: -70px;
+    /* Alinha o mascote na direita */
+    top: 50%;
+    /* Centraliza verticalmente */
+    transform: translateY(-50%);
+    width: 450px;
+    /* Define um tamanho para o mascote */
+}
+
+.draws-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.draws-title {
+    text-align: center;
+}
+
+.draws-title h2 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+}
+
+.accordion-item {
+    margin-bottom: 5px;
+}
+
+.accordion-header {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.3rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+}
+
+.accordion-content {
+    background-color: var(--accordion-content-bg);
+    color: var(--light-text-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-body {
+    padding: 20px;
+    font-size: 18px;
+}
+
+.accordion-icon {
+    transition: transform 0.3s;
+}
+
+.accordion-icon::before {
+    content: '▶';
+    /* Seta para a direita (fechado)  */
+    font-size: 0.8rem;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(90deg);
+    /* Seta para baixo (aberto)  */
+}
+
+/*--------------------------------------------------
+  SEÇÃO 7: DÚVIDAS 
+--------------------------------------------------*/
+.doubts-section {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 5% 0;
+}
+
+.doubts-section h2 {
+    font-size: 2.5rem;
+}
+
+.cta-button-image {
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+
+}
+
+img.cta-button-image {
+
+    max-width: 500px;
+}
+
+/* Bloco de texto p whatsapp*/
+.doubts-section p {
+    font-size: 30px;
+    margin-top: -5px;
+    line-height: 40px;
+    color: var(--light-bg-color);
+}
+
+
+
+/*--------------------------------------------------
+  RODAPÉ 
+--------------------------------------------------*/
+.main-footer {
+    background-color: var(--secondary-color);
+    color: var(--dark-text-color);
+    padding: 40px 0;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+    max-width: 50%;
+}
+
+.footer-links {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    max-width: 800px;
+}
+
+/*--------------------------------------------------
+  PÁGINAS INTERNAS
+--------------------------------------------------*/
+.page-banner {
+    padding: 40px 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.page-banner-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-banner-col-1 {
+    flex: 1;
+}
+
+
+
+.page-content {
+    padding: 60px 0;
+}
+
+
+
+#external-form-container {
+    min-height: 400px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+img.img-interna-col {
+    margin-bottom: -115px;
+}
+
+.section-up-interna {
+    padding-top: 4%;
+}
+
+
+/*--------------------------------------------------
+  ESTILOS PARA A PÁGINA "COMO PARTICIPAR"
+--------------------------------------------------*/
+
+
+
+.participar-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Espaço entre cada etapa */
+    padding: 0 10%;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    /* Alinha os itens no topo */
+    gap: 25px;
+}
+
+.step-icon {
+    flex: 0 0 80px;
+    /* Tamanho base do container do ícone */
+}
+
+.step-icon img {
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 15px;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-title {
+    color: var(--primary-color);
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    line-height: 1.7;
+    color: #333;
+}
+
+.premio-box {
+    background-color: rgba(246, 26, 7, 0.05);
+    /* Fundo avermelhado bem claro */
+    border-left: 4px solid var(--primary-color);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.premio-box h4,
+.premio-final h4 {
+    color: var(--primary-color);
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.premio-final {
+    margin-top: 20px;
+}
+
+.regulamento-link {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.regulamento-link a {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/*--------------------------------------------------
+  ESTILOS GERAIS PARA O REGULAMENTO
+--------------------------------------------------*/
+
+/* Container principal da seção do regulamento */
+.pdf-section {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    max-width: 900px;
+    /* Largura máxima para boa legibilidade em telas grandes */
+    margin: 40px auto;
+    /* Centraliza o container na página */
+    padding: 20px 30px;
+    /* Espaçamento interno */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Estilos para os títulos */
+.pdf-section h2,
+.pdf-section h3,
+.pdf-section h4,
+.pdf-section h5 {
+    font-weight: 700;
+    color: #1a202c;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+.pdf-section h2 {
+    font-size: 28px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.pdf-section h3 {
+    font-size: 24px;
+}
+
+.pdf-section h4 {
+    font-size: 20px;
+}
+
+.pdf-section h5 {
+    font-size: 18px;
+    color: #4a5568;
+}
+
+/* Estilos para parágrafos e listas */
+.pdf-section p {
+    font-size: 16px;
+    margin-bottom: 1em;
+}
+
+.pdf-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+
+.pdf-section li {
+    font-size: 16px;
+    margin-bottom: 0.5em;
+}
+
+.pdf-section strong {
+    color: #000;
+}
+
+/* Estilos para as tabelas em DESKTOP */
+.pdf-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pdf-section th,
+.pdf-section td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.pdf-section thead tr {
+    background-color: #f2f2f2;
+}
+
+.pdf-section th {
+    font-weight: bold;
+}
+
+.pdf-section tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+
+
+/*--------------------------------------------------
+  RESPONSIVIDADE 
+--------------------------------------------------*/
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-color);
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-links li {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: var(--dark-text-color);
+        margin: 5px 0;
+    }
+
+    .main-header.scrolled .hamburger-menu span {
+        background-color: var(--dark-text-color);
+    }
+
+    .main-header:not(.scrolled) .hamburger-menu span {
+        background-color: var(--light-text-color);
+    }
+
+
+    .hero-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .prizes-container {
+        flex-direction: column;
+    }
+
+    .prize-item {
+        width: 70%;
+    }
+
+    img.prize-item2 {
+        width: 60%;
+    }
+
+    .plus-icon {
+        width: 10%;
+    }
+
+    .whatsapp-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .regulation-container {
+        flex-direction: column;
+    }
+
+    .draws-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .page-banner-container {
+        flex-direction: column;
+    }
+
+    /* DENTRO DA MEDIA QUERY */
+
+    /* Melhora 4: Ajuste de fonte no título customizado */
+    .custom-title {
+        font-size: 32px;
+        /* Reduz o tamanho da fonte em telas menores */
+    }
+
+    /* DENTRO DA MEDIA QUERY @media (max-width: 768px) */
+
+    /* Correção para os links do rodapé não vazarem da tela */
+    .footer-links {
+        flex-wrap: wrap;
+        /* Permite que os links quebrem para a próxima linha */
+        justify-content: center;
+        /* Centraliza os links, já que podem ocupar mais de uma linha */
+    }
+
+    /* DENTRO DA MEDIA QUERY @media (max-width: 768px) */
+
+    /* Inverte a ordem da seção 'Regulamento' na home para o mobile */
+    .regulation-col-text {
+        order: 1;
+        /* Define o bloco de texto como o primeiro item visual */
+    }
+
+    .regulation-col-image {
+        order: 2;
+        /* Define o bloco da imagem como o segundo item visual */
+        margin-top: 30px;
+        /* Adiciona um espaço para não colar no botão que agora está acima */
+    }
+
+    /* 1. Ajuste do Banner Principal */
+    .hero-container {
+        /* Garante que o container se ajuste ao único item visível */
+        justify-content: center;
+    }
+
+    .hero-image-front {
+        flex-basis: 90%;
+        /* A imagem do slogan/prêmios ocupa quase toda a largura */
+    }
+
+    .hero-banner {
+        height: 100%;
+    }
+
+    /* 3. Ajuste das imagens na seção de Sorteios/Resultados */
+    .draws-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* Centraliza o grupo de imagens */
+        align-items: center;
+        gap: 20px;
+        /* Espaço entre as imagens */
+        flex-direction: row;
+    }
+
+    .draws-header img {
+        flex: 0 0 130px;
+        /* Define um tamanho base para as imagens */
+        max-width: 130px;
+        height: auto;
+    }
+
+    .draws-title {
+        width: 100%;
+        order: 3;
+        /* Garante que o título venha depois das duas imagens */
+        text-align: center;
+    }
+
+
+    /* 4. Aumenta o logo no rodapé */
+    .footer-logo {
+        max-width: 300px;
+        /* Ajuste o valor conforme sua preferência */
+    }
+
+    img.img-interna-col {
+        margin-bottom: 0;
+        padding-top: 50px;
+    }
+
+
+    /* Ajustes da nova grade de imagens no responsivo - SEÇÃO 3*/
+    .image-grid-container {
+        flex-direction: column;
+        /* Empilha os itens verticalmente */
+    }
+
+    /* --- CONTROLE A ORDEM DAS IMAGENS AQUI --- */
+    .grid-item.item-1 {
+        order: 1;
+        /* Primeira a aparecer */
+    }
+
+    .grid-item.item-2 {
+        order: 2;
+        /* Segunda a aparecer */
+    }
+
+    .grid-item.item-3 {
+        order: 3;
+        /* Terceira a aparecer */
+    }
+
+    /*--------------------------------------------------
+  AJUSTES RESPONSIVOS FINAIS PARA A SEÇÃO WHATSAPP
+--------------------------------------------------*/
+
+    .whatsapp-section {
+        padding-top: 60px;
+        /* Garante o espaçamento no topo */
+    }
+
+    .whatsapp-container-new {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .whatsapp-col-mascot {
+        align-self: center;
+        /* Reseta o alinhamento para o padrão no mobile */
+        margin-bottom: 0;
+        /* Reseta o 'vazamento' no mobile */
+        max-width: 250px;
+    }
+
+    .whatsapp-col-content {
+        align-items: center;
+        padding-bottom: 0;
+        /* Reseta o padding no mobile */
+    }
+
+    /* Ajusta o tamanho da fonte do título no mobile */
+    .whatsapp-col-content h3 {
+        font-size: 2.2rem;
+    }
+
+    /* AJUSTES RESPONSIVOS PARA A SEÇÃO SORTEIOS */
+    .draws-header-new {
+        padding: 0;
+        /* Remove o padding no mobile */
+    }
+
+    .draws-mascot-new {
+        display: none;
+        /* Oculta o mascote em telas menores para um layout mais limpo */
+    }
+
+    img.cta-button-image {
+        max-width: 100%;
+    }
+
+    /* Ajusta o container principal no mobile para permitir a reordenação */
+    .whatsapp-container-new {
+        display: flex;
+        /* Garante que é um container flex */
+        flex-direction: column;
+        /* Itens em coluna */
+        text-align: center;
+    }
+
+    /* Define a ordem dos elementos filhos */
+    .whatsapp-col-content {
+        order: 1;
+        /* Define o bloco de conteúdo (texto e botão) como o primeiro item */
+    }
+
+    .whatsapp-col-mascot {
+        order: 2;
+        /* Define o bloco do mascote como o segundo (último) item */
+        margin-top: 40px;
+        /* Adiciona um espaço acima do mascote para separá-lo do conteúdo */
+    }
+
+    /* Garante que o mascote não tenha espaçamento inferior na seção */
+    .whatsapp-section {
+        padding-bottom: 0;
+    }
+
+}
+
+/*--------------------------------------------------
+  AJUSTES RESPONSIVOS PARA "COMO PARTICIPAR"
+--------------------------------------------------*/
+@media (max-width: 768px) {
+    .step {
+        flex-direction: column;
+        /* Empilha o ícone e o texto */
+        align-items: center;
+        text-align: center;
+    }
+
+    .step-icon {
+        flex-basis: auto;
+        /* Reseta a base do ícone */
+    }
+}
+
+/*--------------------------------------------------
+  AJUSTES RESPONSIVOS PARA "REGULAMENTO"
+--------------------------------------------------*/
+
+@media (max-width: 768px) {
+
+    /* Ajusta o container principal para telas menores */
+    .pdf-section {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    /* Reduz o tamanho das fontes dos títulos */
+    .pdf-section h2 {
+        font-size: 22px;
+    }
+
+    .pdf-section h3 {
+        font-size: 20px;
+    }
+
+    .pdf-section h4 {
+        font-size: 18px;
+    }
+
+    .pdf-section h5 {
+        font-size: 16px;
+    }
+
+    /* Reduz o tamanho das fontes dos textos */
+    .pdf-section p,
+    .pdf-section li {
+        font-size: 14px;
+        line-height: 1.7;
+        /* Aumenta o espaçamento entre linhas para melhor leitura */
+    }
+
+    /* --- RESPONSIVIDADE DAS TABELAS (MÉTODO "CARDS") --- */
+
+    /* Esconde o cabeçalho original da tabela, pois vamos recriá-lo em cada célula */
+    .pdf-section thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .pdf-section table,
+    .pdf-section tbody,
+    .pdf-section tr,
+    .pdf-section td {
+        display: block;
+        /* Faz cada elemento da tabela se comportar como um bloco */
+    }
+
+    /* Transforma a linha em um "card" */
+    .pdf-section tr {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Remove a borda da tabela em si */
+    .pdf-section table {
+        box-shadow: none;
+        border: none;
+    }
+
+    /* Estiliza a célula para ter o label à esquerda e o dado à direita */
+    .pdf-section td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        text-align: right;
+        /* Alinha o dado à direita */
+        padding-left: 50%;
+        /* Deixa espaço para o label */
+        position: relative;
+        /* Necessário para o posicionamento do :before */
+        min-height: 30px;
+        /* Garante altura mínima */
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .pdf-section td:last-child {
+        border-bottom: 0;
+    }
+
+    /* Cria o "label" da coluna usando o atributo data-label do HTML */
+    .pdf-section td:before {
+        content: attr(data-label);
+        /* Pega o texto do atributo data-label */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        /* Alinha o label à esquerda */
+        font-weight: bold;
+        color: #333;
+    }
+}
