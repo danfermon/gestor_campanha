@@ -10,7 +10,7 @@
   <h2 class="mb-3">Cadastro de Cupom</h2>
 
   <!-- FORMULÁRIO DE ENVIO DE IMAGEM -->
-  <form action="{% url 'cadastrar_cupom_qrcode' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
+  <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
     {% csrf_token %}
     <div class="mb-3">
       <label for="img_cupom" class="form-label">Envie a imagem do seu cupom</label>
