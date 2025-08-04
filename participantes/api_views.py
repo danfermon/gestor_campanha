@@ -22,7 +22,7 @@ class BuscarParticipantePorCelularView(APIView):
         if not celular:
             return Response(
                 {"detail": "O número de celular é obrigatório."},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.status.HTTP_200_OK
             )
 
         try:
@@ -33,5 +33,5 @@ class BuscarParticipantePorCelularView(APIView):
         except Participantes.DoesNotExist:
             return Response(
                 {"detail": "Participante não encontrado."},
-                status=status.HTTP_404_NOT_FOUND
+                status=status.status.HTTP_200_OK
             )
