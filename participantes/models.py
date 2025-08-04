@@ -5,7 +5,7 @@ class Participantes(models.Model):
   nome = models.CharField(max_length=255)
   dt_nasc = models.DateField(blank=True, editable=True, null=True)
   cpf = models.CharField(max_length=20)
-  telefone = models.CharField(max_length=20)
+  #telefone = models.CharField(max_length=20)
   celular = models.CharField(max_length=20)
   email = models.CharField(max_length=255)
   uf = models.CharField(max_length=40)
@@ -15,6 +15,7 @@ class Participantes(models.Model):
   bairro = models.CharField(max_length=100)
   num = models.IntegerField(blank=True, editable=True, null=True)
   senha = models.CharField(max_length=128)  # Ideal para senhas criptografadas
+  aceita_termos = models.BooleanField(default=False)
 
   # Status do participante
   STATUS = [

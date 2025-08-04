@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # libs externas
     "rest_framework",
+    "rest_framework.authtoken",
     "widget_tweaks",
     "django_celery_beat",
 ]
@@ -149,3 +150,11 @@ DATE_INPUT_FORMATS = ["%d/%m/%Y"]
 
 # Auto field padrão
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# autenticação para uso da API interna
+REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.TokenAuthentication',
+        ],
+        # ... outras configurações
+    }

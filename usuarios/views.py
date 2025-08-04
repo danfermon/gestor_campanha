@@ -296,6 +296,9 @@ def cupons_enviados(request):
     'Total' : total_cup
   }
   return HttpResponse(template.render(context, request))
+
+
+# para geração de token para usuarios
   
 
 

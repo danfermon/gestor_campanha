@@ -3,8 +3,12 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+
 # para a parte da API
 from rest_framework.routers import DefaultRouter
+
+from rest_framework.authtoken.models import Token # para autenticação de APIs
 
 from participantes.api_views import ParticipantesViewSet
 

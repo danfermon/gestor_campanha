@@ -10,7 +10,7 @@ class ParticipanteForm(forms.ModelForm):
 
     class Meta:
         model = Participantes
-        fields = ['nome', 'dt_nasc', 'cpf', 'telefone', 'celular', 'email',
+        fields = ['nome', 'dt_nasc', 'cpf','celular', 'email',
                   'uf', 'cidade', 'cep', 'rua', 'bairro', 'num', 'senha']
 
     def clean_CEP(self):

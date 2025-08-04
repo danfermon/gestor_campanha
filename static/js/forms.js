@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Máscara para telefone fixo
-  var telefone = document.getElementById('telefone');
+  /*var telefone = document.getElementById('telefone');
   if (telefone) {
     IMask(telefone, { mask: '(00) 0000-0000' });
-  }
+  }*/
 
   // Máscara para celular
   var celular = document.getElementById('celular');

@@ -38,9 +38,6 @@ Cadastro de Participante
     <label for="CPF">CPF:</label>
     {{ form.cpf|add_class:"form-control"|attr:"id:cpf" }}
 
-    <label for="telefone">Telefone:</label>
-    {{ form.telefone|add_class:"form-control"|attr:"id:telefone" }}
-
     <label for="celular">Celular:</label>
     {{ form.celular|add_class:"form-control"|attr:"id:celular" }}
 
@@ -88,4 +85,4 @@ Cadastro de Participante
 <script src="https://unpkg.com/imask"></script>
 <script src="{% static 'js/forms.js' %}"></script>
 <script src="{% static 'js/validar_cpf.js' %}"></script>
-{% endblock %}
+{% endblock %} 
