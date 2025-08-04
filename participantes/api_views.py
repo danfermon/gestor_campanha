@@ -22,7 +22,7 @@ class BuscarParticipantePorCelularView(APIView):
                 {
                     "success": False,
                     "message": "O número de celular é obrigatório.",
-                    "data": None
+                    "data": []
                 },
                 status=status.HTTP_200_OK
             )
@@ -34,7 +34,7 @@ class BuscarParticipantePorCelularView(APIView):
                 {
                     "success": True,
                     "message": "Participante encontrado.",
-                    "data": serializer.data
+                    "data": [serializer.data]
                 },
                 status=status.HTTP_200_OK
             )
@@ -43,7 +43,7 @@ class BuscarParticipantePorCelularView(APIView):
                 {
                     "success": False,
                     "message": "Participante não encontrado.",
-                    "data": None
+                    "data": []
                 },
                 status=status.HTTP_200_OK
             )
