@@ -38,31 +38,18 @@
     <div class="alert alert-info mt-2">{{ qr_msg }}</div>
   {% endif %}
 
+  <hr class="my-4">
 
+  <!-- ENVIAR CÓDIGO MANUALMENTE -->
+  <h4>Ou envie o código do seu cupom</h4>
+  <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <input type="text" class="form-control" id="cod_cupom" placeholder="Informe o código do seu cupom" name="cod_cupom">
+    </div>
+    <button type="submit" class="btn btn-dark">Enviar Cupom</button>
+  </form>
 </div>
-
-<!-- ENVIAR CUPOM VIA FORMULÁRIO  -->
-   <div style="margin-top: 2%; margin-bottom: 2%;">
-    <hr>
-      <h4>Ou envie o código do seu cupom</h4>
-
-      <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="mb-3">
-          <input type="text" class="form-control" id="cod_cupom" placeholder="Informe o código do seu cupom" name="cod_cupom">
-          </imput>
-        </div>
-
-         <button type="submit" class="btn btn-dark">Enviar Cupom</button>
-
-      </form>
-
-   </div>
-
-
-
-
-
 
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/html5-qrcode"></script>
@@ -71,7 +58,7 @@
   const readerDiv = document.getElementById('reader');
   const btnToggle = document.getElementById('btn-toggle-camera');
   const switchCameraBtn = document.getElementById('switch-camera');
-  
+
   let html5QrCode;
   let cameraAtiva = false;
   let cameras = [];
@@ -138,10 +125,7 @@
     if (html5QrCode) {
       html5QrCode.stop().then(() => {
         try {
-          // Verifica se o scanner ainda tem o elemento interno
-          if (html5QrCode._element) {
-            html5QrCode.clear();
-          }
+          html5QrCode.clear();
         } catch (e) {
           console.warn("Erro ao limpar QRCode scanner:", e);
         }
@@ -164,5 +148,4 @@
     setTimeout(() => iniciarCamera(), 500);
   }
 </script>
-
 {% endblock %}
