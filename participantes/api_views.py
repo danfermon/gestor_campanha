@@ -7,11 +7,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-
 class ParticipantesViewSet(viewsets.ModelViewSet):
     queryset = Participantes.objects.all()
     serializer_class = ParticipantesSerializer
-
 
 class BuscarParticipantePorCelularView(APIView):
     permission_classes = [IsAuthenticated]
@@ -21,17 +19,31 @@ class BuscarParticipantePorCelularView(APIView):
 
         if not celular:
             return Response(
-                {"detail": "O número de celular é obrigatório."},
-                status=status.status.HTTP_200_OK
+                {
+                    "success": False,
+                    "message": "O número de celular é obrigatório.",
+                    "data": None
+                },
+                status=status.HTTP_200_OK
             )
 
         try:
             participante = Participantes.objects.get(celular=celular)
             serializer = ParticipantesSerializer(participante)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
+            return Response(
+                {
+                    "success": True,
+                    "message": "Participante encontrado.",
+                    "data": serializer.data
+                },
+                status=status.HTTP_200_OK
+            )
         except Participantes.DoesNotExist:
             return Response(
-                {"detail": "Participante não encontrado."},
-                status=status.status.HTTP_200_OK
+                {
+                    "success": False,
+                    "message": "Participante não encontrado.",
+                    "data": None
+                },
+                status=status.HTTP_200_OK
             )
