@@ -14,7 +14,7 @@ def extrair_texto_ocr(imagem_path):
         return texto
     except Exception as e:
         print(f"Erro ao processar OCR: {e}")
-        return ""
+        return f"Erro ao processar OCR: {e}"
 
 
 

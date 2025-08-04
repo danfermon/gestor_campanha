@@ -35,6 +35,46 @@ def gerar_link_sefaz(chave):
 
 
 
+def cadastrar_cupom_qrcode(request, id_participante):
+    msg = ''
+    qr_msg = ''
+
+    if request.method == 'POST':
+        arquivo = request.FILES.get('img_cupom')
+
+    if not arquivo:
+        msg = 'Selecione um arquivo no formato de imagem.'
+    else:
+        # guardar a imagem
+        path = guardar_cupom(arquivo)
+
+         # Abre a imagem como array para OpenCV
+        with default_storage.open(path, 'rb') as f:
+            file_bytes = np.asarray(bytearray(f.read()), dtype=np.uint8)
+            imagem_cv = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+
+        if imagem_cv is None:
+            raise ValueError("Imagem não pôde ser carregada.")
+        
+        # Detecta QR Code na imagem (se existir)
+        gray = cv2.cvtColor(imagem_cv, cv2.COLOR_BGR2GRAY)
+        detector = cv2.QRCodeDetector()
+        dados_qr, _, _ = detector.detectAndDecode(gray)
+        # Extrai texto via OCR (função personalizada)
+        imagem_local_path = default_storage.path(path)
+        dados_ocr = extrair_texto_ocr(imagem_local_path)
+        extrair_numero_cupom(dados_ocr)
+        print(extrair_numero_cupom)
+
+        msg = 'Cupom enviado com sucesso!'
+        qr_msg = 'Cupom inserido via Código Fiscal'
+        id_participante = id_participante
+        return render(request, 'cad_cupom.html', {
+        'msg': msg,
+        'qr_msg': qr_msg,
+        'id_participante': id_participante,})
+
+
 
 ## CADASTRAR CUPOM PELO CÓDIGO
 def cad_cupom_codigo(request, id_participante):
@@ -108,7 +148,7 @@ def cad_cupom(request, id_participante):
                     participante=participante,
                     imagem_cupom=path,
                     ocr_text=dados_ocr.strip(),
-                    dados_cupom=retorno_sefaz,
+                    dados_cupom=ocr_text,
                     tipo_envio='Sistema',
                     status='Pendente',
                     numero_documento=chave_acesso,
