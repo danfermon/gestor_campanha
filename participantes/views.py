@@ -107,6 +107,15 @@ def home_participantes(request):
 def como_participar(request):
     return render(request, 'como_participar.html')
 
+def regulamento(request):
+    return render(request, 'regulamento.html')
+
+def FAQ(request):
+    return render(request, 'FAQ.html')
+
+def resultados(request):
+    return render(request, 'resultados.html')
+
 def editar_particip(request, id):
     participante = get_object_or_404(Participantes, id=id)
 

@@ -5,69 +5,99 @@
 
 <div id="header-placeholder"></div> 
 
+
 {% block content %}
 {% include 'includes/_header.html' %}
 
 
+<!-- index -->
 
-<!-- como participar -->
-
-<section id="home" style="background-image: url("{% static 'assets/images/Background-Amarelov2.jpg' %}");">
-    
-    <div class="container hero-container banner-desktop-wrapper">
-        <div class="hero-image-front">
-            <img src="{% static 'assets/images/BANNER - Img 1col.png'%}" alt="Promoção de um brilho no seu futuro">
-        </div>
+<section class="prizes-section">
+    <div class="container prizes-container">
+        <img src="{% static 'assets/images/Round1V2.png' %}" alt="Grande Prêmio: Carro Elétrico + iPhone e mais" class="prize-item">
+        <img src="{% static 'assets/images/PlusIcon.png' %}" alt="Mais" class="plus-icon">
+        <img src="{% static 'assets/images/Round2V2.png' %}" alt="8 Prêmios Semanais: 1 ano de supermercado grátis"
+            class="prize-item2">
     </div>
-
 </section>
 
-<section id="comoparticipar" class="page-content section-up-interna">
-    <h1 class="custom-title text-bombril-red text-center">COMO PARTICIPAR</h1>
-    <div class="participar-steps">
-      <div class="step">
-        <div class="step-icon">
-          <img src="{% static 'assets/images/Ícone-de-Cadastro.png'%}" alt="Ícone de Compra">
-        </div>
-        <div class="step-content">
-          <h3 class="step-title">1. COMPRE OS PRODUTOS</h3>
-          <p>Adquira, no mínimo, <strong>3 (três) produtos Bombril participantes</strong> em uma mesma compra, em
-            qualquer loja do território nacional.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-          <img src="{% static 'assets/images/Ícone-de-Cadastro.png'%}" alt="Ícone de Compra">
-        </div>
-        <div class="step-content">
-          <h3 class="step-title">2. CADASTRE SEU CUPOM</h3>
-          <p>Acesse o site <strong>www.promocaobombril.com.br</strong> ou envie uma mensagem para o WhatsApp da
-            promoção no número <strong>(11) 99999-9999</strong>.</p>
-          <p>Faça seu cadastro pessoal e envie uma foto legível do seu cupom fiscal.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-          <img src="{% static 'assets/images/Ícone-de-Sorte.png' %}" alt="Ícone de Sorte">
-        </div>
-        <div class="step-content">
-          <h3 class="step-title">3. CONCORRA A PRÊMIOS!</h3>
-          <p>Após o cadastro, você receberá seus números da sorte para concorrer aos prêmios.</p>
-          <div class="premio-box">
-            <h4>8 PRÊMIOS SEMANAIS</h4>
-            <p>Sorteios de <strong>R$ 2.000,00</strong> toda semana.</p>
-          </div>
-          <div class="premio-final">
-            <h4>GRANDE PRÊMIO FINAL</h4>
-            <p>Um certificado de ouro no valor de <strong>R$ 150.000,00</strong>!</p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    <p class="regulamento-link">Guarde todos os cupons cadastrados! Eles são sua garantia. <a
-        href="regulamento.html">Consulte o regulamento completo</a>.</p>
-  </section>
+        <section class="buy-and-register-section">
+            <div class="container">
+
+                <div class="image-grid-container">
+                    <div class="grid-item item-1">
+                        <img src="{% static 'assets/images/COMPRE 3 PRODUTOS.png' %}" alt="compre 3 produtos">
+                    </div>
+
+                    <div class="grid-item item-2">
+                        <img src="{% static 'assets/images/PRODUTOS.png' %}" alt="produtos bombril">
+                    </div>
+
+                    <div class="grid-item item-3">
+                        <img src="{% static 'assets/images/TURBINE SUAS CHANCES.png' %}" alt="TURBINE">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="whatsapp-section"  style="background-image: url("{% static 'assets/images/background-amarelo.jpg' %}");">
+            
+        <div class="container whatsapp-container-new">
+
+                <div class="whatsapp-col-mascot">
+                    <img src="{% static 'assets/images/ROBOM-BRIL WHATSAPP.png' %}" alt="Mascote Robom-Bril com celular"
+                        class="mascote-com-cel">
+                </div>
+
+                <div class="whatsapp-col-content">
+                    <div class="content-text">
+                        <h3>Cadastre pelo Whatsapp.</h3>
+                        <p class="texto-destaque">Você também pode se cadastrar pelo WhatsApp, fale com o Robombril.</p>
+                    </div>
+                    <div class="content-buttons">
+                        <a href="#">
+                            <img src="{% static 'assets/images/button Whatsapp.png' %}" alt="Botão Cadastrar via WhatsApp">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="doubts-section">
+            <div class="container centered-content">
+                <h2 class="custom-title text-bombril-white">Ainda tem dúvidas?</h2>
+                <p class="duvidas-content text-bombril-white">Confira as questões mais comuns sobre a promoção</p>
+                <a href="FAQ.html"> <img src="{% static 'assets/images/Button-FAQ.png'%}" alt="Fale Conosco" class="cta-button-image">
+                </a>
+            </div>
+        </section>
+
+        <section class="regulation-section">
+            <div class="container regulation-container">
+                <div class="regulation-col-image">
+                    <img src="{% static 'assets/images/ROBOM-BRIL REGULAMENTO.png' %}" alt="Mascote Robom-Bril apontando para o regulamento"
+                        class="mascote-regulamento">
+
+                </div>
+                <div class="regulation-col-text">
+                    <h2 class="custom-title text-bombril-red">Regulamento</h2>
+                    <p>Mauris dictum magna eget magna auctor luctus. Maecenas rutrum placerat velit ut lacinia. Sed
+                        tellus quam, egestas eu porttitor sit amet, pulvinar euismod orci. Maecenas eu maximus neque.
+                    </p>
+                    <a href="{% url 'regulamento'%} ">
+                        <img src="{% static 'assets/images/Button - Confira o regulamento.png' %}" alt="Confira o Regulamento"
+                            class="cta-button-image">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+<!-- index -->
+
+
 
 
 

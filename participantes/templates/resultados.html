@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Início{% endblock %}
+
+<div id="header-placeholder"></div> 
+
+
+{% block content %}
+{% include 'includes/_header.html' %} 
+ 
+ <section id="sorteios" class="draws-section" style="background-color: #fffdf5;">
+            <div class="container">
+
+                <div class="draws-header-new">
+                    <div class="draws-title-new">
+                        <h2>Resultados</h2>
+                        <p>Acompanhe aqui os resultados dos sorteios!</p>
+                    </div>
+                    <div class="draws-mascot-new">
+                        <img src="{% static 'assets/images/ROBOM-BRIL_NAVE.png' %}" alt="Mascote Robom-Bril no sorteio">
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Sorteio 22 de Agosto
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p><strong>Ganhadores</strong></p>
+                                <ul>
+                                    <li>Fulano da Silva</li>
+                                    <li>Sicrano da Silva</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Sorteio 29 de Agosto
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Não Apurado</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Sorteio 15 de Setembro
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Aguardando resultado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     <script src="{% static 'main.js' %}"></script>
+
+{% endblock %}

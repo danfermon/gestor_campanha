@@ -4,7 +4,12 @@ from . import views
 urlpatterns = [
     path('participante/', views.participante, name='participante'),
     path('home_participantes/', views.home_participantes, name='home_participantes'),
+    path('regulamrnto/', views.regulamento, name='regulamento'),
+    path('FAQ/', views.FAQ, name='FAQ'),
+    path('resultados/', views.resultados, name='resultados'),
     path('como_participar/', views.como_participar, name='como_participar'),
+
+    
     path('editar_particip/<int:id>', views.editar_particip, name='editar_particip'),
     
     path('login_participante/', views.login_participante, name='login_participante'),

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Início{% endblock %}
+
+<div id="header-placeholder"></div>
+
+
+{% block content %}
+{% include 'includes/_header.html' %}
+
+<div id="header-placeholder"></div>
+
+      
+<section id="FAQ" class="draws-section" style="background-color: #fffdf5;">
+            <div class="container">
+                <h1 class="custom-title text-bombril-red text-center">Perguntas Frequentes</h1>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Como faço para participar da promoção?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Para participar, basta comprar 3 produtos da família Bombril, acessar o site da promoção, clicar em "Participe" e cadastrar seu cupom fiscal. Você também pode se cadastrar via WhatsApp.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Quais produtos são válidos para a promoção?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                             <div class="accordion-body">
+                                <p>Todos os produtos das marcas Bombril, Mon Bijou, Limpol, etc., são participantes. Para a lista completa, consulte o <a href="regulamento.html">regulamento oficial</a> da promoção.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Até quando posso me cadastrar?
+                            <span class="accordion-icon"></span>
+                        </button>
+                         <div class="accordion-content">
+                             <div class="accordion-body">
+                                <p>O período de participação e cadastro de cupons vai de 15/08/2025 até às 23h59 do dia 15/10/2025. Não deixe para a última hora!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="accordion-item">
+                        <button class="accordion-header">
+                            Posso cadastrar o mesmo cupom fiscal mais de uma vez?
+                            <span class="accordion-icon"></span>
+                        </button>
+                         <div class="accordion-content">
+                             <div class="accordion-body">
+                                <p>Não. Cada cupom fiscal pode ser cadastrado apenas uma única vez durante todo o período da promoção.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+ <script src="{% static 'main.js' %}"></script>
+
+{% endblock %}

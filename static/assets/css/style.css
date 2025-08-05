@@ -1,3 +1,66 @@
+/* ==========================================================================
+   CSS de Padronização e Reset (Cross-browser)
+   ========================================================================== */
+
+/* * 1. Remove margens e paddings padrão inconsistentes dos navegadores.
+ * 2. Define o box-sizing para um modelo de caixa mais intuitivo.
+ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* * Remove estilos padrão de listas.
+ */
+ol,
+ul {
+    list-style: none;
+}
+
+/* * Garante que imagens sejam responsivas por padrão.
+ */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* * Remove a aparência nativa de botões e inputs, permitindo
+ * que nosso estilo customizado seja aplicado de forma mais consistente.
+ * A propriedade -webkit-appearance é crucial para o Safari no iPhone.
+ */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    /* Herda a fonte do elemento pai */
+    -webkit-appearance: none;
+    /* Remove estilos do iOS */
+    appearance: none;
+    border-radius: 0;
+}
+
+/* * 3. Melhora a renderização de fontes no Safari (iPhone) e Chrome.
+ * Deixa as fontes mais nítidas e menos "gordas" no macOS/iOS.
+ */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Fim do código de padronização
+   ========================================================================== */
+
+
+
 /*--------------------------------------------------
   CONFIGURAÇÕES GERAIS E VARIÁVEIS
 --------------------------------------------------*/
@@ -217,6 +280,11 @@ img {
 hero-image-premios {
     flex-basis: 30%;
     /* margin-bottom: -100px; Para invadir a próxima seção  */
+}
+
+/* Esconde o banner mobile em telas grandes */
+.banner-mobile {
+    display: none;
 }
 
 /*--------------------------------------------------
@@ -541,21 +609,6 @@ img.cta-button-image {
 /*--------------------------------------------------
   PÁGINAS INTERNAS
 --------------------------------------------------*/
-.page-banner {
-    padding: 40px 0;
-    background-size: cover;
-    background-position: center;
-}
-
-.page-banner-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.page-banner-col-1 {
-    flex: 1;
-}
 
 
 
@@ -574,10 +627,6 @@ img.cta-button-image {
 }
 
 
-
-img.img-interna-col {
-    margin-bottom: -115px;
-}
 
 .section-up-interna {
     padding-top: 4%;
@@ -663,6 +712,34 @@ img.img-interna-col {
     color: var(--primary-color);
     font-weight: bold;
 }
+
+/* Estilo para os botões internos das etapas */
+.btn-etapa {
+    display: inline-block;
+    /* Permite definir largura e altura */
+    width: auto;
+    /* Largura se ajusta ao texto */
+    max-width: 100%;
+    /* Garante que não ultrapasse o container no mobile */
+    background-color: var(--primary-color);
+    color: #fff;
+    /* Usa a cor vermelha principal */
+    border: 2px solid var(--primary-color);
+    /* Borda vermelha */
+    border-radius: 5px;
+    /* Bordas totalmente arredondadas */
+    padding: 10px 25px;
+    /* Espaçamento interno */
+    margin-top: 15px;
+    /* Espaço acima do botão */
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    /* Efeito de transição suave */
+}
+
+
 
 /*--------------------------------------------------
   ESTILOS GERAIS PARA O REGULAMENTO
@@ -763,7 +840,216 @@ img.img-interna-col {
     background-color: #f9f9f9;
 }
 
+/* Estilos para a página de Produtos Participantes */
+.lista-produtos-completa ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 40px 0;
+    column-count: 4;
+    /* Define 4 colunas para a lista */
+    column-gap: 20px;
+}
 
+.lista-produtos-completa li {
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+/* Style for the products participants image at the bottom */
+.produtos-participantes-image {
+    width: 100%;
+    /* Make the image take full width */
+    margin-bottom: 20px;
+    /* Add a little space above the footer */
+}
+
+.produtos-participantes-image img {
+    display: block;
+    /* Prevent extra space below the image */
+    width: 50%;
+    height: auto;
+    /* Maintain image aspect ratio */
+    object-fit: contain;
+    /* Ensures the image fits within the container without cropping, preserving aspect ratio */
+    place-self: center;
+}
+
+
+/* Ajustes Responsivos para a lista de produtos */
+@media (max-width: 1200px) {
+    .lista-produtos-completa ul {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .lista-produtos-completa ul {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .lista-produtos-completa ul {
+        column-count: 1;
+    }
+}
+
+/*--------------------------------------------------
+  ESTILOS PARA A PÁGINA DE TUTORIAL DO CUPOM
+--------------------------------------------------*/
+
+.main-title {
+    text-align: center;
+    color: var(--primary-red);
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.step-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.content-column {
+    flex: 1;
+}
+
+.image-column {
+    flex: 1;
+    max-width: 200px;
+    /*border: 1px solid var(--image-border);*/
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Garante que a imagem não ultrapasse as bordas arredondadas */
+    flex-shrink: 0;
+}
+
+.image-column img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.step-row h2 {
+    color: var(--dark-grey);
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.step-row p,
+.step-row ul {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.step-row ul {
+    padding-left: 20px;
+    list-style-position: inside;
+}
+
+.highlight-red {
+    color: var(--primary-red);
+    font-weight: bold;
+}
+
+.final-section-wrapper {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.final-section-wrapper .step-row {
+    gap: 30px;
+    margin-bottom: 0;
+}
+
+.final-section-wrapper h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.final-section-wrapper ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: white;
+}
+
+.final-section-wrapper ul li::before {
+    content: '•';
+    margin-right: 10px;
+}
+
+.final-section-wrapper .image-column {
+    /*border: 2px solid white;*/
+    background-color: #F61A07;
+}
+
+.important-section {
+    background-color: #F61A07;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.important-section h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.important-section p {
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Configurações de Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .main-title {
+        font-size: 1.6em;
+    }
+
+    /* A imagem agora ficará ABAIXO do texto */
+    .step-row {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .step-row ul {
+        text-align: left;
+        display: inline-block;
+    }
+
+    .image-column {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .final-section-wrapper {
+        padding: 20px;
+    }
+}
 
 /*--------------------------------------------------
   RESPONSIVIDADE 
@@ -778,6 +1064,30 @@ img.img-interna-col {
         background-color: var(--secondary-color);
         flex-direction: column;
         padding: 20px;
+    }
+
+    /* 1. Esconde o container do banner de desktop no mobile */
+    .banner-desktop-wrapper {
+        display: none;
+    }
+
+    /* 2. Mostra o banner específico para mobile */
+    .banner-mobile {
+        display: block;
+        /* Faz a imagem ser visível */
+        width: 100%;
+        /* Garante que ocupe toda a largura */
+        height: auto;
+        /* Mantém a proporção da imagem */
+        padding: 25% 5px 5% 5px;
+    }
+
+    /* 3. Opcional: Remove o padding da seção para a imagem preencher tudo */
+    .hero-banner {
+        padding-top: 0;
+        padding-bottom: 0;
+        /* Ajusta a altura da seção para a altura da imagem mobile */
+        height: auto;
     }
 
     .main-nav.active {
@@ -857,9 +1167,6 @@ img.img-interna-col {
         gap: 20px;
     }
 
-    .page-banner-container {
-        flex-direction: column;
-    }
 
     /* DENTRO DA MEDIA QUERY */
 
@@ -941,12 +1248,6 @@ img.img-interna-col {
         max-width: 300px;
         /* Ajuste o valor conforme sua preferência */
     }
-
-    img.img-interna-col {
-        margin-bottom: 0;
-        padding-top: 50px;
-    }
-
 
     /* Ajustes da nova grade de imagens no responsivo - SEÇÃO 3*/
     .image-grid-container {
