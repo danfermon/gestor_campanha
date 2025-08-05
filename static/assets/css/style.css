@@ -5,6 +5,7 @@
 /* * 1. Remove margens e paddings padrão inconsistentes dos navegadores.
  * 2. Define o box-sizing para um modelo de caixa mais intuitivo.
  */
+
 *,
 *::before,
 *::after {
@@ -1474,3 +1475,4 @@ img.cta-button-image {
         color: #333;
     }
 }
+

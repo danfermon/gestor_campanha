@@ -3,7 +3,6 @@
 
 {% block title %}Início{% endblock %}
 
-<div id="header-placeholder"></div> 
 
 
 {% block content %}
@@ -21,7 +20,7 @@
     </div>
 </section>
 
-        <section class="buy-and-register-section">
+        <section class="buy-and-register-section" style="background-color: #fffdf5;">
             <div class="container">
 
                 <div class="image-grid-container">
@@ -41,7 +40,7 @@
             </div>
         </section>
 
-        <section class="whatsapp-section"  style="background-image: url("{% static 'assets/images/background-amarelo.jpg' %}");">
+        <section class="whatsapp-section"  style="background-image: url('{% static 'assets/images/background-amarelo.jpg' %}");>
             
         <div class="container whatsapp-container-new">
 
@@ -70,7 +69,8 @@
             <div class="container centered-content">
                 <h2 class="custom-title text-bombril-white">Ainda tem dúvidas?</h2>
                 <p class="duvidas-content text-bombril-white">Confira as questões mais comuns sobre a promoção</p>
-                <a href="FAQ.html"> <img src="{% static 'assets/images/Button-FAQ.png'%}" alt="Fale Conosco" class="cta-button-image">
+                <a href="{% url 'FAQ' %}"> 
+                  <img src="{% static 'assets/images/Button-FAQ.png'%}" alt="Fale Conosco" class="cta-button-image">
                 </a>
             </div>
         </section>

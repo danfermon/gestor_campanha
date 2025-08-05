@@ -1,5 +1,7 @@
 {% extends 'base_2.html' %}
+
 {% load static %}
+
 {% load form_filters %}  {# Carrega o filtro add_class #}
 {% load widget_tweaks %}
 
@@ -13,12 +15,14 @@ Cadastro de Participante
 {% include 'includes/_header.html' %}
 
 <!-- segunda seção como participar  -->
-<section id="cadastrar" class="page-content embed-section section-up-interna">
-    <div class="container">
-      <h1 class="custom-title text-bombril-red text-center">CADASTRE SEU CUPOM</h1>
-        <div id="external-form-container">
-          
-          <div class="container mt-1 sm-5">
+<section id="cadastrar" class="draws-section">
+    <div class="centered-content" style="background-color: #fffdf5;">
+      <h2  style="color: #e90707ff;">
+        É NOVO POR AQUI? FAÇA O SEU CADASTRO!
+      </h2>
+    </div>
+      
+     <div class="container-fluid py-8" style="background-color: #fffdf5;">
 
       {% if form.errors %}
         <div class="alert alert-danger">
@@ -32,7 +36,7 @@ Cadastro de Participante
         </div>
       {% endif %}
       
-      <form method="POST" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">
+      <form method="POST" class="form-control">
         {% csrf_token %}
       
         <label for="nome">Nome:</label>
@@ -76,19 +80,17 @@ Cadastro de Participante
         <label for="senhaconf">Confirme a Senha:</label>
         {{ form.senhaconf|add_class:"form-control"|attr:"id:senhaconf" }}
       
-        <div class="mt-4 mb-4" style="width:60%; margin:5px;">
-          <button type="submit" class="btn btn-primary" style="width:40%; margin:5px;">
+          <button type="submit" class="btn btn-success" style="margin:5px;">
             Cadastrar
           </button>
-          <a href="{% url 'home_participantes' %}" class="btn btn-danger" style="width:40%; margin:5px;">
+          <a href="{% url 'home_participantes' %}" class="btn btn-warning" style="margin:5px;">
             Cancelar
           </a>
         </div>
       </form>
-</div>
+    </div>
 
-            </div>
-        </div>
+        
 </section>
 
 
