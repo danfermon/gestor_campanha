@@ -1,36 +1,53 @@
-{% extends "base.html" %}
+{% extends 'base_2.html' %}
 {% load static %}
 
-{% block title %}Login Participante{% endblock %}
+{% block title %}Início{% endblock %}
+
+<div id="header-placeholder"></div>
+
 
 {% block content %}
+{% include 'includes/_header.html' %}
 
-{% include 'includes/header_2.html' %}
-
-<div class="col-md-4 mb-2" style="margin:auto;width: 50%;padding:10px;">
-      <div class="card">
-          <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;font-weight:bold;"> Login:</h3>
+ <section id="home" class="hero-banner" style="background-image: url('images/Background\ -\ Amarelov2.jpg');">
     
-    <form method="POST">
-      {% csrf_token %}
+            <div class="container hero-container banner-desktop-wrapper">
+                <div class="hero-image-front">
+                    <img src="{% static 'assets/images/BANNER - Img 1col.png' %} " alt="Promoção de um brilho no seu futuro">
+                </div>
+            </div>
 
-      <label for="email" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">E-mail:</label>
-      <input type="email" name="email" class="form-control" required>
+  </section>
 
-      <label for="senha" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">Senha:</label>
-      <input type="password" name="senha" class="form-control" required>
+<div class="col-md-2 mb-2" style="width:100%;padding:10px;">
+  <div class="card" style="margin:3%;padding:3%; width:80%;">
+    
+    <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;font-weight:bold;"> Login:</h3>
+    
+    <div>
+      <form method="POST" class="form-control">
+        {% csrf_token %}
 
-      <div style="margin:2%;width: 50%;padding:10px;">
-        <button type="submit" class="btn btn-primary mt-3" style="width: 140px;">Entrar</button>
-        <a href="{% url 'home_participantes' %}" class="btn btn-warning mt-3" style="width: 140px;"> Voltar </a>
-      </div>
-      
-    </form>
+        <label for="email" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">E-mail:</label>
+        <input type="email" name="email" class="form-control" required>
+
+        <label for="senha" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">Senha:</label>
+        <input type="password" name="senha" class="form-control" required>
+
+        <div style="margin:2%;width: 80%;padding:10px;">
+          <button type="submit" class="btn btn-success mt-3" style="width: 100px;">Entrar</button>
+
+          <a href="{% url 'home_participantes' %}" class="btn btn-warning mt-3" style="width: 100px;"> Voltar </a>
+        </div>
+
+        
+        {% if erro %}
+          <div class="alert alert-danger">{{ erro }}</div>
+        {% endif %}
+      </form>
+    </div>
+
   </div>
-
-    {% if erro %}
-      <div class="alert alert-danger">{{ erro }}</div>
-    {% endif %}
 
 </div>
 {% endblock %}

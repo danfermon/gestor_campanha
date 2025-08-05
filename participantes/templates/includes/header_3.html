@@ -1,17 +1,30 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light" style=" background-image: linear-gradient(to right, #FEEA3B , #fde615ff);">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-danger" href="#">
-      <img src="{% static 'imgs_sistema/logo_bombril.png' %}" alt="Bombril" height="40">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<header class="main-header">
+        <div class="container">
+            <a href="{% url 'home_participantes' %}" class="logo">
+                <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}"alt="Logotipo Bombril">
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                   
+                </ul>
+                <a href="{% url 'painel_participante' %}" class="btn btn-primary" > VOLTAR </a>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </header>
+
+       <section id="home" class="hero-banner" style="background-image: url('images/Background\ -\ Amarelov2.jpg');">
     
-    <div class="collapse navbar-collapse" id="navbarMenu" >
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{% url 'painel_participante' %}">Voltar</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+            <div class="container hero-container banner-desktop-wrapper">
+                <div class="hero-image-front">
+                    <img src="{% static 'assets/images/BANNER - Img 1col.png' %} " alt="Promoção de um brilho no seu futuro">
+                </div>
+            </div>
+
+    </section>
