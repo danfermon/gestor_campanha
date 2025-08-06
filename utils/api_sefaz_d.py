@@ -31,7 +31,7 @@ def consulta_api_sefaz(chave: str) -> dict | None:
 
     # Endpoint para consulta de CF-e de São Paulo.
     # Pode ser tornado dinâmico no futuro para suportar outros estados.
-    url = 'https://api.infosimples.com/api/v2/consultas/sefaz/sp/cfe'
+    url = 'https://api.infosimples.com/consultas/docs/sefaz/sp/cfe'
     
     payload = {
         "chave": chave,

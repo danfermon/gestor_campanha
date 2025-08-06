@@ -4,141 +4,165 @@
 {% block title %}Cadastrar Cupom{% endblock %}
 
 {% block content %}
-{% include 'includes/header_3.html' %}
+  {% include 'includes/header_3.html' %}
 
-<div class="container" style="margin: 5%; padding: 5%;">
+<div class="container mt-4 mb-5">
   <h2 class="mb-3">Cadastro de Cupom</h2>
 
-  <form action="{% url 'cadastrar_cupom' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
+  <!-- Bloco para exibir mensagens de sucesso ou erro vindas da view -->
+  {% if msg_sucesso %}
+    <div class="alert alert-success" role="alert">{{ msg_sucesso }}</div>
+  {% endif %}
+  {% if msg_erro %}
+    <div class="alert alert-danger" role="alert">{{ msg_erro }}</div>
+  {% endif %}
+
+  <!-- Formulário 1: Envio de Imagem -->
+  <form action="{% url 'cadastrar_cupom' id_participante %}" method="POST" enctype="multipart/form-data" class="mb-4">
     {% csrf_token %}
     <div class="mb-3">
-      <label for="img_cupom" class="form-label">Envie a imagem do seu cupom</label>
-      <input type="file" class="form-control" name="img_cupom" id="img_cupom" accept="image/*" required>
+      <label for="img_cupom" class="form-label fw-bold">1. Envie a imagem do seu cupom</label>
+      <input type="file" class="form-control" name="img_cupom" id="img_cupom" accept="image/png, image/jpeg, image/jpg">
     </div>
-    <button type="submit" name="submit_imagem" value="1" class="btn btn-primary">Enviar imagem</button>
+    <!-- O atributo 'name' é essencial para a view identificar qual formulário foi enviado -->
+    <button type="submit" name="submit_imagem" class="btn btn-primary">Enviar Imagem</button>
   </form>
 
   <hr class="my-4">
 
-  <h4>Ou escaneie o QR Code com a câmera</h4>
-  <button id="btn-toggle-camera" class="btn btn-success mb-3" onclick="toggleCamera()">Ativar câmera</button>
-  <button id="switch-camera" class="btn btn-secondary mb-3 ms-2" onclick="trocarCamera()" style="display:none;">Trocar câmera</button>
-  <div id="reader" style="width: 300px; display: none;"></div>
-  <p id="qr-result" class="mt-2 text-success fw-bold"></p>
+  <!-- Seção 2: Leitura com a Câmera -->
+  <div class="mb-4">
+    <h4 class="form-label fw-bold">2. Ou escaneie o QR Code com a câmera</h4>
+    <button id="btn-toggle-camera" class="btn btn-success mb-3" onclick="toggleCamera()">Ativar Câmera</button>
+    <button id="switch-camera" class="btn btn-secondary mb-3 ms-2" onclick="trocarCamera()" style="display:none;">Trocar Câmera</button>
+    
+    <!-- O elemento 'reader' é onde o vídeo da câmera será renderizado -->
+    <div id="reader" style="width: 300px; border: 2px solid #eee; display: none;"></div>
+    <!-- Parágrafo para exibir o resultado do scan -->
+    <p id="qr-result" class="mt-2 fw-bold"></p>
+  </div>
 
   <hr class="my-4">
 
-  <h4>Ou envie o código do seu cupom</h4>
+  <!-- Formulário 3: Envio de Código Manual -->
   <form action="{% url 'cadastrar_cupom' id_participante %}" method="POST">
     {% csrf_token %}
     <div class="mb-3">
-      <input type="text" class="form-control" id="cod_cupom" placeholder="Informe o código do seu cupom" name="cod_cupom" required>
+        <label for="cod_cupom" class="form-label fw-bold">3. Ou envie o código do seu cupom</label>
+        <input type="text" class="form-control" id="cod_cupom" name="cod_cupom" placeholder="Informe os 44 dígitos do código do cupom" maxlength="44" minlength="44" pattern="\d{44}" title="O código deve conter 44 números.">
     </div>
-    <button type="submit" name="submit_codigo" value="1" class="btn btn-dark">Enviar Cupom</button>
+    <!-- O atributo 'name' também é essencial aqui -->
+    <button type="submit" name="submit_codigo" class="btn btn-dark">Enviar Código</button>
   </form>
-
-  {% if msg_sucesso %}
-    <div class="alert alert-success mt-3">{{ msg_sucesso }}</div>
-  {% endif %}
-  {% if msg_erro %}
-    <div class="alert alert-danger mt-3">{{ msg_erro }}</div>
-  {% endif %}
 </div>
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+<!-- Scripts para a funcionalidade do QR Code -->
+<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
 <script>
-const resultText = document.getElementById('qr-result');
-const readerDiv = document.getElementById('reader');
-const btnToggle = document.getElementById('btn-toggle-camera');
-const switchCameraBtn = document.getElementById('switch-camera');
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elementos do DOM
+    const resultText = document.getElementById('qr-result');
+    const readerDiv = document.getElementById('reader');
+    const btnToggle = document.getElementById('btn-toggle-camera');
+    const switchCameraBtn = document.getElementById('switch-camera');
 
-let html5QrCode;
-let cameraAtiva = false;
-let cameras = [];
-let currentCameraIndex = 0;
+    // Variáveis de estado
+    let html5QrCode;
+    let cameraAtiva = false;
+    let cameras = [];
+    let currentCameraIndex = 0;
 
-function onScanSuccess(decodedText, decodedResult) {
-  resultText.textContent = "QR Code detectado: " + decodedText;
+    // Função chamada quando um QR Code é lido com sucesso
+    function onScanSuccess(decodedText, decodedResult) {
+      resultText.textContent = "QR Code detectado. Validando, por favor aguarde...";
+      resultText.className = "mt-2 fw-bold text-info";
+      pararCamera();
 
-  fetch("{% url 'salvar_qrcode_ajax' id_participante %}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": "{{ csrf_token }}"
-    },
-    body: JSON.stringify({ dados_qr: decodedText })
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.status === 'ok') {
-      resultText.textContent += " ✅ (salvo com sucesso)";
-    } else {
-      resultText.textContent += " ❌ Erro: " + data.mensagem;
-    }
-  });
-
-  pararCamera();
-}
-
-function toggleCamera() {
-  if (!cameraAtiva) {
-    iniciarCamera();
-  } else {
-    pararCamera();
-  }
-}
-
-function iniciarCamera() {
-  readerDiv.style.display = "block";
-  html5QrCode = new Html5Qrcode("reader");
-
-  Html5Qrcode.getCameras().then(devices => {
-    if (devices && devices.length) {
-      cameras = devices;
-      const cameraId = cameras[currentCameraIndex].id;
-
-      html5QrCode.start(
-        cameraId,
-        { fps: 10, qrbox: 250 },
-        onScanSuccess
-      ).then(() => {
-        cameraAtiva = true;
-        btnToggle.textContent = "Parar câmera";
-        btnToggle.classList.remove("btn-success");
-        btnToggle.classList.add("btn-danger");
-        switchCameraBtn.style.display = (cameras.length > 1) ? "inline-block" : "none";
+      // Envia o código lido para o backend via AJAX
+      fetch("{% url 'salvar_qrcode_ajax' id_participante %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}" // Token de segurança do Django
+        },
+        body: JSON.stringify({ dados_qr: decodedText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          resultText.textContent = "✅ " + data.mensagem;
+          resultText.className = "mt-2 fw-bold text-success";
+        } else {
+          resultText.textContent = "❌ Erro: " + data.mensagem;
+          resultText.className = "mt-2 fw-bold text-danger";
+        }
+      })
+      .catch(err => {
+          resultText.textContent = "❌ Ocorreu um erro de comunicação com o servidor.";
+          resultText.className = "mt-2 fw-bold text-danger";
       });
     }
-  }).catch(err => {
-    resultText.textContent = "Erro ao acessar câmera: " + err;
-  });
-}
 
-function pararCamera() {
-  if (html5QrCode) {
-    html5QrCode.stop().then(() => {
-      try {
-        html5QrCode.clear();
-      } catch (e) {
-        console.warn("Erro ao limpar QRCode scanner:", e);
+    // Função para ligar/desligar a câmera
+    window.toggleCamera = function() {
+      if (!cameraAtiva) {
+        iniciarCamera();
+      } else {
+        pararCamera();
       }
-      readerDiv.style.display = "none";
-      cameraAtiva = false;
-      btnToggle.textContent = "Ativar câmera";
-      btnToggle.classList.remove("btn-danger");
-      btnToggle.classList.add("btn-success");
-      switchCameraBtn.style.display = "none";
-    }).catch(err => {
-      resultText.textContent = "Erro ao parar câmera: " + err;
-    });
-  }
-}
+    }
 
-function trocarCamera() {
-  if (!cameras.length) return;
-  pararCamera();
-  currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
-  setTimeout(() => iniciarCamera(), 500);
-}
+    // Inicia o scanner de QR Code
+    function iniciarCamera() {
+      readerDiv.style.display = "block";
+      html5QrCode = new Html5Qrcode("reader");
+
+      Html5Qrcode.getCameras().then(devices => {
+        if (devices && devices.length) {
+          cameras = devices;
+          const cameraId = cameras[currentCameraIndex].id;
+
+          html5QrCode.start(
+            cameraId,
+            { fps: 10, qrbox: { width: 250, height: 250 } },
+            onScanSuccess,
+            (errorMessage) => { /* Ignora erros de "não encontrou QR Code" */ }
+          ).then(() => {
+            cameraAtiva = true;
+            btnToggle.textContent = "Parar Câmera";
+            btnToggle.classList.replace("btn-success", "btn-danger");
+            switchCameraBtn.style.display = "inline-block";
+          });
+        }
+      }).catch(err => {
+        resultText.textContent = "Erro ao acessar a câmera. Verifique as permissões do navegador.";
+        resultText.className = "mt-2 fw-bold text-danger";
+      });
+    }
+
+    // Para o scanner de QR Code
+    function pararCamera() {
+      if (html5QrCode && cameraAtiva) {
+        html5QrCode.stop().then(() => {
+          cameraAtiva = false;
+          readerDiv.style.display = "none";
+          btnToggle.textContent = "Ativar Câmera";
+          btnToggle.classList.replace("btn-danger", "btn-success");
+          switchCameraBtn.style.display = "none";
+        }).catch(err => {
+          console.warn("Erro ao parar a câmera:", err);
+          cameraAtiva = false; // Força o estado para garantir consistência
+        });
+      }
+    }
+
+    // Troca entre as câmeras disponíveis (frontal/traseira)
+    window.trocarCamera = function() {
+      if (cameras.length < 2) return;
+      currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+      pararCamera();
+      setTimeout(() => iniciarCamera(), 250); // Delay para garantir que a câmera foi liberada
+    }
+  });
 </script>
 {% endblock %}

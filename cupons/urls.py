@@ -9,7 +9,7 @@ urlpatterns = [
     
     path('cupom/<int:id_participante>/', views.cadastrar_cupom, name='cadastrar_cupom'),
     path('salvar_qrcode/<int:id_participante>/', views.salvar_qrcode_ajax, name='salvar_qrcode_ajax'),
-    #path('cad_cupom_codigo/<int:id_participante>/', views.cad_cupom_codigo, name='cad_cupom_codigo'),
+    path('cadastrar_cupom/<int:id_participante>/', views.cadastrar_cupom, name='cadastrar_cupom'),
     #path('cadastrar_cupom_qrcode/<int:id_participante>/', views.cadastrar_cupom_qrcode, name='cadastrar_cupom_qrcode'),
     
     
