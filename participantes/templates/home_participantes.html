@@ -10,13 +10,13 @@
 
  
 <section id="home" class="hero-banner" style="background-image: url('{% static 'assets/images/background_amarelov2.jpg' %}');">
+    <div class="container hero-container banner-desktop-wrapper">
+        <div class="hero-image-front">
+            <img src="{% static 'assets/images/BANNER - Img 1col.png' %} " alt="Promoção de um brilho no seu futuro">
+        </div>
+    </div>
 
-    
-            <div class="container hero-container banner-desktop-wrapper">
-                <div class="hero-image-front">
-                    <img src="{% static 'assets/images/BANNER - Img 1col.png' %} " alt="Promoção de um brilho no seu futuro">
-                </div>
-            </div>
+    <img src="{% static 'assets/images/banner_mobile.png' %}" alt="Promoção Bombril - Versão Mobile" class="banner-mobile">
 
 </section>
 
@@ -76,7 +76,7 @@
     <div class="container centered-content">
         <h2 class="custom-title text-bombril-white">Ainda tem dúvidas?</h2>
         <p class="duvidas-content text-bombril-white">Confira as questões mais comuns sobre a promoção</p>
-        <a href="{% url 'FAQ' %}"> 
+        <a href="#FAQ"> 
           <img src="{% static 'assets/images/Button-FAQ.png'%}" alt="Fale Conosco" class="cta-button-image">
         </a>
     </div>
@@ -95,7 +95,7 @@
             <p>Mauris dictum magna eget magna auctor luctus. Maecenas rutrum placerat velit ut lacinia. Sed
                 tellus quam, egestas eu porttitor sit amet, pulvinar euismod orci. Maecenas eu maximus neque.
             </p>
-            <a href="{% url 'regulamento'%} ">
+            <a href="#regulamento">
                 <img src="{% static 'assets/images/Button - Confira o regulamento.png' %}" 
                     alt="Confira o Regulamento"
                     class="cta-button-image">
@@ -1537,6 +1537,28 @@
 
 <script src="{% static 'main.js' %}"></script>
 
-     
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger-menu');
+  const mobileNav = document.querySelector('.mobile-nav');
+  const header = document.querySelector('.header');
+
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('active');
+    header.classList.toggle('hide-header')
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      mobileNav.classList.remove('active');
+      header.classList.remove('hide-header');
+    }
+  });
+});
+
+
+</script>
+
+    
 
 {% endblock %}

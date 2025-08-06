@@ -1,0 +1,32 @@
+{% load static %}
+<header class="main-header">
+        <div class="container">
+            
+            <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}"alt="Logotipo Bombril">
+           
+            <nav class="main-nav">
+                <ul class="nav-links">
+                   
+                </ul>
+                <a href="{% url 'painel_participante' %}" > 
+                    <img src="{% static 'assets/images/seta2.png' %}"alt="Botão Voltar" style="max-height: 40px;">
+                    Voltar
+                </a>
+            </nav>
+            <button class="hamburger-menu" aria-label="Abrir Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+        <!-- Menu Mobile -->
+        <div class="mobile-nav" id="mobileMenu">
+            <ul>
+                <li><a href="{% url 'painel_participante' %}">Voltar</a></li>
+            </ul>
+        </div>
+
+        </div>
+
+</header>

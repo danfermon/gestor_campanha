@@ -3,7 +3,7 @@
     <div class="container">
 
         <a href="{% url 'home_participantes' %}" class="logo">
-            <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}"alt="Logotipo Bombril">
+            <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}" alt="Logotipo Bombril">
         </a>
 
         <nav class="main-nav">
@@ -13,16 +13,24 @@
                 <li><a href="#resultados">Resultados</a></li>
                 <li><a href="#FAQ">FAQ</a></li>
             </ul>
-            <a href="#login" class="btn btn-primary" > PARTICIPE</a>
+            <a href="#login" class="btn btn-primary">PARTICIPE</a>
         </nav>
 
-        <button class="hamburger-menu" aria-label="Abrir Menu">
+        <button class="hamburger-menu" aria-label="Abrir Menu" onclick="toggleMobileMenu()">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
+        <!-- Menu Mobile -->
+        <div class="mobile-nav" id="mobileMenu">
+            <ul>
+                <li><a href="#participe">Como participar</a></li>
+                <li><a href="#regulamento">Regulamento</a></li>
+                <li><a href="#resultados">Resultados</a></li>
+                <li><a href="#FAQ">FAQ</a></li>
+            </ul>
+            <a href="#login" class="btn btn-primary d-block mt-3">PARTICIPE</a>
+        </div>
     </div>
-
-
 </header>

@@ -1546,6 +1546,44 @@ img.cta-button-image {
   box-sizing: border-box;
 }
 
+/* Oculta o menu mobile por padrão */
+.mobile-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+    z-index: 1000;
+}
+
+/* Exibe o menu quando ativado */
+.mobile-nav.active {
+    display: block;
+}
+
+/* Oculta o menu principal em telas pequenas */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    .hamburger-menu {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .hamburger-menu span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #000;
+        margin: 5px 0;
+    }
+}
+
 
 
 

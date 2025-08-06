@@ -4,20 +4,11 @@
 {% block title %}Detalhes do Cupom{% endblock %}
 
 {% block content %}
-{% include 'includes/header_basico.html' %}
+{% include 'includes/header_3.html' %}
 
-<div class="container mt-4">
-  <h2 class="mb-4">Visualização do Cupom</h2>
 
+<div class="container" style="margin: 5%; padding: 5%;">
   <div class="row mb-4">
-    <div class="col-md-6">
-      <h5>Imagem do cupom enviado:</h5>
-      {% if cupom.imagem %}
-        <img src="{{ cupom.imagem.url }}" alt="Imagem do Cupom" class="img-fluid border rounded shadow">
-      {% else %}
-        <p class="text-muted">Nenhuma imagem enviada.</p>
-      {% endif %}
-    </div>
     <div class="col-md-6">
       <h5>Dados Do cupom:</h5>
       <ul class="list-group">
@@ -33,6 +24,8 @@
         <li class="list-group-item"><strong>Chave QR:</strong> {{ dados_cupom.chave_acesso|default:"-" }}</li>
 
       </ul>
+    </div>
+    <div class="col-md-6">
       <h5 class="mt-4">Produtos</h5>
       <ul class="list-group">
         {% for produto in dados_cupom.produtos %}
@@ -57,6 +50,5 @@
     </div>
     {% endif %}
 
-    <a href="{% url 'painel_participante' %}" class="btn btn-secondary">Voltar à lista</a>
 </div>
 {% endblock %}

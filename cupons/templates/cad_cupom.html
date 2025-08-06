@@ -6,11 +6,11 @@
 {% block content %}
   {% include 'includes/header_3.html' %}
 
-<div class="container mt-4">
+<div class="container" style="margin: 5%; padding: 5%;">
   <h2 class="mb-3">Cadastro de Cupom</h2>
 
   <!-- FORMULÁRIO DE ENVIO DE IMAGEM -->
-  <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
+  <form action="{% url 'cadastrar_cupom' id_participante %}" method="POST" enctype="multipart/form-data" id="form-cupom-img">
     {% csrf_token %}
     <div class="mb-3">
       <label for="img_cupom" class="form-label">Envie a imagem do seu cupom</label>
@@ -30,19 +30,12 @@
   <div id="reader" style="width: 300px; display: none;"></div>
   <p id="qr-result" class="mt-2 text-success fw-bold"></p>
 
-  {% if msg %}
-    <div class="alert alert-success mt-3">{{ msg }}</div>
-  {% endif %}
-
-  {% if qr_msg %}
-    <div class="alert alert-info mt-2">{{ qr_msg }}</div>
-  {% endif %}
-
+ 
   <hr class="my-4">
 
   <!-- ENVIAR CÓDIGO MANUALMENTE -->
   <h4>Ou envie o código do seu cupom</h4>
-  <form action="{% url 'cad_cupom_codigo' id_participante %}" method="POST">
+  <form action="{% url 'cadastrar_cupom' id_participante %}" method="POST">
     {% csrf_token %}
     <div class="mb-3">
       <input type="text" class="form-control" id="cod_cupom" placeholder="Informe o código do seu cupom" name="cod_cupom">
@@ -50,6 +43,13 @@
     <button type="submit" class="btn btn-dark">Enviar Cupom</button>
   </form>
 </div>
+
+  {% if msg %}
+    <div class="alert alert-success mt-3">{{ msg }}</div>
+  {% endif %}
+
+  {% if  msg_sucesso %}
+  {% endif %}
 
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/html5-qrcode"></script>
