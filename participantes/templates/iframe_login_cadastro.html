@@ -1,0 +1,189 @@
+{% load static %}
+{% load form_filters %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login e Cadastro - Promoção Bombril</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- JQuery e Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- IMask -->
+  <script src="https://unpkg.com/imask"></script>
+
+  <!-- Estilo customizado -->
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e3e9f0, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.93);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: #263A7C;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      color: #263A7C;
+      font-weight: 500;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .alert ul {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .form-card {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Cadastro -->
+      <div class="col-md-6 col-sm-12">
+        <div class="form-card">
+          <h3>Cadastrar</h3>
+
+          {% if form.errors %}
+            <div class="alert alert-danger">
+              {{ form.errors }}
+            </div>
+          {% endif %}
+
+          <form method="post" action="{% url 'cadastrar_participante' %}">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+              <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {% render_field field class="form-control" %}
+                {% for error in field.errors %}
+                  <span class="text-danger small">{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endfor %}
+
+            <div class="form-group">
+              <label for="nome" class="form-label">Nome:</label>
+              <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="dt_nasc" class="form-label">Data de Nascimento:</label>
+              <input type="text" class="form-control" id="dt_nasc" name="dt_nasc" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="cpf" class="form-label">CPF:</label>
+              <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="celular" class="form-label">Celular:</label>
+              <input type="text" class="form-control" id="celular" name="celular" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+             <div class="mb-3">
+              <label for="cep" class="form-label">CEP:</label>
+              <input type="cep" class="form-control" id="cep" name="cep" required onblur="pesquisacep(this.value);">
+            </div>
+      
+            <label for="uf">Estado:</label>
+            <select name="uf" id="uf" class="form-control">
+              <option value="">Selecione um estado</option>
+            </select>
+
+            <div class="mb-3">
+              <label for="cidade" class="form-label">Cidade:</label>
+              <input type="text" class="form-control" id="cidade" name="cidade" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="bairro" class="form-label">Bairro:</label>
+              <input type="text" class="form-control" id="bairro" name="bairro" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="rua" class="form-label">Rua:</label>
+              <input type="text" class="form-control" id="rua" name="rua" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="num" class="form-label">Número:</label>
+              <input type="number" class="form-control" id="num" name="num" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="senha" class="form-label">Senha:</label>
+              <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+          
+            <div class="mb-3">
+              <label for="senha2" class="form-label">Confirme a Senha:</label>
+              <input type="password" class="form-control" id="senha2" name="senha2" required>
+            </div>  
+            
+            <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" name="cadastro">Cadastrar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+         <div class="regulation-col-image">
+           <img src="{% static 'assets/images/ROBOM-BRIL REGULAMENTO.png' %}" 
+           alt="Mascote Robom-Bril apontando para o regulamento"
+            class="mascote-regulamento">
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/forms.js' %}"></script>
+  <script src="{% static 'js/cep-autofill.js' %}"></script>
+  <script src="{% static 'js/validar_cpf.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{% load static %}
+{% load form_filters %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login e Cadastro - Promoção Bombril</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- JQuery e Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- IMask -->
+  <script src="https://unpkg.com/imask"></script>
+
+  <!-- Estilo customizado -->
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e3e9f0, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.93);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: #263A7C;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      color: #263A7C;
+      font-weight: 500;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .alert ul {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .form-card {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Login -->
+      <div class="col-md-6 col-sm-12">
+        <div class="form-card">
+          <h3>Login</h3>
+          <form method="POST" action="{% url 'login_participante' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="email-login">E-mail:</label>
+              <input type="email" name="email" id="email-login" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="senha-login">Senha:</label>
+              <input type="password" name="senha" id="senha-login" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" name="login">Entrar</button>
+
+            {% if erro %}
+              <div class="alert alert-danger" style="margin-top: 10px;">{{ erro }}</div>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+
+     
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/forms.js' %}"></script>
+  <script src="{% static 'js/cep-autofill.js' %}"></script>
+  <script src="{% static 'js/validar_cpf.js' %}"></script>
+</body>
+</html>

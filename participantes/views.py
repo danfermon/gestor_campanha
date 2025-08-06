@@ -1,3 +1,4 @@
+import datetime
 import json
 from django.http import HttpResponse
 from django.template import loader
@@ -9,8 +10,11 @@ from .forms import ParticipanteForm
 from cupons.models import Cupom
 from django.shortcuts import render, get_object_or_404, redirect
 
+import re
+
 from utils.funcoes_cupom import parse_dados_cupom
 
+from datetime import datetime
 
 def login_participante(request):
     if request.method == 'POST':
@@ -28,9 +32,9 @@ def login_participante(request):
         except Participantes.DoesNotExist:
             erro = "Participante não encontrado."
 
-        return render(request, 'login_participante.html', {'erro': erro})
+        return render(request, 'home_participantes.html', {'erro': erro})
 
-    return render(request, 'login_participante.html')
+    return render(request, 'home_participantes.html')
 
 
 # -----------------------------------------------------------
@@ -41,7 +45,7 @@ def participante(request):
 
 # ------------------------------------------
 
-def cadastrar_participante(request):
+'''def cadastrar_participante(request):
     if request.method == 'POST':
         form = ParticipanteForm(request.POST)
         if form.is_valid():
@@ -50,7 +54,46 @@ def cadastrar_participante(request):
     else:
         form = ParticipanteForm()
 
-    return render(request, 'cadastrar_participante.html', {'form': form})
+    return render(request, 'cadastrar_participante.html', {'form': form})'''
+
+def cadastrar_participante(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        dt_nasc = request.POST.get('dt_nasc')
+        cpf = re.sub(r'\D', '', request.POST.get('cpf', ''))  # remove pontuação
+        celular = re.sub(r'\D', '', request.POST.get('celular', ''))
+        email = request.POST.get('email')
+        uf = request.POST.get('uf')
+        cidade = request.POST.get('cidade')
+        cep = re.sub(r'\D', '', request.POST.get('cep', ''))
+        rua = request.POST.get('rua')
+        bairro = request.POST.get('bairro')
+        num = request.POST.get('num')
+        senha = request.POST.get('senha')
+
+        # Criptografa a senha
+        senha_hash = make_password(senha)
+
+        # Cria e salva o participante
+        participante = Participantes(
+            nome=nome,
+            dt_nasc= datetime.strptime(dt_nasc, '%d/%m/%Y').date(),
+            cpf=cpf,
+            celular= '55' + celular,
+            email=email,
+            uf=uf,
+            cidade=cidade,
+            cep=cep,
+            rua=rua,
+            bairro=bairro,
+            num=num,
+            senha=senha_hash
+        )
+        participante.save()
+        return redirect('login_participante')
+
+    return render(request, 'cadastrar_participante.html')
+#-------------------------------------------------------------------------------------
 
 
 def painel_participante(request):
@@ -138,6 +181,15 @@ def editar_particip(request, id):
     }
 
     return render(request, 'painel_participante.html', context)
+
+
+def login_e_cadastro(request):
+    # lógica da view
+    return render(request, 'iframe_login_cadastro.html')
+
+def iframe_login(request):
+    # lógica da view
+    return render(request, 'iframe_login.html')
 
 
 #--------- PARTE DE EXTRAÇÃO DE VALIDAÇÃO DOS DADOS DO CUPOM --------------------------------

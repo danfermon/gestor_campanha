@@ -8,6 +8,9 @@ urlpatterns = [
     path('FAQ/', views.FAQ, name='FAQ'),
     path('resultados/', views.resultados, name='resultados'),
     path('como_participar/', views.como_participar, name='como_participar'),
+    path('login-e-cadastro/', views.login_e_cadastro, name='login_e_cadastro'),
+
+    path('iframe_login/', views.iframe_login, name='iframe_login'),
 
     
     path('editar_particip/<int:id>', views.editar_particip, name='editar_particip'),

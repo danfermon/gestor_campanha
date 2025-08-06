@@ -1,208 +1,137 @@
 import os
 import uuid
 import json
+from venv import logger
 import numpy as np
+import cv2
 
 from django.shortcuts import render, get_object_or_404
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required # Recomendado
 
-from cupons.models import Cupom
+from .models import Cupom
 from participantes.models import Participantes
-from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom, parse_dados_cupom
+from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom
 from utils.api_sefaz import consulta_api_sefaz
-
-import cv2
-
+from utils.link_sefaz import gerar_link_sefaz # Movido para um local mais apropriado
 
 def guardar_cupom(arquivo):
     """Salva a imagem do cupom no storage padrão e retorna o caminho salvo."""
     ext = os.path.splitext(arquivo.name)[1]
-    nome_arquivo = f"{uuid.uuid4()}{ext}"
+    nome_arquivo = f"cupom_{uuid.uuid4().hex}{ext}"
     caminho_arquivo = os.path.join('cupons', nome_arquivo)
     return default_storage.save(caminho_arquivo, ContentFile(arquivo.read()))
 
-
-def gerar_link_sefaz(chave):
+# @login_required # É uma boa prática proteger views que modificam dados
+def cadastrar_cupom(request, id_participante):
     """
-    Gera o link de consulta da chave na SEFAZ-SP.
-    Pode ser adaptado para outro estado se necessário.
+    View unificada para cadastro de cupom via upload de imagem ou código digitado.
     """
-    return f"https://www.sefaz.sp.gov.br/NFCeConsultaPublica/consultarNFCe?chNFe={chave}"
-
-
-
-
-def cadastrar_cupom_qrcode(request, id_participante):
-    msg = ''
-    qr_msg = ''
+    contexto = {'id_participante': id_participante}
+    participante = get_object_or_404(Participantes, id=id_participante)
 
     if request.method == 'POST':
-        arquivo = request.FILES.get('img_cupom')
+        chave_acesso = None
+        imagem_path = None
+        dados_ocr = ""
 
-    if not arquivo:
-        msg = 'Selecione um arquivo no formato de imagem.'
-    else:
-        # guardar a imagem
-        path = guardar_cupom(arquivo)
+        # Rota 1: Formulário de envio de imagem
+        if 'submit_imagem' in request.POST:
+            arquivo = request.FILES.get('img_cupom')
+            if not arquivo:
+                contexto['msg_erro'] = 'Nenhum arquivo de imagem foi selecionado.'
+            else:
+                try:
+                    imagem_path = guardar_cupom(arquivo)
+                    imagem_local_path = default_storage.path(imagem_path)
 
-         # Abre a imagem como array para OpenCV
-        with default_storage.open(path, 'rb') as f:
-            file_bytes = np.asarray(bytearray(f.read()), dtype=np.uint8)
-            imagem_cv = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+                    # Processamento de Imagem (OCR e QR Code)
+                    imagem_cv = cv2.imread(imagem_local_path)
+                    if imagem_cv is None:
+                        raise ValueError("Não foi possível carregar a imagem para processamento.")
+                    
+                    gray = cv2.cvtColor(imagem_cv, cv2.COLOR_BGR2GRAY)
+                    detector = cv2.QRCodeDetector()
+                    dados_qr, _, _ = detector.detectAndDecode(gray)
+                    
+                    dados_ocr = extrair_texto_ocr(imagem_local_path)
+                    chave_acesso = extrair_numero_cupom(dados_qr or dados_ocr)
 
-        if imagem_cv is None:
-            raise ValueError("Imagem não pôde ser carregada.")
+                except Exception as e:
+                    contexto['msg_erro'] = f'Erro ao processar a imagem: {e}'
         
-        # Detecta QR Code na imagem (se existir)
-        gray = cv2.cvtColor(imagem_cv, cv2.COLOR_BGR2GRAY)
-        detector = cv2.QRCodeDetector()
-        dados_qr, _, _ = detector.detectAndDecode(gray)
-        # Extrai texto via OCR (função personalizada)
-        imagem_local_path = default_storage.path(path)
-        dados_ocr = extrair_texto_ocr(imagem_local_path)
-        extrair_numero_cupom(dados_ocr)
-        print(extrair_numero_cupom)
+        # Rota 2: Formulário de envio de código
+        elif 'submit_codigo' in request.POST:
+            chave_acesso = request.POST.get('cod_cupom')
 
-        msg = 'Cupom enviado com sucesso!'
-        qr_msg = 'Cupom inserido via Código Fiscal'
-        id_participante = id_participante
-        return render(request, 'cad_cupom.html', {
-        'msg': msg,
-        'qr_msg': qr_msg,
-        'id_participante': id_participante,})
+        # Processamento da Chave de Acesso (comum a ambas as rotas)
+        if chave_acesso:
+            if len(chave_acesso) != 44:
+                contexto['msg_erro'] = 'O código do cupom extraído ou digitado é inválido.'
+            else:
+                dados_sefaz = consulta_api_sefaz(chave_acesso)
+                if dados_sefaz:
+                    Cupom.objects.create(
+                        participante=participante,
+                        imagem_cupom=imagem_path,
+                        ocr_text=dados_ocr.strip(),
+                        dados_json=dados_sefaz,
+                        tipo_envio='Imagem' if imagem_path else 'Sistema',
+                        status='Aprovado', # Ou 'Pendente' se houver moderação
+                        numero_documento=chave_acesso,
+                        link_consulta=gerar_link_sefaz(chave_acesso)
+                    )
+                    contexto['msg_sucesso'] = 'Cupom cadastrado com sucesso!'
+                else:
+                    contexto['msg_erro'] = 'Não foi possível validar o cupom. Verifique os dados ou tente novamente.'
+        elif 'submit_imagem' in request.POST and not contexto.get('msg_erro'):
+             contexto['msg_erro'] = 'Não foi possível encontrar um código de cupom na imagem enviada.'
 
-
-
-## CADASTRAR CUPOM PELO CÓDIGO
-def cad_cupom_codigo(request, id_participante):
-    if request.method == 'POST':
-        # verifica se o post foi por formulário
-        cod_cupom = request.POST.get('cod_cupom')
-
-        print(cod_cupom)
-
-        participante = get_object_or_404(Participantes, id=id_participante)
-        # fazer a consulta no sefaz
-        retorno_sefaz = json.dumps(consulta_api_sefaz(cod_cupom))
-        # Cria cupom no banco
-        Cupom.objects.create(
-            participante=participante,
-            dados_cupom=retorno_sefaz,
-            tipo_envio='Sistema',
-            status='Pendente',
-            numero_documento=cod_cupom,
-            dados_json= retorno_sefaz
-        )
-        
-        msg = 'Cupom enviado com sucesso!'
-        qr_msg = 'Cupom inserido via Código Fiscal'
-        id_participante = id_participante
-        return render(request, 'cad_cupom.html', {
-        'msg': msg,
-        'qr_msg': qr_msg,
-        'id_participante': id_participante,})
-       
-
-# cadastro de cupom por qrcode e imagem
-def cad_cupom(request, id_participante):
-    """View para cadastro do cupom via upload de imagem e processamento OCR + QR Code."""
-    """ E também via formulário com codigo de cupom fiscal"""
-    msg = ''
-    qr_msg = ''
-
-    if request.method == 'POST':
-        arquivo = request.FILES.get('img_cupom')
-
-        if not arquivo:
-            msg = 'Selecione um arquivo no formato de imagem.'
-        else:
-            try:
-                # Salva a imagem no storage configurado
-                path = guardar_cupom(arquivo)
-                # Abre a imagem como array para OpenCV
-                with default_storage.open(path, 'rb') as f:
-                    file_bytes = np.asarray(bytearray(f.read()), dtype=np.uint8)
-                    imagem_cv = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-                if imagem_cv is None:
-                    raise ValueError("Imagem não pôde ser carregada.")
-                # Detecta QR Code na imagem (se existir)
-                gray = cv2.cvtColor(imagem_cv, cv2.COLOR_BGR2GRAY)
-                detector = cv2.QRCodeDetector()
-                dados_qr, _, _ = detector.detectAndDecode(gray)
-                # Extrai texto via OCR (função personalizada)
-                imagem_local_path = default_storage.path(path)
-                dados_ocr = extrair_texto_ocr(imagem_local_path)
-                # Tenta extrair a chave de acesso (44 dígitos) do QR Code ou OCR
-                chave_acesso = extrair_numero_cupom(dados_qr or dados_ocr)
-                link_sefaz = gerar_link_sefaz(chave_acesso) if chave_acesso else ''
-                print('Chave: :' + chave_acesso + ' Link sefaz: ' + link_sefaz)
-                # fazer a consulta no sefaz
-                retorno_sefaz = consulta_api_sefaz(chave_acesso)
-                # Busca participante no banco
-                participante = get_object_or_404(Participantes, id=id_participante)
-                # Cria cupom no banco
-                Cupom.objects.create(
-                    participante=participante,
-                    imagem_cupom=path,
-                    ocr_text=dados_ocr.strip(),
-                    dados_cupom=ocr_text,
-                    tipo_envio='Sistema',
-                    status='Pendente',
-                    numero_documento=chave_acesso,
-                    link_consulta=link_sefaz,
-                    dados_json=retorno_sefaz
-                )
-                qr_msg = f"QR Code detectado: {dados_qr}" if dados_qr else "Nenhum QR Code detectado."
-                msg = 'Cupom enviado com sucesso!'
-            except Participantes.DoesNotExist:
-                msg = 'Participante não encontrado.'
-            except Exception as e:
-                print(f"[ERRO] {e}")
-                msg = 'Erro ao processar o cupom.'
-
-    return render(request, 'cad_cupom.html', {
-        'msg': msg,
-        'qr_msg': qr_msg,
-        'id_participante': id_participante,
-    })
+    return render(request, 'cad_cupom.html', contexto)
 
 
 @csrf_exempt
+# @login_required
 def salvar_qrcode_ajax(request, id_participante):
-    """Recebe dados QR Code via AJAX (JSON) e cria cupom vinculado ao participante."""
-    if request.method == 'POST':
-        try:
-            body = json.loads(request.body)
-            dados_qr = body.get('dados_qr')
+    """Recebe dados do QR Code lido pela câmera via AJAX e tenta registrar o cupom."""
+    if request.method != 'POST':
+        return JsonResponse({'status': 'erro', 'mensagem': 'Método inválido.'}, status=405)
 
-            if not dados_qr:
-                return JsonResponse({'status': 'erro', 'mensagem': 'QR Code vazio.'})
+    try:
+        body = json.loads(request.body)
+        dados_qr = body.get('dados_qr')
+        
+        if not dados_qr:
+            return JsonResponse({'status': 'erro', 'mensagem': 'Nenhum dado de QR Code recebido.'}, status=400)
 
-            participante = get_object_or_404(Participantes, id=id_participante)
+        chave_acesso = extrair_numero_cupom(dados_qr)
+        if not chave_acesso or len(chave_acesso) != 44:
+            return JsonResponse({'status': 'erro', 'mensagem': 'Não foi possível extrair uma chave válida do QR Code.'}, status=400)
 
+        participante = get_object_or_404(Participantes, id=id_participante)
+        dados_sefaz = consulta_api_sefaz(chave_acesso)
+
+        if dados_sefaz:
             Cupom.objects.create(
                 participante=participante,
-                imagem_cupom=None,
-                dados_cupom=dados_qr,
+                dados_json=dados_sefaz,
                 tipo_envio='QR-Câmera',
-                status='Pendente',
+                status='Aprovado',
+                numero_documento=chave_acesso,
+                link_consulta=gerar_link_sefaz(chave_acesso)
             )
+            return JsonResponse({'status': 'ok', 'mensagem': 'Cupom validado e salvo com sucesso!'})
+        else:
+            return JsonResponse({'status': 'erro', 'mensagem': 'Cupom inválido ou não encontrado na Sefaz.'}, status=400)
 
-            return JsonResponse({'status': 'ok', 'mensagem': 'QR Code salvo com sucesso!'})
-
-        except Participantes.DoesNotExist:
-            return JsonResponse({'status': 'erro', 'mensagem': 'Participante não encontrado.'})
-        except Exception as e:
-            return JsonResponse({'status': 'erro', 'mensagem': str(e)})
-
-    return JsonResponse({'status': 'erro', 'mensagem': 'Método inválido'})
-
-
-
-
-
-def cad_produtos(produto):
-    ...
+    except json.JSONDecodeError:
+        return JsonResponse({'status': 'erro', 'mensagem': 'Requisição JSON malformada.'}, status=400)
+    except Participantes.DoesNotExist:
+        return JsonResponse({'status': 'erro', 'mensagem': 'Participante não encontrado.'}, status=404)
+    except Exception as e:
+        # Logar o erro real no servidor é importante
+        logger.error(f"Erro inesperado em salvar_qrcode_ajax: {e}")
+        return JsonResponse({'status': 'erro', 'mensagem': 'Ocorreu um erro interno.'}, status=500)

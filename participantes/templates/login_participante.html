@@ -1,53 +1,71 @@
-{% extends 'base_2.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Promoção Bombril</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block title %}Início{% endblock %}
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<div id="header-placeholder"></div>
+  <style>
+    body {
+      background-color: #fffdf5;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
+    .login-card {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
 
-{% block content %}
-{% include 'includes/_header.html' %}
+    .login-card h3 {
+      color: #263A7C;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
- <section id="home" class="hero-banner" style="background-image: url('images/Background\ -\ Amarelov2.jpg');">
-    
-            <div class="container hero-container banner-desktop-wrapper">
-                <div class="hero-image-front">
-                    <img src="{% static 'assets/images/BANNER - Img 1col.png' %} " alt="Promoção de um brilho no seu futuro">
-                </div>
-            </div>
+    label {
+      color: #263A7C;
+      font-size: 16px;
+    }
 
-  </section>
+    .btn-success {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
 
-<div class="col-md-2 mb-2" style="width:100%;padding:10px;">
-  <div class="card" style="margin:3%;padding:3%; width:80%;">
-    
-    <h3 style="color: #263A7C; font-size:22px; font-family: Segoe UI; text-align:left;font-weight:bold;"> Login:</h3>
-    
-    <div>
-      <form method="POST" class="form-control">
-        {% csrf_token %}
+  <div class="login-card">
+    <h3>Login:</h3>
 
-        <label for="email" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">E-mail:</label>
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
         <input type="email" name="email" class="form-control" required>
+      </div>
 
-        <label for="senha" style="color: #263A7C; font-size:16px; font-family: Segoe UI;">Senha:</label>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha:</label>
         <input type="password" name="senha" class="form-control" required>
+      </div>
 
-        <div style="margin:2%;width: 80%;padding:10px;">
-          <button type="submit" class="btn btn-success mt-3" style="width: 100px;">Entrar</button>
+      <button type="submit" class="btn btn-success mt-2">Entrar</button>
 
-          <a href="{% url 'home_participantes' %}" class="btn btn-warning mt-3" style="width: 100px;"> Voltar </a>
-        </div>
-
-        
-        {% if erro %}
-          <div class="alert alert-danger">{{ erro }}</div>
-        {% endif %}
-      </form>
-    </div>
-
+      {% if erro %}
+        <div class="alert alert-danger mt-3">{{ erro }}</div>
+      {% endif %}
+    </form>
   </div>
 
-</div>
-{% endblock %}
+</body>
+</html>

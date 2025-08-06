@@ -1,24 +1,28 @@
 {% load static %}
 <header class="main-header">
-        <div class="container">
-            <a href="{% url 'home_participantes' %}" class="logo">
-                <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}"alt="Logotipo Bombril">
-            </a>
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="{% url 'como_participar' %}">Como participar</a></li>
-                    <li><a href="{% url 'regulamento' %}">Regulamento</a></li>
-                    <li><a href="{% url 'resultados' %}">Resultados</a></li>
-                    <li><a href="{% url 'FAQ' %}">FAQ</a></li>
-                    <li><a href="{% url 'login_participante' %}">Login</a></li>
-                </ul>
-                <a href="{% url 'cadastrar_participante' %}" class="btn btn-primary" > PARTICIPE</a>
-            </nav>
-            <button class="hamburger-menu" aria-label="Abrir Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+    <div class="container">
 
-    </header>
+        <a href="{% url 'home_participantes' %}" class="logo">
+            <img src="{% static 'assets/images/LOGO_BOMBRIL.png' %}"alt="Logotipo Bombril">
+        </a>
+
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="#participe">Como participar</a></li>
+                <li><a href="#regulamento">Regulamento</a></li>
+                <li><a href="#resultados">Resultados</a></li>
+                <li><a href="#FAQ">FAQ</a></li>
+            </ul>
+            <a href="#login" class="btn btn-primary" > PARTICIPE</a>
+        </nav>
+
+        <button class="hamburger-menu" aria-label="Abrir Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+
+
+</header>

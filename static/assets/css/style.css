@@ -1475,3 +1475,77 @@ img.cta-button-image {
     }
 }
 
+
+/** Para a parte de login **/
+
+.form-card {
+      background: rgba(255, 255, 255, 0.93);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+}
+
+
+.form-group {
+      margin-bottom: 15px;
+    }
+
+.alert{
+      margin-bottom: 0;
+}
+
+.h3_login {
+    color: #263A7C;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+      margin-bottom: 15px;
+    }
+
+.alert {
+      margin-bottom: 0;
+    }
+
+.label_login {
+      color: #263A7C;
+      font-weight: 500;
+    }
+
+#btn_login {
+      width: 100%;
+      background-color: #263A7C;
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+      font: inherit;
+      border-radius: 0.25%;
+      width: 100%;
+      
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      
+    }
+#btn_login:hover {
+  background-color: #081e68;
+}
+
+.text_login {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+
+

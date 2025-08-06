@@ -1,10 +1,10 @@
-{% extends "base_2.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Painel do Participante{% endblock %}
 
 {% block content %}
-  {% include 'includes/header_basico.html' %}
+  {% include 'includes/_header.html' %}
   
   <div style="font-family: Segoe UI; color: #263A7C; text-align:center;font-weight:bold;font-size:40px">
     <h1>Painel do participante</h1>
@@ -72,7 +72,7 @@
             </p>
 
           <p style="margin:4px">
-            <a href="{% url 'cad_cupom' participante.id %}" class="btn btn-danger" style="width:100%">
+            <a href="{% url 'cadastrar_cupom' participante.id %}" class="btn btn-danger" style="width:100%">
               Cadastrar Cupom
             </a>
           </p>

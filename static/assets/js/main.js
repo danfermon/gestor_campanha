@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- 1. CARREGAMENTO DINÂMICO DO HEADER ---
     // Esta função carrega o _header.html e o insere nas páginas.
     // Os scripts do menu e do scroll SÓ rodam DEPOIS que o header é carregado.
-    const loadHeader = () => {
+    /*const loadHeader = () => {
         const headerPlaceholder = document.getElementById("header-placeholder");
         // Roda apenas se o placeholder do header existir na página
         if (headerPlaceholder) {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error('Erro ao carregar o header:', error);
                 });
         }
-    };
+    };comentei aqui pois não estava funcionando direiro - Danatielly - 05-08-2025 */
 
     // --- 2. FUNCIONALIDADE DO ACORDEÃO (Para Sorteios e FAQ) ---
     // Este código funciona de forma independente do header.
@@ -93,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // --- CHAMADA INICIAL PARA CARREGAR O HEADER ---
-    loadHeader();
+   // loadHeader();
 
 });
-
