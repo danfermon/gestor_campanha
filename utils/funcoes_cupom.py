@@ -52,6 +52,22 @@ def parse_dados_cupom(texto):
 
     return dados
 
+def extrai_codigo_qrcode(texto):
+    #pegar o texto extraido pela camera e separa a parte do codigo do cupom - danny - 07-08-2025
+
+    # copiar do 0 até a pos 77 #chave: CFe35250845495694001942590013611591810634041386|20250804173321|68.17|
+    pos = texto.find("|")
+
+    texto_qr_code = texto[0:pos]
+    
+    codigo = texto_qr_code.replace("CFe", "")
+    codigo = codigo.replace(" ", "")
+
+    print('pos ' + str(pos))
+    print('texto_qr_code' + texto_qr_code)
+    print('codigo: ' + codigo)
+
+    return codigo
 
 
 def extrair_numero_cupom(texto):

@@ -15,11 +15,13 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "34.95.220.242",
+    "dd4f190ef753.ngrok-free.app"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://34.95.220.242",
     "https://34.95.220.242",
+    "https://dd4f190ef753.ngrok-free.app"
 ]
 
 DOMAIN_NAME = os.getenv("DOMAIN_NAME")

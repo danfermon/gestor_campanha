@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required # Recomendado
 
 from .models import Cupom
 from participantes.models import Participantes
-from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom
+from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom, extrai_codigo_qrcode
 from utils.api_sefaz import consulta_api_sefaz
 from utils.link_sefaz import gerar_link_sefaz # Movido para um local mais apropriado
 
@@ -107,7 +107,8 @@ def salvar_qrcode_ajax(request, id_participante):
         if not dados_qr:
             return JsonResponse({'status': 'erro', 'mensagem': 'Nenhum dado de QR Code recebido.'}, status=400)
 
-        chave_acesso = extrair_numero_cupom(dados_qr)
+        chave_acesso =  extrai_codigo_qrcode(dados_qr)
+        print('chave: ' +  chave_acesso)
         if not chave_acesso or len(chave_acesso) != 44:
             return JsonResponse({'status': 'erro', 'mensagem': 'Não foi possível extrair uma chave válida do QR Code.'}, status=400)
 
