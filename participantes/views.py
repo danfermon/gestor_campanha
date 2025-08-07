@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 from django.http import HttpResponse
 from django.template import loader
 from .models import Participantes
@@ -196,19 +197,20 @@ def iframe_login(request):
 
 def area_cupom(request, id):
     cupom = get_object_or_404(Cupom, id=id)
-    dados_ocr = parse_dados_cupom(cupom.dados_cupom or "")
 
-    dados_json = json.loads(cupom.dados_json or '{}')
-
-    # Acessa os dados do cupom que estão dentro da chave "data"
-    dados = dados_json.get("data", [{}])[0]  # se "data" não existir, evita erro
+    # pega o primeiro cupom da lista de dados retornados pela API
+    dados_lista = cupom.dados_json if isinstance(cupom.dados_json, list) else []
+    dados = dados_lista[0] if dados_lista else {}
 
     context = {
         'cupom': cupom,
-        'dados_ocr': dados_ocr,
         'dados_cupom': dados
     }
     return render(request, 'area_cupom.html', context)
+
+
+    
+
 
 
 
