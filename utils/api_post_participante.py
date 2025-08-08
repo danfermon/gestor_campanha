@@ -1,7 +1,7 @@
 import requests
 
 url = "http://127.0.0.1:8000/api/participantes/"
-token = "58f9bd5cb1206768314996da54729462720bafa6"
+token = "XXXXXXXXXXXXXX"
 
 headers = {
     "Authorization": f"Token {token}",
