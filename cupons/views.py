@@ -15,8 +15,8 @@ from django.contrib.auth.decorators import login_required # Recomendado
 from .models import Cupom
 from participantes.models import Participantes
 from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom, extrai_codigo_qrcode
-from utils.api_sefaz import consulta_api_sefaz
-from utils.link_sefaz import gerar_link_sefaz # Movido para um local mais apropriado
+from utils.api_sefaz import consulta_api_sefaz, gerar_link_sefaz
+
 
 def guardar_cupom(arquivo):
     """Salva a imagem do cupom no storage padrão e retorna o caminho salvo."""

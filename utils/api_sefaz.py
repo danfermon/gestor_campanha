@@ -79,7 +79,7 @@ def consulta_api_sefaz(chave: str) -> dict | None:
     args = {
             "nfce": chave,
             "token": api_key,
-            "timeout": 300
+            "timeout": 60
         }
 
     try:
