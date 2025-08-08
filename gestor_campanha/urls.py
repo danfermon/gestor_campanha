@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
+
 # Import do ViewSet para o router da API
 from participantes.api_views import ParticipantesViewSet
 
@@ -16,10 +17,12 @@ router.register(r'participantes', ParticipantesViewSet)
 # --- Padrões de URL do Projeto ---
 urlpatterns = [
     # Includes para cada app. Cada app gerencia suas próprias URLs.
+
     path('usuarios/', include('usuarios.urls')),
     path('participantes/', include('participantes.urls')), # Esta linha já inclui nossa nova URL da API
     path('cupons/', include('cupons.urls')),
     path('skus_validos/', include('skus_validos.urls')),
+    path('', include('promocaobombril.urls')),
 
     # --- URLs Globais da API ---
     # Endpoint para obter o token de autenticação
@@ -34,6 +37,7 @@ urlpatterns = [
 
     # URL do painel de administração do Django
     path('admin/', admin.site.urls),
+   
 ]
 
 # Configuração para servir arquivos de mídia em ambiente de desenvolvimento

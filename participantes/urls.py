@@ -1,6 +1,6 @@
 # participantes/urls.py
 
-from django.urls import path
+from django.urls import path, include
 from . import views, api_views
 
 # A linha 'app_name' foi removida para eliminar a necessidade de namespaces nos templates.
@@ -8,7 +8,7 @@ from . import views, api_views
 
 urlpatterns = [
     # --- URLs para Páginas e Templates ---
-    path('participante/', views.participante, name='participante'),
+    #path('participante/', views.participante, name='participante'),
     path('home_participantes/', views.home_participantes, name='home_participantes'),
     path('regulamento/', views.regulamento, name='regulamento'),
     path('FAQ/', views.FAQ, name='FAQ'),
