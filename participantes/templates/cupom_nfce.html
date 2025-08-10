@@ -1,0 +1,30 @@
+{% extends 'cupom_base.html' %}
+
+{% block dados_emitente %}
+  {% if dados_json.emitente %}
+    <li class="list-group-item"><strong>Loja:</strong> {{ dados_json.emitente.nome_razao_social|default:"-" }}</li>
+    <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_json.emitente.cnpj|default:"-" }}</li>
+    <li class="list-group-item"><strong>Endereço:</strong> {{ dados_json.emitente.endereco|default:"-" }}</li>
+    <li class="list-group-item"><strong>Bairro:</strong> {{ dados_json.emitente.bairro|default:"-" }}</li>
+    <li class="list-group-item"><strong>Município:</strong> {{ dados_json.emitente.municipio|default:"-" }}</li>
+    <li class="list-group-item"><strong>Chave de Acesso:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
+    <li class="list-group-item"><strong>QR Code:</strong> {{ dados_json.qr_code|default:"-" }}</li>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block lista_produtos %}
+  {% if dados_json.produtos %}
+    {% for produto in dados_json.produtos %}
+      <li class="list-group-item">
+        <strong>{{ produto.codigo|default:"" }} - {{ produto.descricao|default:"-" }}</strong><br>
+        {{ produto.quantidade|default:"1" }} × 
+        R$ {{ produto.valor_unitario|floatformat:2|default:"0,00" }} = 
+        R$ {{ produto.valor_total_item|floatformat:2|default:"0,00" }}
+      </li>
+    {% endfor %}
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}

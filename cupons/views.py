@@ -1,21 +1,25 @@
+from dataclasses import asdict
 import os
 import uuid
 import json
 from venv import logger
 import numpy as np
 import cv2
+import ast
 
 from django.shortcuts import render, get_object_or_404
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required # Recomendado
+from django.contrib.auth.decorators import login_required
+
+from utils.get_modelo import identificar_chave_detalhada 
 
 from .models import Cupom
 from participantes.models import Participantes
-from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom, extrai_codigo_qrcode
-from utils.api_sefaz import consulta_api_sefaz, gerar_link_sefaz
+from utils.funcoes_cupom import extrair_texto_ocr, extrair_numero_cupom, extrai_codigo_qrcode, validar_documento
+from utils.api_sefaz import gerar_link_sefaz, consulta_nfe, consulta_api_nfce, consulta_api_CFeSat
 
 
 def guardar_cupom(arquivo):
@@ -25,11 +29,71 @@ def guardar_cupom(arquivo):
     caminho_arquivo = os.path.join('cupons', nome_arquivo)
     return default_storage.save(caminho_arquivo, ContentFile(arquivo.read()))
 
-# @login_required # É uma boa prática proteger views que modificam dados
+
+
+import json
+from dataclasses import asdict
+
+
+
+
+
 def cadastrar_cupom(request, id_participante):
-    """
-    View unificada para cadastro de cupom via upload de imagem ou código digitado.
-    """
+    contexto = {'id_participante': id_participante}
+    participante = get_object_or_404(Participantes, id=id_participante)
+
+    if request.method == 'POST':
+        chave_acesso = request.POST.get('cod_cupom')
+        if not chave_acesso:
+            contexto['msg_erro'] = "Informe o código do cupom."
+            return render(request, 'cad_cupom.html', contexto)
+
+        dados_nota = identificar_chave_detalhada(chave_acesso)
+
+        if not dados_nota.valida:
+            contexto['msg_erro'] = f"Chave inválida: {dados_nota.mensagem}"
+            return render(request, 'cad_cupom.html', contexto)
+
+        status_nota = 'Invalidado' if not dados_nota.valida else 'Aprovado'
+
+        validar = validar_cupom(dados_nota.chave, dados_nota.tipo_documento)
+
+        # Salva o cupom no banco
+        Cupom.objects.create(
+            participante=participante,
+            dados_cupom=asdict(dados_nota),  # como string? Não, melhor guardar como texto mesmo.
+            tipo_envio='Codigo',
+            status=status_nota,
+            numero_documento=dados_nota.codigo_numerico,
+            cnpj_loja=dados_nota.cnpj_emitente,
+            dados_json=validar,  # aqui salva o dict direto
+            tipo_documento=dados_nota.tipo_documento 
+        )
+
+        contexto['msg_sucesso'] = 'Cupom cadastrado com sucesso!'
+        return render(request, 'cad_cupom.html', contexto)
+
+    return render(request, 'cad_cupom.html', contexto)
+
+    
+def validar_cupom(chave, tipo):
+   
+    if tipo == 'SAT-cfe':
+       dados_sefaz = consulta_api_CFeSat(chave)
+    
+    if tipo == 'NF-e':
+        dados_sefaz = consulta_nfe(chave)
+        
+
+    if tipo == 'NFC-e':
+        dados_sefaz = consulta_api_nfce(chave)
+    
+    return dados_sefaz
+
+
+"""def cadastrar_cupom(request, id_participante):
+
+    #View unificada para cadastro de cupom via upload de imagem ou código digitado.
     contexto = {'id_participante': id_participante}
     participante = get_object_or_404(Participantes, id=id_participante)
 
@@ -90,7 +154,7 @@ def cadastrar_cupom(request, id_participante):
         elif 'submit_imagem' in request.POST and not contexto.get('msg_erro'):
              contexto['msg_erro'] = 'Não foi possível encontrar um código de cupom na imagem enviada.'
 
-    return render(request, 'cad_cupom.html', contexto)
+    return render(request, 'cad_cupom.html', contexto)"""
 
 
 @csrf_exempt

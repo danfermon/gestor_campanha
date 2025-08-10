@@ -1,0 +1,58 @@
+{% extends 'base_2.html' %}
+{% load static extras %}
+
+{% block title %}Detalhes do Cupom{% endblock %}
+
+{% block content %}
+{% include 'includes/header_3.html' %}
+
+<div class="container" style="margin: 5%; padding: 5%;">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h5>Dados do Cupom:</h5>
+      <ul class="list-group">
+        {% block dados_emitente %}
+          <li class="list-group-item text-danger">Dados do emitente não disponíveis.</li>
+        {% endblock %}
+        
+        {% block dados_gerais %}
+          <li class="list-group-item"><strong>Data:</strong> {{ dados_json.data_hora_emissao|default:"-" }}</li>
+          <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_json.valor_total|floatformat:2|default:"0,00" }}</li>
+          <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.forma_pagamento|default:"-" }}</li>
+        {% endblock %}
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h5 class="mt-4">Produtos</h5>
+      <ul class="list-group">
+        {% block lista_produtos %}
+          <li class="list-group-item">Nenhum produto encontrado.</li>
+        {% endblock %}
+      </ul>
+    </div>
+  </div>
+
+  {% if cupom.ocr_text %}
+    <div class="mb-4">
+      <h5>Texto completo extraído do cupom (OCR):</h5>
+      <pre class="bg-light p-3 border rounded" style="white-space: pre-wrap;">{{ cupom.ocr_text|default:"-" }}</pre>
+    </div>
+  {% endif %}
+
+  {% if dados_cupom %}
+    <div class="mb-4">
+      <h5>Dados Extraídos do Cupom:</h5>
+      <ul class="list-group">
+        {% for key, value in dados_cupom.items %}
+          <li class="list-group-item">
+            <strong>{{ key }}:</strong> {{ value }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p>Nenhum dado do cupom disponível.</p>
+  {% endif %}
+</div>
+{% endblock %}

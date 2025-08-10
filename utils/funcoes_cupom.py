@@ -4,6 +4,8 @@ import json
 import os
 import re
 
+from utils.get_modelo import identificar_chave_detalhada
+
 def extrair_texto_ocr(imagem_path):
     """
     Recebe o caminho da imagem e retorna o texto extraído via OCR.
@@ -98,3 +100,9 @@ def validar_produto(lista_produtos_cupom):
 # extrair produtos do cupom
 def extrair_produtos(cupom):
     ...
+
+def validar_documento(codigo_documento):
+    "função para validar notas enviadas, separar o tipo da nota, "
+    "verificar se é autentica e extrair informações pelo codigo informado"
+    dados = identificar_chave_detalhada(codigo_documento)
+    return dados
