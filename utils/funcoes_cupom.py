@@ -155,7 +155,10 @@ def get_dados_json(dados_json, tipo_cupom):
             "descricao": p.get("descricao"),
             "qtd": p.get("quantidade") or p.get("qtd"),
             "valor_unitario": p.get("valor_unitario") or p.get("valor_unitario_comercial"),
-            "valor_total_item": p.get("valor_total_item") or p.get("valor")
+            "valor_total_item": p.get("valor_total_item") or p.get("valor"),
+            "codigo": p.get("codigo") or p.get("ean_tributavel") or p.get("ean_comercial"),
+            "ean": p.get("ean_tributavel") or p.get("ean_comercial")
+
         })
 
     emitente_formatado = {
@@ -176,3 +179,4 @@ def get_dados_json(dados_json, tipo_cupom):
     }
 
     return resultado
+
