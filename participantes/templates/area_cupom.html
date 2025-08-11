@@ -6,10 +6,11 @@
 {% block content %}
 {% include 'includes/header_3.html' %}
 
-<div class="container" style="margin: 5%; padding: 5%;">
+<div class="container my-5">
 
   {% if cupom.tipo_documento == 'NFC-e' %}
     <div class="row mb-4">
+      <!-- Dados do Cupom -->
       <div class="col-md-6">
         <h5>Dados do Cupom:</h5>
         <ul class="list-group">
@@ -30,16 +31,20 @@
         </ul>
       </div>
 
+      <!-- Produtos -->
       <div class="col-md-6">
-        <h5 class="mt-4">Produtos</h5>
+        <h5>Produtos</h5>
         <ul class="list-group">
           {% if dados_json.produtos %}
             {% for produto in dados_json.produtos %}
               <li class="list-group-item">
                 <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
-                {{ produto.qtd|default:"1" }} × 
-                R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
-                R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                {{ produto.qtd|default:"1" }} × R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }}
+                = R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                <br>
+                <small class="text-muted">
+                  Código: {{ produto.codigo|default:"-" }} | EAN: {{ produto.ean|default:"-" }}
+                </small>
               </li>
             {% endfor %}
           {% else %}
@@ -51,6 +56,7 @@
 
   {% elif cupom.tipo_documento == 'SAT-cfe' %}
     <div class="row mb-4">
+      <!-- Dados do Cupom SAT -->
       <div class="col-md-6">
         <h5>Dados do Cupom SAT-CFe:</h5>
         <ul class="list-group">
@@ -71,16 +77,20 @@
         </ul>
       </div>
 
+      <!-- Produtos -->
       <div class="col-md-6">
-        <h5 class="mt-4">Produtos</h5>
+        <h5>Produtos</h5>
         <ul class="list-group">
           {% if dados_json.produtos %}
             {% for produto in dados_json.produtos %}
               <li class="list-group-item">
                 <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
-                {{ produto.qtd|default:"1" }} × 
-                R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
-                R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                {{ produto.qtd|default:"1" }} × R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }}
+                = R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                <br>
+                <small class="text-muted">
+                  Código: {{ produto.codigo|default:"-" }} | EAN: {{ produto.ean|default:"-" }}
+                </small>
               </li>
             {% endfor %}
           {% else %}
@@ -92,6 +102,7 @@
 
   {% elif cupom.tipo_documento == 'NF-e' %}
     <div class="row mb-4">
+      <!-- Dados NF-e -->
       <div class="col-md-6">
         <h5>Dados da NF-e:</h5>
         <ul class="list-group">
@@ -115,16 +126,20 @@
         </ul>
       </div>
 
+      <!-- Itens NF-e -->
       <div class="col-md-6">
-        <h5 class="mt-4">Itens da NF-e</h5>
+        <h5>Itens da NF-e</h5>
         <ul class="list-group">
           {% if dados_json.produtos %}
             {% for produto in dados_json.produtos %}
               <li class="list-group-item">
                 <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
-                {{ produto.qtd|default:"1" }} × 
-                R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
-                R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                {{ produto.qtd|default:"1" }} × R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }}
+                = R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+                <br>
+                <small class="text-muted">
+                  Código: {{ produto.codigo|default:"-" }} | EAN: {{ produto.ean|default:"-" }}
+                </small>
               </li>
             {% endfor %}
           {% else %}
@@ -137,7 +152,7 @@
 
   {% if cupom.ocr_text %}
     <div class="mb-4">
-      <h5>Texto completo extraído do cupom (OCR):</h5>
+      <h5>Texto extraído do cupom (OCR):</h5>
       <pre class="bg-light p-3 border rounded" style="white-space: pre-wrap;">{{ cupom.ocr_text|default:"-" }}</pre>
     </div>
   {% endif %}
@@ -147,9 +162,7 @@
       <h5>Dados Extraídos do Cupom:</h5>
       <ul class="list-group">
         {% for key, value in dados_cupom.items %}
-          <li class="list-group-item">
-            <strong>{{ key }}:</strong> {{ value }}
-          </li>
+          <li class="list-group-item"><strong>{{ key }}:</strong> {{ value }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -157,13 +170,35 @@
     <p>Nenhum dado do cupom disponível.</p>
   {% endif %}
 
+  <div class="mb-4">
+    <h5>Produtos Validados:</h5>
+    {% if produtos_validos %}
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Número da Sorte</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produto in produtos_validos %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ produto.nome }}</td>
+              <td>{{ produto.quantidade }}</td>
+              <td>R$ {{ produto.valor_unitario|floatformat:2 }}</td>
+              <td>{{ produto.num_sorte }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Não há produtos para esse cupom.</p>
+    {% endif %}
+  </div>
+
 </div>
-
-
-<!--div>
-  <p> Dados do json</p>
-  {{ cupom.dados_json }}
-</div-->
-
-
 {% endblock %}

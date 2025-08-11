@@ -3,6 +3,8 @@ import json
 import os
 from django.http import HttpResponse
 from django.template import loader
+
+from cupons.models.produto import Produto
 from .models import Participantes
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
@@ -219,11 +221,14 @@ def area_cupom(request, id):
     except Exception as e:
         print(f"[ERRO] Falha ao interpretar dados_cupom do cupom {cupom.id}: {e}")
         dados_cupom_dict = {}
+    
+    produtos_validos = Produto.objects.filter(cupom=id)
 
     contexto = {
         'cupom': cupom,
         'dados_cupom': dados_cupom_dict,
-        'dados_json': dados_cupom
+        'dados_json': dados_cupom,
+        'produtos_validos': produtos_validos
     }
 
     return render(request, 'area_cupom.html', contexto)
