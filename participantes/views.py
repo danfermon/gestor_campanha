@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 import re
 
-from utils.funcoes_cupom import parse_dados_cupom
+from utils.funcoes_cupom import parse_dados_cupom, get_dados_json
 
 from datetime import datetime
 
@@ -197,81 +197,37 @@ def iframe_login(request):
 
 #--------- PARTE DE EXTRAÇÃO DE VALIDAÇÃO DOS DADOS DO CUPOM --------------------------------
 
+
 def area_cupom(request, id):
     cupom = get_object_or_404(Cupom, id=id)
 
-    if cupom.tipo_documento == 'SAT-cfe':
-        try:
-            dados_json_dict =  json.dumps(cupom.dados_json)
-        except Exception:
-            dados_json_dict = {}
-
-        cupom_sefaz = json.loads(dados_json_dict)
-        print(cupom_sefaz)
-        dados_json = cupom_sefaz['data'][0]
-    
-    if cupom.tipo_documento == 'NFC-e':
-        cupom_sefaz = cupom.dados_json
-        print(cupom_sefaz)
-        dados_json = cupom_sefaz[0]
-   
-    
-
-#--------------------------------------------------------------------------
-
-    if cupom.tipo_documento == 'NF-e':
-        # 1. Se não existe dados_json, evitar qualquer processamento
-        if not cupom.dados_json:
-            print("[AVISO] cupom.dados_json está vazio ou None.")
-            cupom_sefaz = {}
-        elif isinstance(cupom.dados_json, dict):
-            cupom_sefaz = cupom.dados_json
-        else:
-            try:
-                cupom_sefaz = json.loads(cupom.dados_json)
-            except Exception as e:
-                print(f"[ERRO] Falha ao converter JSON da NF-e: {e}")
-                cupom_sefaz = {}
-
-        # 2. Extrair dados
-        if isinstance(cupom_sefaz, dict) and "data" in cupom_sefaz:
-            try:
-                dados_json = cupom_sefaz["data"][0]
-            except (IndexError, TypeError):
-                print("[AVISO] 'data' encontrado mas vazio ou mal formatado.")
-                dados_json = {}
-        else:
-            dados_json = cupom_sefaz
-
-        # 3. Log para depuração
-        print("=== DEBUG NF-e ===")
-        print("Tipo de cupom_sefaz:", type(cupom_sefaz))
-        print("Cupom SEFAZ keys:", list(cupom_sefaz.keys()) if isinstance(cupom_sefaz, dict) else cupom_sefaz)
-        print("Dados JSON enviados ao template:", dados_json)
-
- 
-
-
-#-----------------------------------------------------------------------------------
-
-        
-   
-
+    # Tenta processar os dados_json com tratamento de exceções
     try:
-        dados_cupom_dict = ast.literal_eval(cupom.dados_cupom)
-    except Exception:
+        dados_cupom = get_dados_json(cupom.dados_json, cupom.tipo_documento)
+    except Exception as e:
+        print(f"[ERRO] Falha ao processar dados_json do cupom {cupom.id}: {e}")
+        dados_cupom = {}
+
+    # Tenta converter dados_cupom do banco para dict Python
+    try:
+        if cupom.dados_cupom and isinstance(cupom.dados_cupom, str):
+            dados_cupom_dict = ast.literal_eval(cupom.dados_cupom)
+        elif isinstance(cupom.dados_cupom, dict):
+            dados_cupom_dict = cupom.dados_cupom
+        else:
+            dados_cupom_dict = {}
+    except Exception as e:
+        print(f"[ERRO] Falha ao interpretar dados_cupom do cupom {cupom.id}: {e}")
         dados_cupom_dict = {}
 
     contexto = {
         'cupom': cupom,
         'dados_cupom': dados_cupom_dict,
-        'dados_json': dados_json #json.loads(dados_json_dict),
+        'dados_json': dados_cupom
     }
- 
-   
 
     return render(request, 'area_cupom.html', contexto)
-   
+
 
 
 

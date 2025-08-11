@@ -170,27 +170,20 @@ def consulta_api_nfce(chave: str) -> dict | None:
         logger.error(f"Erro de decodificação: A resposta da API da Sefaz (chave {chave[:10]}...) não é um JSON válido.")
         return None
 
-
+#-----------------------------------------
 def consulta_nfe(chave):
     api_key = settings.API_KEY_SEFAZ
     url = 'https://api.infosimples.com/api/v2/consultas/receita-federal/nfe'
     args = {
       "nfe":  chave,       #"VALOR_DO_PARAMETRO_NFE",
       "token": api_key,      #"INFORME_AQUI_O_TOKEN_DA_CHAVE_DE_ACESSO",
-      "timeout": 300
+      "timeout": 60
     }
 
     response = requests.post(url, args)
-    response_json = response.json()
-    response.close()
+    return response.json()
 
-    if response_json['code'] == 200:
-      print("Retorno com sucesso: ", response_json['data'])
-    elif response_json['code'] in range(600, 799):
-      mensagem = "Resultado sem sucesso. Leia para saber mais: \n"
-      mensagem += "Código: {} ({})\n".format(response_json['code'], response_json['code_message'])
-      mensagem += "; ".join(response_json['errors'])
-      print(mensagem)
+    
 
-    print("Cabeçalho da consulta: ", response_json['header'])
-    #print("URLs com arquivos de visualização (HTML/PDF): ", response_json['site_receipts'])
+    
+   

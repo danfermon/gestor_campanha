@@ -14,7 +14,7 @@
         <h5>Dados do Cupom:</h5>
         <ul class="list-group">
           {% if dados_json.emitente %}
-            <li class="list-group-item"><strong>Loja:</strong> {{ dados_json.emitente.nome_razao_social|default:"-" }}</li>
+            <li class="list-group-item"><strong>Loja:</strong> {{ dados_json.emitente.nome|default:"-" }}</li>
             <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_json.emitente.cnpj|default:"-" }}</li>
             <li class="list-group-item"><strong>Endereço:</strong> {{ dados_json.emitente.endereco|default:"-" }}</li>
             <li class="list-group-item"><strong>Bairro:</strong> {{ dados_json.emitente.bairro|default:"-" }}</li>
@@ -22,11 +22,11 @@
           {% else %}
             <li class="list-group-item text-danger">Dados do emitente não disponíveis.</li>
           {% endif %}
-          <li class="list-group-item"><strong>Data:</strong> {{ dados_json.data_hora_emissao|default:"-" }}</li>
-          <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_json.valor_total|default:"0.00"|floatformat:2 }}</li>
-          <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.forma_pagamento|default:"-" }}</li>
-          <li class="list-group-item"><strong>SAT:</strong> {{ dados_json.sat_numero_serie|default:"-" }}</li>
-          <li class="list-group-item"><strong>Chave QR:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
+          <li class="list-group-item"><strong>Data:</strong> {{ dados_json.infos.data_emissao|default:"-" }}</li>
+          <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_json.infos.valor_total|default:"0.00"|floatformat:2 }}</li>
+          <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.infos.forma_pagamento|default:"-" }}</li>
+          <li class="list-group-item"><strong>Número de Série:</strong> {{ dados_json.infos.numero_serie|default:"-" }}</li>
+          <li class="list-group-item"><strong>Chave de Acesso:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
         </ul>
       </div>
 
@@ -36,8 +36,8 @@
           {% if dados_json.produtos %}
             {% for produto in dados_json.produtos %}
               <li class="list-group-item">
-                <strong>{{ produto.item|default:"" }}. {{ produto.descricao|default:"-" }}</strong><br>
-                {{ produto.quantidade|default:"1" }} × 
+                <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
+                {{ produto.qtd|default:"1" }} × 
                 R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
                 R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
               </li>
@@ -55,7 +55,7 @@
         <h5>Dados do Cupom SAT-CFe:</h5>
         <ul class="list-group">
           {% if dados_json.emitente %}
-            <li class="list-group-item"><strong>Loja:</strong> {{ dados_json.emitente.nome_razao_social|default:"-" }}</li>
+            <li class="list-group-item"><strong>Loja:</strong> {{ dados_json.emitente.nome|default:"-" }}</li>
             <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_json.emitente.cnpj|default:"-" }}</li>
             <li class="list-group-item"><strong>Endereço:</strong> {{ dados_json.emitente.endereco|default:"-" }}</li>
             <li class="list-group-item"><strong>Bairro:</strong> {{ dados_json.emitente.bairro|default:"-" }}</li>
@@ -63,10 +63,10 @@
           {% else %}
             <li class="list-group-item text-danger">Dados do emitente não disponíveis.</li>
           {% endif %}
-          <li class="list-group-item"><strong>Data:</strong> {{ dados_json.data_hora_emissao|default:"-" }}</li>
-          <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_json.valor_total|default:"0.00"|floatformat:2 }}</li>
-          <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.forma_pagamento|default:"-" }}</li>
-          <li class="list-group-item"><strong>Número de Série SAT:</strong> {{ dados_json.sat_numero_serie|default:"-" }}</li>
+          <li class="list-group-item"><strong>Data:</strong> {{ dados_json.infos.data_emissao|default:"-" }}</li>
+          <li class="list-group-item"><strong>Total:</strong> R$ {{ dados_json.infos.valor_total|default:"0.00"|floatformat:2 }}</li>
+          <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.cobranca.forma_pagamento|default:"-" }}</li>
+          <li class="list-group-item"><strong>Número de Série SAT:</strong> {{ dados_json.infos.numero_serie|default:"-" }}</li>
           <li class="list-group-item"><strong>Chave de Consulta:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
         </ul>
       </div>
@@ -77,8 +77,8 @@
           {% if dados_json.produtos %}
             {% for produto in dados_json.produtos %}
               <li class="list-group-item">
-                <strong>{{ produto.item|default:"" }}. {{ produto.descricao|default:"-" }}</strong><br>
-                {{ produto.quantidade|default:"1" }} × 
+                <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
+                {{ produto.qtd|default:"1" }} × 
                 R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
                 R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
               </li>
@@ -91,51 +91,49 @@
     </div>
 
   {% elif cupom.tipo_documento == 'NF-e' %}
-<div class="row mb-4">
-  <div class="col-md-6">
-    <h5>Dados da NF-e:</h5>
-    <ul class="list-group">
-      {% if dados_json.emitente %}
-        <li class="list-group-item"><strong>Empresa:</strong> {{ dados_json.emitente.nome|default:"-" }}</li>
-        <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_json.emitente.cnpj|default:"-" }}</li>
-        <li class="list-group-item"><strong>Endereço:</strong> {{ dados_json.emitente.endereco|default:"-" }}</li>
-        <li class="list-group-item"><strong>Bairro:</strong> {{ dados_json.emitente.bairro|default:"-" }}</li>
-        <li class="list-group-item"><strong>Município:</strong> {{ dados_json.emitente.municipio|default:"-" }}</li>
-      {% else %}
-        <li class="list-group-item text-danger">Dados do emitente não disponíveis.</li>
-      {% endif %}
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h5>Dados da NF-e:</h5>
+        <ul class="list-group">
+          {% if dados_json.emitente %}
+            <li class="list-group-item"><strong>Empresa:</strong> {{ dados_json.emitente.nome|default:"-" }}</li>
+            <li class="list-group-item"><strong>CNPJ:</strong> {{ dados_json.emitente.cnpj|default:"-" }}</li>
+            <li class="list-group-item"><strong>Endereço:</strong> {{ dados_json.emitente.endereco|default:"-" }}</li>
+            <li class="list-group-item"><strong>Bairro:</strong> {{ dados_json.emitente.bairro|default:"-" }}</li>
+            <li class="list-group-item"><strong>Município:</strong> {{ dados_json.emitente.municipio|default:"-" }}</li>
+          {% else %}
+            <li class="list-group-item text-danger">Dados do emitente não disponíveis.</li>
+          {% endif %}
+          {% if dados_json.nfe %}
+            <li class="list-group-item"><strong>Data de Emissão:</strong> {{ dados_json.nfe.data_emissao|default:"-" }}</li>
+            <li class="list-group-item"><strong>Total da Nota:</strong> R$ {{ dados_json.nfe.valor_total|default:"0.00"|floatformat:2 }}</li>
+          {% endif %}
+          {% if dados_json.cobranca %}
+            <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.cobranca.forma_pagamento|default:"-" }}</li>
+          {% endif %}
+          <li class="list-group-item"><strong>Chave de Acesso:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
+        </ul>
+      </div>
 
-      {% if dados_json.nfe %}
-        <li class="list-group-item"><strong>Data de Emissão:</strong> {{ dados_json.nfe.data_emissao|default:"-" }}</li>
-        <li class="list-group-item"><strong>Total da Nota:</strong> R$ {{ dados_json.nfe.valor_total|default:"0.00"|floatformat:2 }}</li>
-      {% endif %}
-      {% if dados_json.cobranca %}
-        <li class="list-group-item"><strong>Forma de Pagamento:</strong> {{ dados_json.cobranca.forma_pagamento|default:"-" }}</li>
-      {% endif %}
-      <li class="list-group-item"><strong>Chave de Acesso:</strong> {{ dados_json.chave_acesso|default:"-" }}</li>
-    </ul>
-  </div>
-
-  <div class="col-md-6">
-    <h5 class="mt-4">Itens da NF-e</h5>
-    <ul class="list-group">
-      {% if dados_json.produtos %}
-        {% for produto in dados_json.produtos %}
-          <li class="list-group-item">
-            <strong>{{ produto.num|default:"" }}. {{ produto.descricao|default:"-" }}</strong><br>
-            {{ produto.qtd|default:"1" }} × 
-            R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
-            R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
-          </li>
-        {% endfor %}
-      {% else %}
-        <li class="list-group-item">Nenhum produto encontrado.</li>
-      {% endif %}
-    </ul>
-  </div>
-</div>
-{% endif %}
-
+      <div class="col-md-6">
+        <h5 class="mt-4">Itens da NF-e</h5>
+        <ul class="list-group">
+          {% if dados_json.produtos %}
+            {% for produto in dados_json.produtos %}
+              <li class="list-group-item">
+                <strong>{{ produto.num|default:forloop.counter }}. {{ produto.descricao|default:"-" }}</strong><br>
+                {{ produto.qtd|default:"1" }} × 
+                R$ {{ produto.valor_unitario|default:"0.00"|floatformat:2 }} = 
+                R$ {{ produto.valor_total_item|default:"0.00"|floatformat:2 }}
+              </li>
+            {% endfor %}
+          {% else %}
+            <li class="list-group-item">Nenhum produto encontrado.</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
 
   {% if cupom.ocr_text %}
     <div class="mb-4">
@@ -160,5 +158,12 @@
   {% endif %}
 
 </div>
+
+
+<!--div>
+  <p> Dados do json</p>
+  {{ cupom.dados_json }}
+</div-->
+
 
 {% endblock %}

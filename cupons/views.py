@@ -57,6 +57,7 @@ def cadastrar_cupom(request, id_participante):
         status_nota = 'Invalidado' if not dados_nota.valida else 'Aprovado'
 
         validar = validar_cupom(dados_nota.chave, dados_nota.tipo_documento)
+        print(validar)
 
         # Salva o cupom no banco
         Cupom.objects.create(
@@ -200,3 +201,7 @@ def salvar_qrcode_ajax(request, id_participante):
         # Logar o erro real no servidor é importante
         logger.error(f"Erro inesperado em salvar_qrcode_ajax: {e}")
         return JsonResponse({'status': 'erro', 'mensagem': 'Ocorreu um erro interno.'}, status=500)
+
+
+#------------------- PRODUTOS --------------------------------------
+
